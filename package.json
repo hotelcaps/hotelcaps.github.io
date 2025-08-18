@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "deploy": "read -p 'Commit message: ' msg && gh-pages --dotfiles -d dist -b main -r git@github-hotelcaps:hotelcaps/hotelcaps.github.io.git -m \"$msg\""
+    "deploy": "gh-pages --dotfiles -d .output/public -b gh-pages -r git@github-hotelcaps:hotelcaps/hotelcaps.github.io.git"
   },
   "dependencies": {
     "@phosphor-icons/vue": "^2.2.1",
