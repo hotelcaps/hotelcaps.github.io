@@ -60,7 +60,8 @@ onMounted(() => {
 <template>
   <section id="features" class="w-full bg-gradient-to-b from-stone-200 to-slate-200 py-16 lg:py-28 px-4">
     <div class="max-w-7xl mx-auto text-center">
-      <h2 class="text-3xl lg:text-5xl font-display font-bold tracking-wide text-gray-800 mb-16 leading-tight">What do you feel like doing today?</h2>
+      <p class="stagger-item font-sans text-sm font-bold uppercase tracking-widest text-teal-600 mb-2">Choose your day</p>
+      <h2 class="text-3xl lg:text-4xl font-display font-bold tracking-wide text-gray-800 mb-16 leading-tight">What do you feel like doing today?</h2>
       
       <div class="flex flex-wrap items-stretch justify-center gap-10">
         
@@ -128,20 +129,20 @@ onMounted(() => {
 
 /* Blue Button */
 .bubble-button-blue { 
-  border: 2px solid #2375e0; 
-  color: #2375e0; 
+  border: 2px solid #2563eb; 
+  color: #2563eb; 
 }
 .bubble-button-blue::before { 
-  background-color: #2375e0; 
+  background-color: #2563eb; 
 }
 
 /* Green Button */
 .bubble-button-green { 
-  border: 2px solid #038661; 
-  color: #038661; 
+  border: 2px solid #03a661; 
+  color: #03a661; 
 }
 .bubble-button-green::before { 
-  background-color: #038661; 
+  background-color: #03a661; 
 }
 
 /* Pink Button */

@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Define the data for our hero section
 const heroImages = ref([
-  '/images/rooms/hero/room-hero-2.jpg'
+  '/images/pricing/hero/pricing.jpg'
 ]);
 
 const main = ref(null);
@@ -61,41 +61,109 @@ onMounted(() => {
   });
 });
 
+const roomsGalleryData = {
+  eyebrow: "Our Amenities",
+  title: "Comfort in Every Detail",
+  themeTextClass: "text-sky-600",
+  themeBgClass: "bg-sky-600",
+  images: [
+    { src: "/images/rooms/amenities/1.jpg", alt: "room amenities" },
+    { src: "/images/rooms/amenities/2.jpg", alt: "room amenities" },
+    { src: "/images/rooms/amenities/3.jpg", alt: "room amenities" },
+    { src: "/images/rooms/amenities/4.jpg", alt: "room amenities" },
+    { src: "/images/rooms/amenities/5.jpg", alt: "room amenities" },
+    { src: "/images/rooms/amenities/6.jpg", alt: "room amenities" },
+    { src: "/images/rooms/amenities/7.jpg", alt: "room amenities" },
+    { src: "/images/rooms/amenities/8.jpg", alt: "room amenities" },
+    { src: "/images/rooms/amenities/9.jpg", alt: "room amenities" },
+    { src: "/images/rooms/amenities/10.jpg", alt: "room amenities" },
+  ]
+};
+
+// 1. Core Meta Values
+const pageTitle = 'Suites & Rooms Pricing | Hotel CAPS, Koduvayur, Palakkad'
+const pageDesc = 'View detailed rates & tariffs for Standard, Deluxe & Suite rooms at Hotel CAPS, Koduvayur. Plan your stay in Palakkad with transparent & competitive pricing.'
+const canonicalUrl = 'https://capsfamily.in/pricing'
+const ogImage = 'https://capsfamily.in/images/favicons/caps-pricing-og-image.jpg'
+
+// 2. Structured Link and JSON-LD Schema Injection
 useHead({
-  title: 'Suites & Rooms Pricing | Hotel CAPS, Koduvayur, Palakkad',
-
-  meta: [
-    // SEO and Page Information
-    { name: 'description', content: 'View the detailed pricing and tariffs for our Standard, Deluxe, and Suite rooms at Hotel CAPS. Plan your perfect stay in Palakkad with transparent and competitive rates.' },
-    { name: 'keywords', content: 'Hotel CAPS, hotel in palakkad, best hotel kerala, best hotels palakkad, best hotels koduvayur, luxury rooms palakkad, multi-cuisine restaurant palakkad, auditorium hall palakkad, accommodation kerala, palakkad hotels' },
-    { name: 'author', content: 'kriz - https://www.brandsta.in' },
-
-    // Open Graph / Facebook
-    { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: 'https://capsfamily.in/pricing' },
-    { property: 'og:title', content: 'Suites & Rooms Pricing | Hotel CAPS, Koduvayur, Palakkad' },
-    { property: 'og:description', content: 'View the detailed pricing and tariffs for our Standard, Deluxe, and Suite rooms at Hotel CAPS. Plan your perfect stay in Palakkad with transparent and competitive rates.' },
-    { property: 'og:image', content: 'https://sparklingspur.github.io/images/favicons/caps-og-image.jpg' },
-
-    // Twitter
-    { property: 'twitter:card', content: 'summary_large_image' },
-    { property: 'twitter:url', content: 'https://capsfamily.in/pricing' },
-    { property: 'twitter:title', content: 'Suites & Rooms Pricing | Hotel CAPS, Koduvayur, Palakkad' },
-    { property: 'twitter:description', content: 'View the detailed pricing and tariffs for our Standard, Deluxe, and Suite rooms at Hotel CAPS. Plan your perfect stay in Palakkad with transparent and competitive rates.' },
-    { property: 'twitter:image', content: 'https://sparklingspur.github.io/images/favicons/caps-og-image.jpg' },
-
+  link: [
+    { rel: 'canonical', href: canonicalUrl }
   ],
-  
-});
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "PriceSpecification",
+        "name": pageTitle,
+        "description": pageDesc,
+        "url": canonicalUrl,
+        "priceCurrency": "INR",
+        "eligibleQuantity": {
+          "@type": "QuantitativeValue",
+          "unitCode": "DAY",
+          "value": 1
+        },
+        "offeredBy": {
+          "@type": "Hotel",
+          "name": "Hotel CAPS",
+          "url": "https://capsfamily.in/",
+          "logo": "https://capsfamily.in/images/caps-solid-logo.png",
+          "image": ogImage,
+          "telephone": [
+            "+919207517064",
+            "+918848369567"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Main Road, Pittupeedika",
+            "addressLocality": "Koduvayur",
+            "addressRegion": "Kerala",
+            "postalCode": "678501",
+            "addressCountry": "IN"
+          }
+        }
+      })
+    }
+  ]
+})
+
+// 3. Nuxt 4 SEO Composable (Search & Social Cards)
+useSeoMeta({
+  title: pageTitle,
+  description: pageDesc,
+  ogTitle: pageTitle,
+  ogDescription: pageDesc,
+  ogUrl: canonicalUrl,
+  ogImage: ogImage,
+  twitterCard: 'summary_large_image',
+  twitterTitle: pageTitle,
+  twitterDescription: pageDesc,
+  twitterImage: ogImage
+})
 
 </script>
 
 <template>
   <div ref="main">
     <PageHero 
-      title="Rooms Pricing"
-      subtitle="Discover your personal sanctuary of comfort, elegance, and modern luxury."
+      eyebrow="Exclusive Direct Booking Rates."
+      title="Our Pricing"
+      subtitle="Transparent and competitive rates for your perfect stay with us."
       :images="heroImages"
+      imageGradientClass="absolute inset-0 bg-gradient-to-r from-black/90 via-sky-950/70 to-black/70 z-5"
+      eyebrowColorClass="text-[#0ea5e9]"
+      themeColorClass="text-[#075985]"
+    />
+    
+    <PageGallery 
+      :eyebrow="roomsGalleryData.eyebrow"
+      :title="roomsGalleryData.title"
+      :images="roomsGalleryData.images"
+      :themeTextClass="roomsGalleryData.themeTextClass"
+      :themeBgClass="roomsGalleryData.themeBgClass"
     />
 
     <div class="bg-white py-16 overflow-hidden">
@@ -105,7 +173,7 @@ useHead({
         <div 
           v-for="(room, index) in roomsData" 
           :key="room.id"
-          class="room-card grid grid-cols-1 lg:grid-cols-2 gap-8 rounded-2xl p-4 sm:p-6 border-4 border-amber-400 items-center"
+          class="room-card grid grid-cols-1 lg:grid-cols-2 gap-8 rounded-2xl p-4 sm:p-6 border-4 border-sky-700 items-center"
         >
           <!-- The layout alternates for each room using the 'order' class, now starting at the LG breakpoint -->
           <div class="room-details-col" :class="{ 'lg:order-2': index % 2 !== 0 }">

@@ -121,10 +121,9 @@ onMounted(() => {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   top: 60%;
 }
-:deep(.swiper-button-next::after),
-:deep(.swiper-button-prev::after) {
-  font-size: 0.8rem;
-  font-weight: 700;
+:deep(.swiper-button-next svg),
+:deep(.swiper-button-prev svg) {
+  width: .6rem;
 }
 :deep(.swiper-button-prev) {
   left: 0;

@@ -7,7 +7,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { PhUser } from '@phosphor-icons/vue';
 import IconHexagon from '~/components/icons/IconHexagon.vue';
 
-
 // Import Swiper's CSS
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -50,13 +49,13 @@ onMounted(() => {
 
   let ctx = gsap.context(() => {
     const tl = gsap.timeline({
-      scrollTrigger: { trigger: main.value, start: "top 70%" }
+      scrollTrigger: { trigger: main.value, start: "top 75%" }
     });
 
     // Animate the text content column
     tl.from('.text-content-col', { opacity: 0, x: -50, duration: 0.8, ease: 'power3.out' });
 
-    // --- NEW: Converging Gallery Animation ---
+    // --- Converging Gallery Animation ---
     const galleryItems = gsap.utils.toArray('.gallery-item');
     const startPositions = [
       { x: -50, y: -50 }, // Top-left
@@ -74,6 +73,14 @@ onMounted(() => {
         ease: 'power3.out'
       }, "-=0.6"); // Overlap animations for a fluid effect
     });
+
+    // Animate the Read Review Button
+    tl.from('.review-btn-container', { 
+      opacity: 0, 
+      y: 30, 
+      duration: 0.6, 
+      ease: 'power3.out' 
+    }, "-=0.4");
 
   }, main.value);
 
@@ -99,7 +106,7 @@ onMounted(() => {
         <div class="testimonial-slider relative h-72">
           <div ref="swiperEl" class="swiper h-full">
             <div class="swiper-wrapper">
-              <!-- UPDATED: Refactored slide structure for correct layout -->
+              <!-- Refactored slide structure for correct layout -->
               <div v-for="(testimonial, index) in testimonials" :key="index" class="swiper-slide flex items-center">
                 <div class="flex items-start">
                   <!-- Vertical Bar -->
@@ -146,12 +153,29 @@ onMounted(() => {
       </div>
 
     </div>
+
+    <!-- Read Reviews Button (Bottom Center) -->
+    <div class="review-btn-container w-full flex justify-center mt-12 lg:mt-16">
+      <a 
+        href="https://search.google.com/local/reviews?placeid=ChIJ3wXSZcxtqDsRPs_NLF5MtAo" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="relative overflow-hidden inline-flex items-center justify-center px-8 py-2.5 rounded-lg border-2 border-purple-600 font-sans font-normal text-purple-700 group transition-all duration-300 shadow-[0_4px_12px_rgba(147,51,234,0.15)] hover:shadow-[0_6px_20px_rgba(147,51,234,0.3)] active:scale-95"
+      >
+        <!-- Left-to-Right Hover Fill -->
+        <span class="absolute inset-0 w-full h-full bg-purple-600 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+        
+        <!-- Button Text -->
+        <span class="relative z-10 tracking-widest text-sm lg:text-lg font-display capitalize group-hover:text-white transition-colors duration-500 flex items-center">
+          Read Reviews
+        </span>
+      </a>
+    </div>
+
   </section>
 </template>
 
 <style scoped>
-
-
 /* --- Testimonial Quote Styling --- */
 .testimonial-quote {
   position: relative;
@@ -185,10 +209,9 @@ onMounted(() => {
   background-color: #e2e8f0;
   color: #1e293b;
 }
-:deep(.testimonial-slider .swiper-button-next::after),
-:deep(.testimonial-slider .swiper-button-prev::after) {
-  font-size: 1rem;
-  font-weight: 700;
+:deep(.testimonial-slider .swiper-button-next svg),
+:deep(.testimonial-slider .swiper-button-prev svg) {
+  width: 1rem;
 }
 
 /* --- HEXAGON AVATAR STYLES --- */

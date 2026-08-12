@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-18', 
+  compatibilityDate: '2026-07-30',
+  ssr: true,
   devtools: { enabled: true },
   devServer: {
     host: '0.0.0.0', // e.g., '0.0.0.0' for external access
@@ -17,55 +18,103 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/robots'
   ],
 
-  // This tells Nuxt to build self-contained pages for static hosting.
-  experimental: {
-    payloadExtraction: false
+  // 1. Site configuration for Sitemap & Robots
+  site: {
+    url: 'https://capsfamily.in',
+    name: 'Hotel CAPS'
   },
 
-  // This tells Nuxt to render the interactive homepage on the client-side only.
-  routeRules: {
-    '/': { ssr: false },
+  // 2. Sitemap Module Configuration
+  sitemap: {
+    // Explicitly define all static routes
+    urls: [
+      { loc: '/', changefreq: 'weekly', priority: 1.0 },
+      { loc: '/about', changefreq: 'monthly', priority: 0.8 },
+      { loc: '/rooms', changefreq: 'weekly', priority: 0.9 },
+      { loc: '/pricing', changefreq: 'weekly', priority: 0.8 },
+      { loc: '/restaurant', changefreq: 'weekly', priority: 0.9 },
+      { loc: '/menu', changefreq: 'weekly', priority: 0.8 },
+      { loc: '/hall', changefreq: 'monthly', priority: 0.8 },
+      { loc: '/catering', changefreq: 'monthly', priority: 0.8 },
+      { loc: '/contact', changefreq: 'monthly', priority: 0.7 },
+      { loc: '/policy', changefreq: 'yearly', priority: 0.3 },
+      { loc: '/terms', changefreq: 'yearly', priority: 0.3 },
+    ]
   },
+
+  // 3. Robots.txt Module Configuration
+  robots: {
+    disallow: [], // An empty array explicitly means "Allow Everything"
+    sitemap: ['https://capsfamily.in/sitemap.xml']
+  },
+
+  // This tells Nuxt to build self-contained pages for static hosting.
+  // experimental: {
+  //   payloadExtraction: false
+  // },
+
+  // This tells Nuxt to render the interactive homepage on the client-side only.
+  // routeRules: {
+  //   '/': { ssr: false },
+  // },
 
   app: {
     baseURL: '/',
     buildAssetsDir: 'assets', // This can also help with caching. Best practice
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
+      // Root level configuration parameters
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
-      title: 'Hotel CAPS - Rooms, Multi-Cuisine Restaurant, Auditorium Hall - Koduvayur, Palakkad, Kerala',
+      title: 'Hotel CAPS - Luxury Rooms, Restaurant, Auditorium - Koduvayur',
+
+      // 1. Language metadata (Moved to correct root level)
+      htmlAttrs: {
+        lang: 'en'
+      },
+      
+      // 2. Base meta tags (Cleaned up duplicates)
       meta: [
-        // SEO and Page Information
-        { name: 'description', content: 'Hotel CAPS offers luxury rooms, a multi-cuisine restaurant, and a spacious auditorium hall in the heart of Palakkad, Kerala. Experience premium hospitality and comfort.' },
-        { name: 'keywords', content: 'Hotel CAPS, hotel in palakkad, best hotel kerala, best hotels palakkad, best hotels koduvayur, luxury rooms palakkad, multi-cuisine restaurant palakkad, auditorium hall palakkad, accommodation kerala, palakkad hotels' },
-        { name: 'author', content: 'kriz - https://www.brandsta.in' },
+        { name: 'description', content: 'Welcome to Hotel CAPS - Koduvayur, Palakkad | Luxury Suites & Rooms | Multi-Cuisine Restaurant | Auditorium Hall | Outdoor Catering | Free Home Delivery' },
+        { name: 'robots', content: 'index, follow' },
+        { name: 'author', content: 'kriz - https://brandsta.in' },
 
-        // Open Graph / Facebook
+        
+        // Local Business Geographic Coordinates 
+        { name: 'geo.region', content: 'IN-KL' },
+        { name: 'geo.placename', content: 'Koduvayur, Palakkad' },
+        { name: 'geo.position', content: '10.680926464534636;76.65040838503162' }, 
+        { name: 'ICBM', content: '10.680926464534636, 76.65040838503162' },
+
+        // Global Social Layout Standards
         { property: 'og:type', content: 'website' },
-        { property: 'og:url', content: 'https://capsfamily.in/' },
-        { property: 'og:title', content: 'Hotel CAPS - Rooms, Multi-Cuisine Restaurant, Auditorium Hall - Koduvayur, Palakkad, Kerala' },
-        { property: 'og:description', content: 'Experience premium hospitality at Hotel CAPS, Palakkad. We offer luxury rooms, fine dining, and event spaces.' },
-        { property: 'og:image', content: 'https://sparklingspur.github.io/images/favicons/caps-og-image.jpg' },
-
-        // Twitter
+        { property: 'og:locale', content: 'en_IN' },
+        { property: 'og:site_name', content: 'Hotel CAPS' },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
+        { property: 'og:image:type', content: 'image/jpeg' },
         { property: 'twitter:card', content: 'summary_large_image' },
-        { property: 'twitter:url', content: 'https://capsfamily.in/' },
-        { property: 'twitter:title', content: 'Hotel CAPS - Rooms, Multi-Cuisine Restaurant, Auditorium Hall - Koduvayur, Palakkad, Kerala' },
-        { property: 'twitter:description', content: 'Experience premium hospitality at Hotel CAPS, Palakkad. We offer luxury rooms, fine dining, and event spaces.' },
-        { property: 'twitter:image', content: 'https://sparklingspur.github.io/images/favicons/caps-og-image.jpg' },
 
-        // PWA & Mobile Meta Tags
+        // Windows PWA & Mobile Meta Tags
         { name: 'msapplication-TileColor', content: '#ffffff' },
         { name: 'msapplication-TileImage', content: '/images/favicons/ms-icon-144x144.png' },
         { name: 'theme-color', content: '#ffffff' },
-        // --- NEW: Link to browserconfig.xml ---
-        { name: 'msapplication-config', content: '/images/favicons/browserconfig.xml' }
+        { name: 'msapplication-config', content: '/images/favicons/browserconfig.xml' },
+
+        // Apple Safari Device Customizations
+        // PWA & Mobile Device Customizations
+        { name: 'mobile-web-app-capable', content: 'yes' }, // Modern generic standard
+        { name: 'apple-mobile-web-app-capable', content: 'yes' }, // Kept strictly for legacy iOS support
+        { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
+        { name: 'apple-mobile-web-app-title', content: 'Hotel CAPS' }
       ],
+
+      // 3. PWA & Favicon Links
       link: [
-        // PWA & Favicon Links
         { rel: 'apple-touch-icon', sizes: '57x57', href: '/images/favicons/apple-icon-57x57.png' },
         { rel: 'apple-touch-icon', sizes: '60x60', href: '/images/favicons/apple-icon-60x60.png' },
         { rel: 'apple-touch-icon', sizes: '72x72', href: '/images/favicons/apple-icon-72x72.png' },
@@ -79,14 +128,8 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/images/favicons/favicon-32x32.png' },
         { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/images/favicons/favicon-96x96.png' },
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/images/favicons/favicon-16x16.png' },
-        { rel: 'manifest', href: '/images/favicons/manifest.json' },
-      ],
-      script: [
-        {
-          
-        }
-      ]
+        { rel: 'manifest', href: '/images/favicons/manifest.json' }
+      ] // Empty script array completely dropped to keep runtime code light
     }
   }
 })
-

@@ -17,190 +17,300 @@ import IconParking from '~/components/icons/IconParking.vue';
 
 // Define the data for our hero section
 const heroImages = ref([
-  '/images/rooms/hero/room-hero-2.jpg'
+  '/images/rooms/hero/rooms.jpg'
 ]);
 
-// This is the data for our new FeaturesGrid component.
-// It's clean, easy to read, and simple to update.
-const roomFeatures = shallowRef([
-  {
-    icon: markRaw(IconWifi),
-    title: 'Free Wi-Fi',
-    description: 'Stay connected anytime, anywhere.'
-  },
-  {
-    icon: markRaw(IconWorkdesk),
-    title: 'Work Desk',
-    description: 'Striving to exceed expectations in every stay.'
-  },
-  {
-    icon: markRaw(IconBed),
-    title: 'Cozy Bedding',
-    description: 'Thoughtfully designed spaces for a relaxing stay.'
-  },
-  {
-    icon: markRaw(IconStorage),
-    title: 'Storage Space',
-    description: 'Striving to exceed expectations in every stay.'
-  },
-  {
-    icon: markRaw(IconAirConditioner),
-    title: 'Air Conditioning',
-    description: 'A peaceful escape surrounded by nature.'
-  },
-  {
-    icon: markRaw(IconForkKnife),
-    title: 'Free Breakfast',
-    description: 'Enjoy meals and assistance at any hour.'
-  },
-  {
-    icon: markRaw(IconElevator),
-    title: 'Elevator Facility',
-    description: 'Elevating your experience, one floor at a time.'
-  },
-  {
-    icon: markRaw(IconClockClockwise),
-    title: '24/7 Check In/Out',
-    description: 'Start your day with a delicious meal.'
-  },
-  {
-    icon: markRaw(IconCctv),
-    title: 'CCTV Cameras',
-    description: 'Genuine experiences rooted in local culture.'
-  },
-  {
-    icon: markRaw(IconParking),
-    title: 'Car Parking',
-    description: 'Genuine experiences rooted in local culture.'
-  },
-]);
+// Your page-specific JSON payload for Intro Section
+const roomsIntroData = {
+  eyebrow: "Welcome to Hotel CAPS",
+  title: "Comfortable Stays.\nMemorable Experiences.",
+  description: "At Hotel CAPS, we offer a range of well-appointed rooms designed for relaxation, convenience, and modern comfort. Whether you're here for business or leisure, we ensure a stay that feels just right.",
+  image: "/images/rooms/intro.jpg",
+  themeTextClass: "text-[#2563eb]", 
+  themeBgClass: "bg-[#2563eb]",
+  themeIconBgClass: "bg-blue-50",
+  features: [
+    {
+      title: "Premium Comfort",
+      description: "Spacious and cozy rooms designed for your comfort.",
+      // Raw SVG: Bed
+      svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 sm:w-8 sm:h-8"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>`
+    },
+    {
+      title: "Daily Housekeeping",
+      description: "Impeccable cleanliness for a pleasant stay.",
+      // Raw SVG: Sparkles / Cleaning
+      svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 sm:w-8 sm:h-8"><path d="M12 3v18"/><path d="M3 12h18"/><path d="m5 5 14 14"/><path d="m5 19 14-14"/></svg>`
+    },
+    {
+      title: "Free Wi-Fi",
+      description: "Stay connected anytime, anywhere.",
+      // Raw SVG: Wi-Fi
+      svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 sm:w-8 sm:h-8"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20" stroke-width="2.5"/></svg>`
+    },
+    {
+      title: "24/7 Assistance",
+      description: "We're here to help, whenever you need.",
+      // Raw SVG: Clock
+      svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 sm:w-8 sm:h-8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`
+    }
+  ]
+};
 
-
-const tourismSpots = ref([
-  {
-    image: '/images/home/tourism/1.jpg',
-    title: 'Malampuzha Dam',
-    distance: '9.8',
-    map: 'https://maps.app.goo.gl/1zFvX8CMGHNzKnkg7'
-  },
-  {
-    image: '/images/home/tourism/2.jpg',
-    title: 'Silent Valley National Park',
-    distance: '67.4',
-    map: 'https://maps.app.goo.gl/QPg7FZ1gtvhAxP8E6'
-  },
-  {
-    image: '/images/home/tourism/3.jpg',
-    title: 'Palakkad Fort',
-    distance: '10.5',
-    map: 'https://maps.app.goo.gl/YvLrZVPy2x9Tmh1L8'
-  },
-  {
-    image: '/images/home/tourism/4.jpg',
-    title: 'Dhoni Hills',
-    distance: '16.2',
-    map: 'https://maps.app.goo.gl/B7nHQZ1NDXkJJYpw8'
-  },
-  {
-    image: '/images/home/tourism/5.jpg',
-    title: 'Kalpathy Heritage Village',
-    distance: '8.1',
-    map: 'https://maps.app.goo.gl/cDdE43PXnT4K25xUA'
-  },
-  {
-    image: '/images/home/tourism/6.jpg',
-    title: 'Seethargundu Viewpoint',
-    distance: '35.9',
-    map: 'https://maps.app.goo.gl/5eVMsXc2s6nZmwRr6'
-  },
-  {
-    image: '/images/home/tourism/7.jpg',
-    title: 'Fantasy Park',
-    distance: '10.1',
-    map: 'https://maps.app.goo.gl/8X1EsRQ42ZpXBoTR9'
-  },
-  {
-    image: '/images/home/tourism/8.jpg',
-    title: 'Parambikulam Tiger Reserve',
-    distance: '98.2',
-    map: 'https://maps.app.goo.gl/YuR3eG5nUMnATxu49'
-  },
-  {
-    image: '/images/home/tourism/9.jpg',
-    title: 'Nelliyampathy Hills',
-    distance: '58.6',
-    map: 'https://maps.app.goo.gl/Zx3q6cREo26WJ4LT7'
-  },
-  {
-    image: '/images/home/tourism/10.jpg',
-    title: 'Kava View Point',
-    distance: '18.9',
-    map: 'https://maps.app.goo.gl/qtCRAtJgVo4j8H5M7'
-  },
-  {
-    image: '/images/home/tourism/11.jpg',
-    title: 'Meenvallam Waterfalls',
-    distance: '31.0',
-    map: 'https://maps.app.goo.gl/JXTtRtq3VGnNRbFo9'
-  },
-  {
-    image: '/images/home/tourism/12.jpg',
-    title: 'Attappadi Hills',
-    distance: '79.4',
-    map: 'https://maps.app.goo.gl/EWUtMQH9CJ9oAhsC6'
-  },
-]);
-
-useHead({
-  title: 'Suites & Rooms | Hotel CAPS, Koduvayur, Palakkad',
-
-  meta: [
-    // SEO and Page Information
-    { name: 'description', content: 'Explore our collection of elegant suites and rooms at Hotel CAPS. Discover your personal sanctuary of comfort and modern luxury for an unforgettable stay in Palakkad.' },
-    { name: 'keywords', content: 'Hotel CAPS, hotel in palakkad, best hotel kerala, best hotels palakkad, best hotels koduvayur, luxury rooms palakkad, multi-cuisine restaurant palakkad, auditorium hall palakkad, accommodation kerala, palakkad hotels' },
-    { name: 'author', content: 'kriz - https://www.brandsta.in' },
-
-    // Open Graph / Facebook
-    { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: 'https://capsfamily.in/rooms' },
-    { property: 'og:title', content: 'Suites & Rooms | Hotel CAPS, Koduvayur, Palakkad' },
-    { property: 'og:description', content: 'Explore our collection of elegant suites and rooms at Hotel CAPS. Discover your personal sanctuary of comfort and modern luxury for an unforgettable stay in Palakkad.' },
-    { property: 'og:image', content: 'https://sparklingspur.github.io/images/favicons/caps-og-image.jpg' },
-
-    // Twitter
-    { property: 'twitter:card', content: 'summary_large_image' },
-    { property: 'twitter:url', content: 'https://capsfamily.in/rooms' },
-    { property: 'twitter:title', content: 'Suites & Rooms | Hotel CAPS, Koduvayur, Palakkad' },
-    { property: 'twitter:description', content: 'Explore our collection of elegant suites and rooms at Hotel CAPS. Discover your personal sanctuary of comfort and modern luxury for an unforgettable stay in Palakkad.' },
-    { property: 'twitter:image', content: 'https://sparklingspur.github.io/images/favicons/caps-og-image.jpg' },
-
+const roomsSplitData = {
+  eyebrow: "Why Choose Us?",
+  title: "Designed for Your Comfort,\nBuilt for Your Satisfaction.",
+  description: "Every detail in our rooms is carefully curated to provide you with a restful and refreshing stay.",
+  bullets: [
+    "Spacious, hygenic and well-furnished rooms",
+    "Modern amenities for a hassle-free stay",
+    "Peaceful atmosphere for better relaxation",
+    "Dedicated service for a memorable experience"
   ],
-  
-});
+  image: "/images/rooms/split.jpg", // Adjust path as needed
+  buttonClass: "border-2 border-solid border-[#2563eb] text-[#2563eb] before:bg-[#2563eb]",
+  buttonText: "View Pricing",
+  buttonLink: "/pricing",
+  themeTextClass: "text-[#2563eb]",
+  themeBgClass: "bg-[#2563eb]"
+};
+
+const roomsAssureData = {
+  eyebrow: "We Assure",
+  title: "Quality You Can Trust",
+  description: "We are committed to providing you with a restful sanctuary. Every amenity is carefully chosen to ensure your stay is completely hassle-free.",
+  themeTextClass: "text-[#2563eb]",
+  themeBgClass: "bg-[#2563eb]",
+  themeIconBgClass: "bg-blue-50",
+  features: [
+    {
+      title: "Hygienic Rooms",
+      description: "Cleaned and sanitized to the highest standards.",
+      svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 sm:w-10 sm:h-10"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>`
+    },
+    {
+      title: "Modern Amenities",
+      description: "All essential facilities for a convenient stay.",
+      svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 sm:w-10 sm:h-10"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>`
+    },
+    {
+      title: "Elevator Facility",
+      description: "Elevating your experience, one floor at a time.",
+      // Elevator Split Doors SVG
+      svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 sm:w-10 sm:h-10"><rect x="3" y="2" width="18" height="20" rx="2"/><line x1="12" y1="2" x2="12" y2="22"/><path d="M8 10l-2-2-2 2"/><path d="M18 14l-2 2-2-2"/></svg>`    },
+    {
+      title: "24/7 Service",
+      description: "Round-the-clock service at your fingertips.",
+      svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 sm:w-10 sm:h-10"><path d="M22 17H2c0-5.5 4.5-10 10-10s10 4.5 10 10Z"/><path d="M12 7V4m-2 0h4"/><path d="M2 21h20"/></svg>`
+    },
+    {
+      title: "High-Speed Wi-Fi",
+      description: "Stay connected seamlessly.",
+      svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 sm:w-10 sm:h-10"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20" stroke-width="2.5"/></svg>`
+    },
+    {
+      title: "Work Desk",
+      description: "A dedicated, well-lit workspace for maximum productivity and comfort.",
+      // Re-engineered the provided 256x256 SVG to a clean 24x24 grid
+      svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 sm:w-10 sm:h-10"><line x1="2" y1="7" x2="22" y2="7"/><line x1="4" y1="7" x2="4" y2="19"/><line x1="20" y1="7" x2="20" y2="19"/><line x1="12" y1="7" x2="12" y2="13"/><line x1="4" y1="13" x2="20" y2="13"/><line x1="7" y1="10" x2="9" y2="10"/><line x1="15" y1="10" x2="17" y2="10"/></svg>`
+    },
+    {
+      title: "Air Conditioning",
+      description: "Perfect temperature for total comfort.",
+      svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 sm:w-10 sm:h-10"><rect x="3" y="6" width="18" height="8" rx="2"/><path d="M7 14v4"/><path d="M12 14v4"/><path d="M17 14v4"/><line x1="8" y1="10" x2="16" y2="10"/></svg>`
+    },
+    {
+      title: "Power Backup",
+      description: "Uninterrupted comfort during your stay.",
+      svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 sm:w-10 sm:h-10"><rect x="2" y="7" width="16" height="10" rx="2"/><line x1="22" y1="11" x2="22" y2="13"/><line x1="6" y1="12" x2="14" y2="12"/><line x1="10" y1="8" x2="10" y2="16"/></svg>`
+    },
+    {
+      title: "Storage Space",
+      description: "Ample wardrobes and storage for all your belongings.",
+      // Drawer / Storage Cabinet SVG
+      svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 sm:w-10 sm:h-10"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><path d="M4 12h16"/><path d="M10 8h4"/><path d="M10 16h4"/></svg>`
+    },
+    {
+      title: "Free Breakfast",
+      description: "Enjoy a complimentary and delicious morning meal to start your day.",
+      // Fork and Knife SVG
+      svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 sm:w-10 sm:h-10"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>`
+    },
+    {
+      title: "CCTV Cameras",
+      description: "24/7 surveillance ensuring a secure environment for all guests.",
+      // Security Camera SVG
+      svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 sm:w-10 sm:h-10"><path d="M16 11l2 2v4M16 11h6M3 15a2 2 0 0 0 2 2h2.5l3.5 3.5a1 1 0 0 0 1.5 0L21 12a1 1 0 0 0 0-1.5l-5-5a1 1 0 0 0-1.5 0Z"/></svg>`
+    },
+    {
+      title: "Ample Parking",
+      description: "Spacious and secure parking space.",
+      svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 sm:w-10 sm:h-10"><circle cx="12" cy="12" r="10"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>`
+    },
+
+  ]
+};
+
+const roomsGalleryData = {
+  eyebrow: "Our Amenities",
+  title: "Comfort in Every Detail",
+  themeTextClass: "text-[#2563eb]",
+  themeBgClass: "bg-[#2563eb]",
+  images: [
+    { src: "/images/rooms/amenities/1.jpg", alt: "room amenities" },
+    { src: "/images/rooms/amenities/2.jpg", alt: "room amenities" },
+    { src: "/images/rooms/amenities/3.jpg", alt: "room amenities" },
+    { src: "/images/rooms/amenities/4.jpg", alt: "room amenities" },
+    { src: "/images/rooms/amenities/5.jpg", alt: "room amenities" },
+    { src: "/images/rooms/amenities/6.jpg", alt: "room amenities" },
+    { src: "/images/rooms/amenities/7.jpg", alt: "room amenities" },
+    { src: "/images/rooms/amenities/8.jpg", alt: "room amenities" },
+    { src: "/images/rooms/amenities/9.jpg", alt: "room amenities" },
+    { src: "/images/rooms/amenities/10.jpg", alt: "room amenities" },
+  ]
+};
+
+const roomsCtaData = {
+  eyebrow: "Need a Comfortable Stay?",
+  title: "Reserve Your Sanctuary with Us.",
+  description: "Enjoy luxurious amenities, daily housekeeping, and peaceful relaxation. Book your stay now.",
+  buttonText: "Check Pricing",
+  buttonLink: "/pricing",
+  bgGradientClass: "bg-gradient-to-r from-[#1e3a8a] via-[#2563eb] to-[#38bdf8]",
+  buttonTextClass: "text-[#2563eb]",
+  // Bed / Comfort Watermark SVG
+  watermarkSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="w-full h-full"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>`
+};
+
+// 1. Core Meta Values
+const pageTitle = 'Luxury Suites & Rooms | Hotel CAPS, Koduvayur, Palakkad'
+const pageDesc = 'Explore luxury suites and rooms at Hotel CAPS, Koduvayur | Experience comfortable stays, modern luxury, premium amenities & quality service in Palakkad.'
+const canonicalUrl = 'https://capsfamily.in/rooms'
+const ogImage = 'https://capsfamily.in/images/favicons/caps-rooms-og-image.jpg'
+
+// 2. Structured Link and JSON-LD Schema Injection
+useHead({
+  link: [
+    { rel: 'canonical', href: canonicalUrl }
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ItemPage",
+        "name": pageTitle,
+        "description": pageDesc,
+        "url": canonicalUrl,
+        "mainEntity": {
+          "@type": "Hotel",
+          "name": "Hotel CAPS",
+          "url": "https://capsfamily.in/",
+          "logo": "https://capsfamily.in/images/caps-solid-logo.png",
+          "image": ogImage,
+          "telephone": [
+            "+919207517064",
+            "+918848369567"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Main Road, Pittupeedika",
+            "addressLocality": "Koduvayur",
+            "addressRegion": "Kerala",
+            "postalCode": "678501",
+            "addressCountry": "IN"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Accommodation & Suites",
+            "itemListElement": [
+              {
+                "@type": "HotelRoom",
+                "name": "Luxury Suites & Executive Rooms",
+                "description": "Comfortable stays with modern luxury, premium amenities, air conditioning, and room service."
+              }
+            ]
+          }
+        }
+      })
+    }
+  ]
+})
+
+// 3. Nuxt 4 SEO Composable (Search & Social Cards)
+useSeoMeta({
+  title: pageTitle,
+  description: pageDesc,
+  ogTitle: pageTitle,
+  ogDescription: pageDesc,
+  ogUrl: canonicalUrl,
+  ogImage: ogImage,
+  twitterCard: 'summary_large_image',
+  twitterTitle: pageTitle,
+  twitterDescription: pageDesc,
+  twitterImage: ogImage
+})
 
 </script>
 
 <template>
   <div>
     <PageHero 
+      eyebrow="Rest Easy, Wake Inspired."
       title="Suites & Rooms"
-      subtitle="Discover your personal sanctuary of comfort, elegance, and modern luxury."
+      subtitle="Thoughtfully designed rooms and suites for a comfortable stay every time."
       :images="heroImages"
+      imageGradientClass="absolute inset-0 bg-gradient-to-r from-black/90 via-blue-950/70 to-black/70 z-5"
+      eyebrowColorClass="text-[#3b82f6]"
+      themeColorClass="text-[#1e40af]"
     />
 
-    <FeaturesGrid 
-      title="Everything You Need"
-      :features="roomFeatures"
+    <PageIntro 
+      :eyebrow="roomsIntroData.eyebrow"
+      :title="roomsIntroData.title"
+      :description="roomsIntroData.description"
+      :image="roomsIntroData.image"
+      :themeTextClass="roomsIntroData.themeTextClass"
+      :themeBgClass="roomsIntroData.themeBgClass"
+      :themeIconBgClass="roomsIntroData.themeIconBgClass"
+      :features="roomsIntroData.features"
     />
 
-   <div class="pt-0 pb-20 flex flex-col items-center gap-12 mx-auto px-6">
-      <h2 class="text-gray-800 text-3xl sm:text-4xl text-center lg:text-4xl font-display font-semibold tracking-wider mt-2 ">Our Amenities</h2>
-      <SliderIntegrator :items="tourismSpots" />
-    </div>
+    <PageSplit 
+      :eyebrow="roomsSplitData.eyebrow"
+      :title="roomsSplitData.title"
+      :description="roomsSplitData.description"
+      :bullets="roomsSplitData.bullets"
+      :image="roomsSplitData.image"
+      :buttonClass="roomsSplitData.buttonClass"
+      :buttonText="roomsSplitData.buttonText"
+      :buttonLink="roomsSplitData.buttonLink"
+      :themeTextClass="roomsSplitData.themeTextClass"
+      :themeBgClass="roomsSplitData.themeBgClass"
+    />
+      
+    <RoomCategories />
+      
+    <PageAssure 
+      :eyebrow="roomsAssureData.eyebrow"
+      :title="roomsAssureData.title"
+      :description="roomsAssureData.description"
+      :features="roomsAssureData.features"
+      :themeTextClass="roomsAssureData.themeTextClass"
+      :themeBgClass="roomsAssureData.themeBgClass"
+      :themeIconBgClass="roomsAssureData.themeIconBgClass"
+    />
 
-    <!-- The rest of your rooms page content will go here -->
-    <div class="py-20 text-center">
-      <h2 class="text-3xl font-bold">Room listings will go here...</h2>
-    </div>
+
+    <PageGallery 
+      :eyebrow="roomsGalleryData.eyebrow"
+      :title="roomsGalleryData.title"
+      :images="roomsGalleryData.images"
+      :themeTextClass="roomsGalleryData.themeTextClass"
+      :themeBgClass="roomsGalleryData.themeBgClass"
+    />
+
+    <PageCtaBanner v-bind="roomsCtaData" />
+
   </div>
 </template>

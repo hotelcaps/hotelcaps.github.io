@@ -8,8 +8,8 @@ import IconPhone from '~/components/icons/IconPhone.vue';
 
 // --- DATA-DRIVEN LINKS ---
 const socialLinks = shallowRef([
-  { name: 'Facebook', href: '#', icon: markRaw(IconFacebook), color: "text-blue-600 hover:text-blue-700" },
-  { name: 'Instagram', href: '#', icon: markRaw(IconInstagram), color: "text-pink-600 hover:text-pink-700", }
+  { name: 'Facebook', href: 'https://www.facebook.com/caps.koduvayur/', icon: markRaw(IconFacebook), color: "text-blue-600 hover:text-blue-700" },
+  { name: 'Instagram', href: 'https://www.instagram.com/capsfamily.in/', icon: markRaw(IconInstagram), color: "text-pink-600 hover:text-pink-700", }
 ]);
 
 
@@ -87,10 +87,8 @@ const footerNav = ref([
       
       <!-- Bottom Bar (Copyright, etc.) -->
       <div class="mt-12 border-t border-stone-700 pt-8 flex flex-col sm:flex-row justify-between items-center text-sm">
-        <p class="text-stone-200 order-1">&copy; 2025 Hotel CAPS. All rights reserved.</p>
-        <p class="text-stone-200 order-3 sm:order-2 mt-4 sm:mt-0">
-          Created by <a href="https://www.brandsta.in" target="_blank" rel="noopener noreferrer" class="hover:text-stone-400 transition-all duration-300 underline">Brandsta</a>
-        </p>
+        <p class="text-stone-200 order-1">&copy; 2026 Hotel CAPS. All rights reserved.</p>
+
         <div class="flex space-x-4 order-2 sm:order-3 mt-4 sm:mt-0">
           <NuxtLink to="/policy" class="text-stone-200 transition-all duration-300 hover:text-stone-400 hover:underline">Privacy Policy</NuxtLink>
           <NuxtLink to="/terms" class="text-stone-200 transition-all duration-300 hover:text-stone-400 hover:underline">Terms & Conditions</NuxtLink>

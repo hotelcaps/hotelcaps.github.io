@@ -1,5 +1,10 @@
 <template>
-  <section class="bg-stone-100 font-display py-16 px-4 text-gray-800">
+  <section class="bg-white font-display py-16 px-4 text-gray-800">
+    <p 
+      class="text-center font-sans text-sm font-bold uppercase tracking-widest mb-2 text-orange-500"
+    >
+      Visit Us
+    </p>
     <h2 class="text-3xl sm:text-4xl font-semibold text-center mb-10 tracking-wide">
       Our Location
     </h2>

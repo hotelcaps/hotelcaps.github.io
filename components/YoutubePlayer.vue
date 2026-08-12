@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 
-// Define the props for this component. It requires a videoId.
 const props = defineProps({
   videoId: {
     type: String,
@@ -9,30 +8,45 @@ const props = defineProps({
   }
 });
 
-// Refs to target our DOM elements
 const playerContainer = ref(null);
 const playerDiv = ref(null);
-let player; // Variable to hold the YouTube player instance
+let player; 
 
-// --- LAZY LOADING & API SETUP ---
-
-// This function loads the YouTube Iframe API script
+// --- ROBUST LAZY LOADING & API SETUP ---
 const loadYouTubeAPI = () => {
+  // 1. If API is already fully loaded by a previous component, execute immediately
   if (window.YT && window.YT.Player) {
     createPlayer();
-  } else {
+    return;
+  }
+
+  // 2. If this is the FIRST component requesting the API, set up the queue and inject the script
+  if (!window.__YT_CALLBACKS) {
+    window.__YT_CALLBACKS = [];
+    
+    // YouTube calls this exact function name when its script finishes loading
+    window.onYouTubeIframeAPIReady = () => {
+      // Run every component's initialization function
+      window.__YT_CALLBACKS.forEach(cb => cb());
+      // Clear the queue
+      window.__YT_CALLBACKS = []; 
+    };
+
+    // Inject the script only once
     const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     const firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    window.onYouTubeIframeAPIReady = createPlayer;
   }
+
+  // 3. Add THIS specific component's createPlayer function to the global queue
+  window.__YT_CALLBACKS.push(createPlayer);
 };
 
-// This function creates the actual YouTube player instance
 const createPlayer = () => {
   if (!playerDiv.value) return;
-  player = new YT.Player(playerDiv.value, {
+  
+  player = new window.YT.Player(playerDiv.value, {
     height: '100%',
     width: '100%',
     videoId: props.videoId,
@@ -46,8 +60,7 @@ const createPlayer = () => {
       showinfo: 0,
       rel: 0,
       modestbranding: 1,
-      // FIX: Add the origin parameter. This tells YouTube which site is allowed to control the player.
-      // window.location.origin dynamically gets the correct origin for both localhost and your live domain.
+      enablejsapi: 1, // Ensures postMessage API is active
       origin: window.location.origin
     },
     events: {
@@ -59,7 +72,7 @@ const createPlayer = () => {
   });
 };
 
-// --- INTERSECTION OBSERVER FOR LAZY LOADING ---
+// --- INTERSECTION OBSERVER ---
 let observer;
 
 onMounted(() => {
@@ -72,9 +85,7 @@ onMounted(() => {
         }
       });
     },
-    {
-      rootMargin: '200px',
-    }
+    { rootMargin: '200px' }
   );
 
   if (playerContainer.value) {
@@ -82,15 +93,9 @@ onMounted(() => {
   }
 });
 
-// Clean up the observer when the component is unmounted
 onUnmounted(() => {
-  if (observer) {
-    observer.disconnect();
-  }
-  if (player) {
-    player.destroy();
-  }
-  window.onYouTubeIframeAPIReady = null;
+  if (observer) observer.disconnect();
+  if (player && typeof player.destroy === 'function') player.destroy();
 });
 </script>
 

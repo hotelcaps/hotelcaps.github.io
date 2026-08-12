@@ -6,7 +6,7 @@
         <div class="absolute inset-0 "></div>
         <div class="relative w-full h-full flex flex-col justify-center items-center text-center bg-black/70 text-white px-12 md:px-16">
           <div class="hero-slide-content">
-            <h2 class="font-display text-3xl mb-4 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold lg:font-semibold tracking-widest xl:tracking-widest leading-snug sm:leading-normal">{{ slide.title }}</h2>
+            <h1 class="font-display mb-4 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold lg:font-semibold tracking-widest xl:tracking-widest leading-snug sm:leading-normal">{{ slide.title }}</h1>
             <p class="font-body max-w-sm sm:max-w-md md:max-w-4xl mt-4 sm:mt-6 text-2x1 sm:text-2xl font-light opacity-90 tracking-wider">{{ slide.subtitle }}</p>
             <NuxtLink v-if="slide.buttonLink" :to="slide.buttonLink" class="hero-bubble-button text-lg font-display tracking-wider mt-8 block font-normal py-3 px-8 rounded-lg">
               {{ slide.buttonText }}

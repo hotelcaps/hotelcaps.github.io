@@ -4,49 +4,76 @@ import PageHero from '~/components/PageHero.vue';
 
 // Define the data for our hero section
 const heroImages = ref([
-  '/images/rooms/hero/room-hero-2.jpg'
+  '/images/others/privacy.jpg'
 ]);
+// 1. Core Meta Values
+const pageTitle = 'Privacy Policy | Hotel CAPS - Koduvayur, Palakkad'
+const pageDesc = 'Learn how Hotel CAPS in Koduvayur, Palakkad collects, uses, and protects your personal data. Read our commitment to your privacy and data security.'
+const canonicalUrl = 'https://capsfamily.in/policy'
+const ogImage = 'https://capsfamily.in/images/favicons/caps-policy-og-image.jpg'
 
+// 2. Structured Link and JSON-LD Schema Injection
 useHead({
-  title: 'Privacy Policy | Hotel CAPS',
-
-  meta: [
-    // SEO and Page Information
-    { name: 'description', content: 'Learn about how Hotel CAPS collects, uses, and protects your personal data. Our commitment to your privacy.' },
-    { name: 'keywords', content: 'Hotel CAPS, hotel in palakkad, best hotel kerala, best hotels palakkad, best hotels koduvayur, luxury rooms palakkad, multi-cuisine restaurant palakkad, auditorium hall palakkad, accommodation kerala, palakkad hotels' },
-    { name: 'author', content: 'kriz - https://www.brandsta.in' },
-
-    // Open Graph / Facebook
-    { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: 'https://capsfamily.in/policy' },
-    { property: 'og:title', content: 'Privacy Policy | Hotel CAPS' },
-    { property: 'og:description', content: 'Learn about how Hotel CAPS collects, uses, and protects your personal data. Our commitment to your privacy.' },
-    { property: 'og:image', content: 'https://sparklingspur.github.io/images/favicons/caps-og-image.jpg' },
-
-    // Twitter
-    { property: 'twitter:card', content: 'summary_large_image' },
-    { property: 'twitter:url', content: 'https://capsfamily.in/policy' },
-    { property: 'twitter:title', content: 'Privacy Policy | Hotel CAPS' },
-    { property: 'twitter:description', content: 'Learn about how Hotel CAPS collects, uses, and protects your personal data. Our commitment to your privacy.' },
-    { property: 'twitter:image', content: 'https://sparklingspur.github.io/images/favicons/caps-og-image.jpg' },
-
+  link: [
+    { rel: 'canonical', href: canonicalUrl }
   ],
-  
-});
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": pageTitle,
+        "description": pageDesc,
+        "url": canonicalUrl,
+        "publisher": {
+          "@type": "Hotel",
+          "name": "Hotel CAPS",
+          "url": "https://capsfamily.in/",
+          "logo": "https://capsfamily.in/images/caps-solid-logo.png",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Main Road, Pittupeedika",
+            "addressLocality": "Koduvayur",
+            "addressRegion": "Kerala",
+            "postalCode": "678501",
+            "addressCountry": "IN"
+          }
+        }
+      })
+    }
+  ]
+})
+
+// 3. Nuxt 4 SEO Composable (Search & Social Cards)
+useSeoMeta({
+  title: pageTitle,
+  description: pageDesc,
+  ogTitle: pageTitle,
+  ogDescription: pageDesc,
+  ogUrl: canonicalUrl,
+  ogImage: ogImage,
+  twitterCard: 'summary_large_image',
+  twitterTitle: pageTitle,
+  twitterDescription: pageDesc,
+  twitterImage: ogImage
+})
 
 </script>
 
 <template>
   <div>
     <PageHero 
+      eyebrow="Your Data, Kept Guarded."
       title="Privacy Policy"
-      subtitle="Discover your personal sanctuary of comfort, elegance, and modern luxury."
+      subtitle="How we collect, handle, and protect your personal information."
       :images="heroImages"
+      imageGradientClass="absolute inset-0 bg-gradient-to-r from-black/90 via-[#191a13]/50 to-black/70 z-5"
+      eyebrowColorClass="text-[#abae9a]"
+      themeColorClass="text-[#2b2b22]"
     />
 
-    <!-- The rest of your rooms page content will go here -->
-    <div class="py-20 text-center">
-      <h2 class="text-3xl font-bold">Policy listings will go here...</h2>
-    </div>
+    <PrivacyPolicy />
+
   </div>
 </template>

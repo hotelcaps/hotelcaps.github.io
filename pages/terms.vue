@@ -1,52 +1,81 @@
 <script setup>
 import { ref } from 'vue';
 import PageHero from '~/components/PageHero.vue';
+import TermsAndConditions from '~/components/TermsAndConditions.vue';
 
 // Define the data for our hero section
 const heroImages = ref([
-  '/images/rooms/hero/room-hero-2.jpg'
+  '/images/others/terms.jpg'
 ]);
 
+// 1. Core Meta Values
+const pageTitle = 'Terms & Conditions | Hotel CAPS, Koduvayur, Palakkad'
+const pageDesc = 'Read the terms and conditions for room bookings, guest stays, restaurant dining, and service policies at Hotel CAPS in Koduvayur, Palakkad.'
+const canonicalUrl = 'https://capsfamily.in/terms'
+const ogImage = 'https://capsfamily.in/images/favicons/caps-terms-og-image.jpg'
+
+// 2. Structured Link and JSON-LD Schema Injection
 useHead({
-  title: 'Terms & Conditions | Hotel CAPS, Koduvayur, Palakkad',
-
-  meta: [
-    // SEO and Page Information
-    { name: 'description', content: 'Read the terms and conditions for bookings, stays, and use of services at Hotel CAPS, Palakkad.' },
-    { name: 'keywords', content: 'Hotel CAPS, hotel in palakkad, best hotel kerala, best hotels palakkad, best hotels koduvayur, luxury rooms palakkad, multi-cuisine restaurant palakkad, auditorium hall palakkad, accommodation kerala, palakkad hotels' },
-    { name: 'author', content: 'kriz - https://www.brandsta.in' },
-
-    // Open Graph / Facebook
-    { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: 'https://capsfamily.in/terms' },
-    { property: 'og:title', content: 'Terms & Conditions | Hotel CAPS, Koduvayur, Palakkad' },
-    { property: 'og:description', content: 'Read the terms and conditions for bookings, stays, and use of services at Hotel CAPS, Palakkad.' },
-    { property: 'og:image', content: 'https://sparklingspur.github.io/images/favicons/caps-og-image.jpg' },
-
-    // Twitter
-    { property: 'twitter:card', content: 'summary_large_image' },
-    { property: 'twitter:url', content: 'https://capsfamily.in/terms' },
-    { property: 'twitter:title', content: 'Terms & Conditions | Hotel CAPS, Koduvayur, Palakkad' },
-    { property: 'twitter:description', content: 'Read the terms and conditions for bookings, stays, and use of services at Hotel CAPS, Palakkad.' },
-    { property: 'twitter:image', content: 'https://sparklingspur.github.io/images/favicons/caps-og-image.jpg' },
-
+  link: [
+    { rel: 'canonical', href: canonicalUrl }
   ],
-  
-});
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": pageTitle,
+        "description": pageDesc,
+        "url": canonicalUrl,
+        "publisher": {
+          "@type": "Hotel",
+          "name": "Hotel CAPS",
+          "url": "https://capsfamily.in/",
+          "logo": "https://capsfamily.in/images/caps-solid-logo.png",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Main Road, Pittupeedika",
+            "addressLocality": "Koduvayur",
+            "addressRegion": "Kerala",
+            "postalCode": "678501",
+            "addressCountry": "IN"
+          }
+        }
+      })
+    }
+  ]
+})
+
+// 3. Nuxt 4 SEO Composable (Search & Social Cards)
+useSeoMeta({
+  title: pageTitle,
+  description: pageDesc,
+  ogTitle: pageTitle,
+  ogDescription: pageDesc,
+  ogUrl: canonicalUrl,
+  ogImage: ogImage,
+  twitterCard: 'summary_large_image',
+  twitterTitle: pageTitle,
+  twitterDescription: pageDesc,
+  twitterImage: ogImage
+})
 
 </script>
 
 <template>
   <div>
     <PageHero 
-      title="Terms and Conditions"
-      subtitle="Discover your personal sanctuary of comfort, elegance, and modern luxury."
+      eyebrow="The Legal Stuff, Simplified."
+      title="Terms & Conditions"
+      subtitle="Everything you need to know about how we can work together."
       :images="heroImages"
+      imageGradientClass="absolute inset-0 bg-gradient-to-r from-black/90 via-[#191413]/50 to-black/70 z-5"
+      eyebrowColorClass="text-[#aba09c]"
+      themeColorClass="text-[#2b2422]"
     />
 
-    <!-- The rest of your rooms page content will go here -->
-    <div class="py-20 text-center">
-      <h2 class="text-3xl font-bold">Terms listings will go here...</h2>
-    </div>
+    <TermsAndConditions />
+
   </div>
 </template>

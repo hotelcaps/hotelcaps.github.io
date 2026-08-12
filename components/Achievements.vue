@@ -2,6 +2,11 @@
   <section id="achievements-section" class="bg-stone-300 pt-12 pb-16 lg:pt-20 lg:pb-28 dotted-bg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12 md:mb-16">
+        <p 
+          class="font-sans text-sm font-bold uppercase tracking-widest mb-2 text-stone-500"
+        >
+          Our Stats
+        </p>
         <h2 class=" text-gray-800 text-3xl sm:text-4xl text-center lg:text-4xl font-display font-semibold tracking-wider mt-2">Our Achievements in Numbers</h2>
       </div>
       <div class="flex flex-wrap justify-center gap-4 sm:gap-8">
@@ -9,14 +14,19 @@
         <div 
           v-for="(stat, index) in achievements" 
           :key="index"
-          class="achievement-card p-4 sm:p-6 lg:p-10 rounded-xl shadow-lg text-center flex flex-col items-center justify-center aspect-square shadow-[inset_-24px_-18px_40px_#46464620] shadow-[2px_11px_21px_5px_rgba(0,_0,_0,_0.2)] w-[calc(47%)] sm:w-[calc(33.33%-1.5rem)] md:w-[calc(25%-1.5rem)]"
-          :class="stat.colorClass"
+          class="achievement-card p-4 sm:p-6 lg:p-10 rounded-xl shadow-lg text-center flex flex-col items-center justify-center aspect-square  w-[calc(47%)] sm:w-[calc(33.33%-1.5rem)] md:w-[calc(25%-1.5rem)]"
+          :class="[stat.colorClass,stat.shadowClass]"
         >
-          <component :is="stat.iconComponent" class="text-4xl sm:text-5xl" weight="regular" />
-          <h3 class="font-number text-4xl sm:text-5xl lg:text-7xl font-semibold text-zinc-800 mt-4">
+          <component :is="stat.iconComponent" class="text-4xl sm:text-5xl  w-12 h-12 sm:w-12 sm:h-12 lg:w-14 lg:h-14 p-2 rounded-full" :class="stat.iconBg" weight="regular" />
+          <h3 :class="stat.colorClass" class="font-number text-4xl sm:text-5xl lg:text-7xl font-semibold mt-4">
             <span :ref="el => { if (el) statNumbers[index] = el }">{{ stat.startNumber }}</span>{{ stat.suffix }}
           </h3>
           <p class="mt-2 text-sm sm:text-base text-gray-600 tracking-wide">{{ stat.label }}</p>
+          <!-- Bottom Accent Line -->
+          <div 
+            class="w-10 h-1 rounded-full mt-4"
+            :class="stat.lineBg"
+          ></div>
         </div>
 
       </div>
@@ -37,31 +47,43 @@ gsap.registerPlugin(ScrollTrigger);
 const achievements = shallowRef([
   { 
     iconComponent: PhUsersThree, 
-    colorClass: 'bg-sky-400 text-blue-800',
+    iconBg: 'bg-blue-100',
+    shadowClass: 'shadow-blue-500/20 hover:shadow-blue-500/40',
+    lineBg: 'bg-blue-600',
+    colorClass: 'bg-white text-blue-600',
     startNumber: 0,
-    targetNumber: 5, 
+    targetNumber: 10, 
     suffix: 'K+', 
     label: 'Guests Hosted' 
   },
   { 
     iconComponent: PhForkKnife, 
-    colorClass: 'bg-emerald-400 text-emerald-800',
+    iconBg: 'bg-emerald-100',
+    shadowClass: 'shadow-emerald-500/20 hover:shadow-emerald-500/40',
+    lineBg: 'bg-emerald-600',
+    colorClass: 'bg-white text-emerald-600',
     startNumber: 0,
-    targetNumber: 300, 
+    targetNumber: 400, 
     suffix: 'K+', 
     label: 'Customers Served' 
   },
   { 
     iconComponent: PhCalendarCheck, 
-    colorClass: 'bg-rose-400 text-rose-800',
+    iconBg: 'bg-rose-100',
+    shadowClass: 'shadow-rose-500/20 hover:shadow-rose-500/40',
+    lineBg: 'bg-rose-500',
+    colorClass: 'bg-white text-rose-500',
     startNumber: 0,
-    targetNumber: 250, 
+    targetNumber: 400, 
     suffix: '+', 
     label: 'Events Conducted' 
   },
   { 
     iconComponent: PhSparkle, 
-    colorClass: 'bg-amber-400 text-amber-900',
+    iconBg: 'bg-amber-100',
+    shadowClass: 'shadow-amber-500/20 hover:shadow-amber-500/40',
+    lineBg: 'bg-amber-500',
+    colorClass: 'bg-white text-amber-500',
     startNumber: 0,
     targetNumber: 100, 
     suffix: '%', 
@@ -110,9 +132,10 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* Subtle dotted background grid matching the design */
 .dotted-bg {
-  background-image: radial-gradient(circle at 2px 2px, rgba(0,0,0,0.1) 3px, transparent 0);
-  background-size: 2rem 2rem;
+  background-image: radial-gradient(circle at 1.5px 1.5px, rgba(0, 0, 0, 0.05) 1.5px, transparent 0);
+  background-size: 24px 24px;
 }
 .font-serif-thin {
     font-family: 'Cinzel', serif;

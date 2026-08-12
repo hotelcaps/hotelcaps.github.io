@@ -47,6 +47,7 @@ const menuData = ref([
     {"id":31,"name":"Ghee Rice","category":"Rice & Biryani","info":"Rice cooked with clarified butter.","isBestseller":false,"specializations":[{"name":"","price":120,"isVeg":true}]},
     {"id":32,"name":"Veg Fried Rice","category":"Rice & Biryani","info":"Wok-tossed fried rice with vegetables.","isBestseller":false,"specializations":[{"name":"","price":140,"isVeg":true}]},
     {"id":33,"name":"Egg Fried Rice","category":"Rice & Biryani","info":"Wok-tossed fried rice with egg.","isBestseller":false,"specializations":[{"name":"","price":150,"isVeg":false}]},
+    {"id":57,"name":"Paneer Fried Rice","category":"Rice & Biryani","info":"Wok-tossed fried rice with vegetables and paneer.","isBestseller":false,"specializations":[{"name":"","price":160,"isVeg":true}]},
     {"id":34,"name":"Chicken Fried Rice","category":"Rice & Biryani","info":"Classic chicken fried rice.","isBestseller":false,"specializations":[{"name":"","price":170,"isVeg":false}]},
     {"id":35,"name":"Mixed Fried Rice","category":"Rice & Biryani","info":"Fried rice with chicken, egg, and shrimp.","isBestseller":false,"specializations":[{"name":"","price":200,"isVeg":false}]},
     {"id":36,"name":"Szechwan Veg Fried Rice","category":"Rice & Biryani","info":"Spicy Szechwan-style fried rice.","isBestseller":false,"specializations":[{"name":"","price":150,"isVeg":true}]},
@@ -77,7 +78,6 @@ const menuData = ref([
     {"id":54,"name":"Szechwan Egg Noodles","category":"Noodles","info":"Spicy Szechwan noodles with egg.","isBestseller":false,"specializations":[{"name":"","price":160,"isVeg":false}]},
     {"id":55,"name":"Szechwan Chicken Noodles","category":"Noodles","info":"Spicy Szechwan noodles with chicken.","isBestseller":false,"specializations":[{"name":"","price":180,"isVeg":false}]},
     {"id":56,"name":"Szechwan Mixed Noodles","category":"Noodles","info":"Spicy Szechwan noodles with mixed meats.","isBestseller":false,"specializations":[{"name":"","price":210,"isVeg":false}]},
-    {"id":57,"name":"Paneer Fried Rice","category":"Noodles","info":"Wait, this is rice in the noodles section? Menu quirk!","isBestseller":false,"specializations":[{"name":"","price":160,"isVeg":true}]},
     {"id":58,"name":"Mushroom Noodles","category":"Noodles","info":"Stir-fried noodles with mushrooms.","isBestseller":false,"specializations":[{"name":"","price":150,"isVeg":true}]},
     {"id":59,"name":"Paal Kappa Beef Varattu","category":"Traditional Highlights","info":"Tapioca and beef roast.","isBestseller":true,"specializations":[{"name":"","price":220,"isVeg":false}]},
     {"id":60,"name":"Pothi Porotta Chicken","category":"Traditional Highlights","info":"Layered bread with chicken, wrapped.","isBestseller":false,"specializations":[{"name":"","price":150,"isVeg":false}]},
@@ -210,6 +210,37 @@ const activeCategoryInfo = computed(() => {
 const getCategoryStyles = (category) => {
   const config = categoryConfig[category] || categoryConfig.Default;
   return tailwindColors[config.color] || tailwindColors.slate;
+};
+
+const restaurantGalleryData = {
+  eyebrow: "Our Delicacies",
+  title: "Flavors That Speak for Us",
+  themeTextClass: "text-[#03a661]",
+  themeBgClass: "bg-[#03a661]",
+  images: [
+    { src: "/images/restaurant/food/1.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/2.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/3.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/4.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/5.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/6.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/7.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/8.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/9.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/10.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/11.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/12.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/13.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/14.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/15.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/16.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/17.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/18.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/19.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/20.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/21.jpg", alt: "CAPS Delicacy" },
+    { src: "/images/restaurant/food/22.jpg", alt: "CAPS Delicacy" },
+  ]
 };
 
 // --- REFS for DOM elements ---
@@ -354,36 +385,61 @@ onUnmounted(() => {
   categoryObservers.forEach(observer => observer.disconnect());
 });
 
-// This is the new, correct pattern fo
-// r server-only meta tags.
-if (import.meta.server) {
-  useHead({
-    title: 'Restaurant Menu | Hotel CAPS, Koduvayur, Palakkad',
-  
-    meta: [
-      // SEO and Page Information
-      { name: 'description', content: 'Browse the complete menu of the multi-cuisine restaurant at Hotel CAPS. Explore a wide range of starters, main courses, traditional Keralan highlights, and more.' },
-      { name: 'keywords', content: 'Hotel CAPS, hotel in palakkad, best hotel kerala, best hotels palakkad, best hotels koduvayur, luxury rooms palakkad, multi-cuisine restaurant palakkad, auditorium hall palakkad, accommodation kerala, palakkad hotels' },
-      { name: 'author', content: 'kriz - https://www.brandsta.in' },
-  
-      // Open Graph / Facebook
-      { property: 'og:type', content: 'website' },
-      { property: 'og:url', content: 'https://capsfamily.in/menu' },
-      { property: 'og:title', content: 'Restaurant Menu | Hotel CAPS, Koduvayur, Palakkad' },
-      { property: 'og:description', content: 'Browse the complete menu of the multi-cuisine restaurant at Hotel CAPS. Explore a wide range of starters, main courses, traditional highlights, and more.' },
-      { property: 'og:image', content: 'https://sparklingspur.github.io/images/favicons/caps-og-image.jpg' },
-  
-      // Twitter
-      { property: 'twitter:card', content: 'summary_large_image' },
-      { property: 'twitter:url', content: 'https://capsfamily.in/menu' },
-      { property: 'twitter:title', content: 'Restaurant Menu | Hotel CAPS, Koduvayur, Palakkad' },
-      { property: 'twitter:description', content: 'Browse the complete menu of the multi-cuisine restaurant at Hotel CAPS. Explore a wide range of starters, main courses, traditional highlights, and more.' },
-      { property: 'twitter:image', content: 'https://sparklingspur.github.io/images/favicons/caps-og-image.jpg' },
-  
-    ],
-    
-  });
-}
+// 1. Core Meta Values
+const pageTitle = 'Interactive Restaurant Menu | Hotel CAPS, Koduvayur, Palakkad'
+const pageDesc = 'Browse the Hotel CAPS restaurant menu online, featuring multi-cuisine favorites, bestsellers, our delicacies, snacks, beverages & more.'
+const canonicalUrl = 'https://capsfamily.in/menu'
+const ogImage = 'https://capsfamily.in/images/favicons/caps-menu-og-image.jpg'
+
+// 2. Structured Link and JSON-LD Schema Injection
+useHead({
+  link: [
+    { rel: 'canonical', href: canonicalUrl }
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Menu",
+        "name": pageTitle,
+        "description": pageDesc,
+        "url": canonicalUrl,
+        "mainEntity": {
+          "@type": "Restaurant",
+          "name": "Hotel CAPS Multi-Cuisine Restaurant",
+          "url": "https://capsfamily.in/restaurant",
+          "telephone": [
+            "+919207517064",
+            "+918848369567"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Main Road, Pittupeedika",
+            "addressLocality": "Koduvayur",
+            "addressRegion": "Kerala",
+            "postalCode": "678501",
+            "addressCountry": "IN"
+          }
+        }
+      })
+    }
+  ]
+})
+
+// 3. Nuxt 4 SEO Composable (Search & Social Cards)
+useSeoMeta({
+  title: pageTitle,
+  description: pageDesc,
+  ogTitle: pageTitle,
+  ogDescription: pageDesc,
+  ogUrl: canonicalUrl,
+  ogImage: ogImage,
+  twitterCard: 'summary_large_image',
+  twitterTitle: pageTitle,
+  twitterDescription: pageDesc,
+  twitterImage: ogImage
+})
 
 </script>
 
@@ -425,6 +481,15 @@ if (import.meta.server) {
         </div>
       </div>
     </section>
+
+    <!-- Delicacies -->
+    <PageGallery 
+      :eyebrow="restaurantGalleryData.eyebrow"
+      :title="restaurantGalleryData.title"
+      :images="restaurantGalleryData.images"
+      :themeTextClass="restaurantGalleryData.themeTextClass"
+      :themeBgClass="restaurantGalleryData.themeBgClass"
+    />
 
     <!-- The MenuInfo component is now defined inside this file -->
     <section id="info-section" class="p-10 bg-gradient-to-r from-rose-400 to-orange-400">
@@ -471,7 +536,7 @@ if (import.meta.server) {
 
           <div 
             ref="expandedNavRef"
-            class="flex flex-wrap overflow-x-hidden overflow-y-auto flex-wrap gap-3 justify-center py-4 transition-all duration-300"
+            class="flex flex-wrap overflow-x-hidden overflow-y-auto gap-3 justify-center py-4 transition-all duration-300"
             :class="{ 'hidden': isSticky && !isCollapsedNavOpen }"
             :style="isNavOverflowing ? { maxHeight: `calc(100vh - 6rem)` } : {}"
           >

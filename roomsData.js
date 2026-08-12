@@ -25,7 +25,7 @@ export const roomsData = ref([
     features: [
       'Expansive living area',
       'Premium bath amenities',
-      'City or garden view',
+      'Ample natural light & ventilation',
     ],
     galleryImages: [
       '/images/rooms/deluxe/1.jpg',
