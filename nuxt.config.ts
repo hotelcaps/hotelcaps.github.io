@@ -131,7 +131,7 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/images/favicons/favicon-96x96.png' },
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/images/favicons/favicon-16x16.png' },
         // Cache-Busted Web Manifest Path
-        { rel: 'manifest', href: '/images/favicons/manifest.json' }
+        { rel: 'manifest', crossorigin: 'use-credentials', href: 'manifest.json' }
       ] // Empty script array completely dropped to keep runtime code light
     }
   }

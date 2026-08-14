@@ -1,6 +1,7 @@
 {
   "name": "Hotel CAPS",
   "short_name": "Hotel CAPS",
+  "id": "/",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -37,17 +38,30 @@
       "density": "3.0"
     },
     {
+      "src": "/images/favicons/apple-icon-180x180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "density": "4.0",
+      "purpose": "any"
+    },
+    {
       "src": "/images/favicons/android-icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "density": "4.0",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "/images/favicons/android-icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/images/favicons/android-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
