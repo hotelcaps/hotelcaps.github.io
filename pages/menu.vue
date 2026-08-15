@@ -1,216 +1,307 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue';
-import Swiper from 'swiper';
-import { Autoplay } from 'swiper/modules';
-import { gsap } from 'gsap';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-import 'swiper/css';
+import { ref } from 'vue';
 
-// Import only the necessary icon for the collapsed nav dropdown
-import { PhCaretDown } from '@phosphor-icons/vue';
+// Category Mapping ensuring exact Outlet associations and 1-21 IDs for images
+const categoryMap = {
+  // Restaurant (14 Categories)
+  "Breakfast": { id: 1, outlet: "Restaurant" },
+  "Soups": { id: 2, outlet: "Restaurant" },
+  "Starters": { id: 3, outlet: "Restaurant" },
+  "Rice & Biryani": { id: 4, outlet: "Restaurant" },
+  "Seafood": { id: 5, outlet: "Restaurant" },
+  "Noodles": { id: 6, outlet: "Restaurant" },
+  "Traditional Highlights": { id: 7, outlet: "Restaurant" },
+  "Breads": { id: 8, outlet: "Restaurant" },
+  "Farms & Flames": { id: 9, outlet: "Restaurant" },
+  "Chicken": { id: 10, outlet: "Restaurant" },
+  "Beef": { id: 11, outlet: "Restaurant" },
+  "Mutton": { id: 12, outlet: "Restaurant" },
+  "Duck": { id: 13, outlet: "Restaurant" },
+  "Salads & Sides": { id: 14, outlet: "Restaurant" }, 
+  // Arabic Corner (3 Categories)
+  "Shawarma": { id: 15, outlet: "Arabic Corner" },
+  "Mandi": { id: 16, outlet: "Arabic Corner" },
+  "Arabic Grills": { id: 17, outlet: "Arabic Corner" },
+  // Chill N Chai (4 Categories)
+  "Mocktails": { id: 18, outlet: "Chill N Chai" },
+  "Shakes & Juices": { id: 19, outlet: "Chill N Chai" },
+  "Hot Beverages": { id: 20, outlet: "Chill N Chai" },
+  "Specialities": { id: 21, outlet: "Chill N Chai" }
+};
 
-// Register GSAP plugins
-gsap.registerPlugin(ScrollToPlugin);
+// 210 Items (Exactly 10 per category)
+const rawData = [
+  // 1. Breakfast
+  {"id":101,"name":"Puttu Kadala","category":"Breakfast","info":"Steamed rice cake, black chickpea curry.","isBestseller":true,"specializations":[{"price":110}]},
+  {"id":102,"name":"Appam & Stew","category":"Breakfast","info":"Lacy rice pancake with veg stew.","isBestseller":false,"specializations":[{"price":120}]},
+  {"id":103,"name":"Ghee Roast","category":"Breakfast","info":"Crispy dosa cooked with clarified butter.","isBestseller":true,"specializations":[{"price":90}]},
+  {"id":104,"name":"Masala Dosa","category":"Breakfast","info":"Roast filled with spiced potatoes.","isBestseller":false,"specializations":[{"price":90}]},
+  {"id":105,"name":"Idli Sambar","category":"Breakfast","info":"Steamed rice cakes with lentil soup.","isBestseller":false,"specializations":[{"price":60}]},
+  {"id":106,"name":"Poori Masala","category":"Breakfast","info":"Fried bread with potato curry.","isBestseller":false,"specializations":[{"price":90}]},
+  {"id":107,"name":"Thattu Dosa Set","category":"Breakfast","info":"Set of small, thick dosas.","isBestseller":false,"specializations":[{"price":70}]},
+  {"id":108,"name":"Onion Oothappam","category":"Breakfast","info":"Thick pancake topped with onions.","isBestseller":false,"specializations":[{"price":80}]},
+  {"id":109,"name":"Noolputtu","category":"Breakfast","info":"String hoppers made from rice flour.","isBestseller":false,"specializations":[{"price":80}]},
+  {"id":110,"name":"Upma","category":"Breakfast","info":"Savory semolina porridge.","isBestseller":false,"specializations":[{"price":60}]},
 
-// --- 1. DATA: SINGLE SOURCE OF TRUTH ---
-const menuData = ref([
-    {"id":1,"name":"Puttu Kadala","category":"Breakfast","info":"Steamed rice cake, black chickpea curry.","isBestseller":true,"specializations":[{"name":"","price":110,"isVeg":true}]},
-    {"id":2,"name":"Noolputtu","category":"Breads","info":"String hoppers made from rice flour.","isBestseller":false,"specializations":[{"name":"","price":15,"isVeg":true}]},
-    {"id":3,"name":"Pathiri","category":"Breads","info":"Thin rice flour pancake.","isBestseller":false,"specializations":[{"name":"","price":12,"isVeg":true}]},
-    {"id":4,"name":"Appam","category":"Breads","info":"Lacy rice pancake with a soft center.","isBestseller":false,"specializations":[{"name":"","price":15,"isVeg":true}]},
-    {"id":5,"name":"Poori Masala","category":"Breakfast","info":"Fried bread with potato curry.","isBestseller":false,"specializations":[{"name":"","price":90,"isVeg":true}]},
-    {"id":6,"name":"Thattu Dosa Set","category":"Breakfast","info":"Set of small, thick dosas.","isBestseller":false,"specializations":[{"name":"","price":70,"isVeg":true}]},
-    {"id":7,"name":"Plain Roast","category":"Breakfast","info":"Crispy, thin rice and lentil crepe.","isBestseller":false,"specializations":[{"name":"","price":80,"isVeg":true}]},
-    {"id":8,"name":"Ghee Roast","category":"Breakfast","info":"Plain roast cooked with clarified butter.","isBestseller":true,"specializations":[{"name":"","price":90,"isVeg":true}]},
-    {"id":9,"name":"Masala Dosa","category":"Breakfast","info":"Roast filled with spiced potatoes.","isBestseller":true,"specializations":[{"name":"","price":90,"isVeg":true}]},
-    {"id":10,"name":"Plain Oothappam","category":"Breakfast","info":"Thick rice pancake.","isBestseller":false,"specializations":[{"name":"","price":60,"isVeg":true}]},
-    {"id":11,"name":"Special Oothappam","category":"Breakfast","info":"Topped with onion, tomato, carrot.","isBestseller":false,"specializations":[{"name":"","price":80,"isVeg":true}]},
-    {"id":12,"name":"Iddly Set","category":"Breakfast","info":"Steamed rice and lentil cakes.","isBestseller":false,"specializations":[{"name":"","price":60,"isVeg":true}]},
-    {"id":13,"name":"Manchow Soup","category":"Soups","info":"Spicy and sour soup with fried noodles.","isBestseller":false,"specializations":[{"name":"Veg","price":140,"isVeg":true},{"name":"Chicken","price":160,"isVeg":false}]},
-    {"id":14,"name":"Lemon Coriander Soup","category":"Soups","info":"Clear soup with lemon and coriander.","isBestseller":false,"specializations":[{"name":"Veg","price":140,"isVeg":true},{"name":"Chicken","price":160,"isVeg":false}]},
-    {"id":15,"name":"East Chinese Noodle Soup","category":"Soups","info":"A hearty noodle soup.","isBestseller":false,"specializations":[{"name":"Veg","price":140,"isVeg":true},{"name":"Chicken","price":160,"isVeg":false}]},
-    {"id":16,"name":"All Time Favorite Asian Soup","category":"Soups","info":"Sweet Corn, Hot & Sour, or Clear.","isBestseller":false,"specializations":[{"name":"Veg","price":140,"isVeg":true},{"name":"Chicken","price":160,"isVeg":false}]},
-    {"id":17,"name":"Choice Of Cream Soup","category":"Soups","info":"Tomato, Mushroom, or Chicken.","isBestseller":false,"specializations":[{"name":"Veg","price":140,"isVeg":true},{"name":"Chicken","price":160,"isVeg":false}]},
-    {"id":18,"name":"Dragon Chicken","category":"Starters","info":"Spicy fried chicken starter.","isBestseller":true,"specializations":[{"name":"","price":280,"isVeg":false}]},
-    {"id":19,"name":"Chicken Lollipop","category":"Starters","info":"Frenched chicken winglet.","isBestseller":false,"specializations":[{"name":"","price":250,"isVeg":false}]},
-    {"id":20,"name":"Peri Peri Chicken Pops","category":"Starters","info":"Spicy bite-sized chicken pops.","isBestseller":false,"specializations":[{"name":"","price":260,"isVeg":false}]},
-    {"id":21,"name":"Honey Glazed Chicken","category":"Starters","info":"Sweet and savory glazed chicken.","isBestseller":false,"specializations":[{"name":"","price":290,"isVeg":false}]},
-    {"id":22,"name":"Tawa Fried Prawns","category":"Starters","info":"Prawns pan-fried on a griddle.","isBestseller":true,"specializations":[{"name":"","price":320,"isVeg":false}]},
-    {"id":23,"name":"Hot Crispy Garlic Potato","category":"Starters","info":"Crispy potatoes in a garlic sauce.","isBestseller":false,"specializations":[{"name":"","price":180,"isVeg":true}]},
-    {"id":24,"name":"Mushroom Pepper Ularthu","category":"Starters","info":"Mushroom roast with black pepper.","isBestseller":false,"specializations":[{"name":"","price":200,"isVeg":true}]},
-    {"id":25,"name":"Momos","category":"Starters","info":"Fried or Steamed dumplings.","isBestseller":false,"specializations":[{"name":"Veg","price":200,"isVeg":true},{"name":"Chicken","price":220,"isVeg":false}]},
-    {"id":26,"name":"Veg Meals","category":"Rice & Biryani","info":"Traditional Kerala vegetarian thali.","isBestseller":false,"specializations":[{"name":"","price":140,"isVeg":true}]},
-    {"id":27,"name":"Fish Curry Meals","category":"Rice & Biryani","info":"Kerala meals with fish curry.","isBestseller":true,"specializations":[{"name":"","price":160,"isVeg":false}]},
-    {"id":28,"name":"CAPS Dhum Chicken Biriyani","category":"Rice & Biryani","info":"Our special slow-cooked biryani.","isBestseller":true,"specializations":[{"name":"","price":175,"isVeg":false}]},
-    {"id":29,"name":"Beef Biriyani","category":"Rice & Biryani","info":"Flavorful beef biryani.","isBestseller":false,"specializations":[{"name":"","price":200,"isVeg":false}]},
-    {"id":30,"name":"Mutton Biriyani","category":"Rice & Biryani","info":"Rich and aromatic mutton biryani.","isBestseller":false,"specializations":[{"name":"","price":340,"isVeg":false}]},
-    {"id":31,"name":"Ghee Rice","category":"Rice & Biryani","info":"Rice cooked with clarified butter.","isBestseller":false,"specializations":[{"name":"","price":120,"isVeg":true}]},
-    {"id":32,"name":"Veg Fried Rice","category":"Rice & Biryani","info":"Wok-tossed fried rice with vegetables.","isBestseller":false,"specializations":[{"name":"","price":140,"isVeg":true}]},
-    {"id":33,"name":"Egg Fried Rice","category":"Rice & Biryani","info":"Wok-tossed fried rice with egg.","isBestseller":false,"specializations":[{"name":"","price":150,"isVeg":false}]},
-    {"id":57,"name":"Paneer Fried Rice","category":"Rice & Biryani","info":"Wok-tossed fried rice with vegetables and paneer.","isBestseller":false,"specializations":[{"name":"","price":160,"isVeg":true}]},
-    {"id":34,"name":"Chicken Fried Rice","category":"Rice & Biryani","info":"Classic chicken fried rice.","isBestseller":false,"specializations":[{"name":"","price":170,"isVeg":false}]},
-    {"id":35,"name":"Mixed Fried Rice","category":"Rice & Biryani","info":"Fried rice with chicken, egg, and shrimp.","isBestseller":false,"specializations":[{"name":"","price":200,"isVeg":false}]},
-    {"id":36,"name":"Szechwan Veg Fried Rice","category":"Rice & Biryani","info":"Spicy Szechwan-style fried rice.","isBestseller":false,"specializations":[{"name":"","price":150,"isVeg":true}]},
-    {"id":37,"name":"Szechwan Egg Fried Rice","category":"Rice & Biryani","info":"Spicy Szechwan-style fried rice with egg.","isBestseller":false,"specializations":[{"name":"","price":160,"isVeg":false}]},
-    {"id":38,"name":"Szechwan Chicken Fried Rice","category":"Rice & Biryani","info":"Spicy Szechwan-style fried rice with chicken.","isBestseller":false,"specializations":[{"name":"","price":180,"isVeg":false}]},
-    {"id":39,"name":"Szechwan Mixed Fried Rice","category":"Rice & Biryani","info":"Spicy Szechwan-style fried rice with mixed meats.","isBestseller":false,"specializations":[{"name":"","price":210,"isVeg":false}]},
-    {"id":40,"name":"Alfaham Mandi","category":"Rice & Biryani","info":"Grilled chicken with flavored rice.","isBestseller":false,"specializations":[{"name":"Full","price":760,"isVeg":false},{"name":"Half","price":420,"isVeg":false},{"name":"Quarter","price":210,"isVeg":false}]},
-    {"id":41,"name":"Shawaya Mandi","category":"Rice & Biryani","info":"Roasted chicken with flavored rice.","isBestseller":false,"specializations":[{"name":"Full","price":760,"isVeg":false},{"name":"Half","price":420,"isVeg":false},{"name":"Quarter","price":210,"isVeg":false}]},
-    {"id":42,"name":"Meen Mulakitathu","category":"Seafood","info":"Spicy fish curry.","isBestseller":false,"specializations":[{"name":"As per size","price":0,"isVeg":false}]},
-    {"id":43,"name":"Fish Mango Curry","category":"Seafood","info":"Fish curry with raw mango.","isBestseller":false,"specializations":[{"name":"As per size","price":0,"isVeg":false}]},
-    {"id":100,"name":"Crab Varuthu Vattichathu","category":"Seafood","info":"Crab roast.","isBestseller":false,"specializations":[{"name":"As per size","price":0,"isVeg":false}]},
-    {"id":101,"name":"Fish Tawa Fry","category":"Seafood","info":"Pan-fried fish.","isBestseller":false,"specializations":[{"name":"As per size","price":0,"isVeg":false}]},
-    {"id":102,"name":"Fish Malabari Fry","category":"Seafood","info":"Malabar style fried fish.","isBestseller":false,"specializations":[{"name":"As per size","price":0,"isVeg":false}]},
-    {"id":103,"name":"Chemmeenum Koonthalum Ularthiyathu","category":"Seafood","info":"Prawn and squid roast.","isBestseller":false,"specializations":[{"name":"As per size","price":0,"isVeg":false}]},
-    {"id":104,"name":"Podimeen Fry","category":"Seafood","info":"Small fish fry.","isBestseller":false,"specializations":[{"name":"As per size","price":0,"isVeg":false}]},
-    {"id":105,"name":"Koonthal Varattiyathu","category":"Seafood","info":"Squid roast.","isBestseller":false,"specializations":[{"name":"As per size","price":0,"isVeg":false}]},
-    {"id":106,"name":"Koonthal Coconut Dry Fry","category":"Seafood","info":"Squid fry with coconut.","isBestseller":false,"specializations":[{"name":"As per size","price":0,"isVeg":false}]},
-    {"id":44,"name":"Alfaham Chicken","category":"Grills & Fries","info":"Charcoal-grilled Arabian chicken.","isBestseller":true,"specializations":[{"name":"Full","price":600,"isVeg":false},{"name":"Half","price":320,"isVeg":false},{"name":"Quarter","price":160,"isVeg":false}]},
-    {"id":45,"name":"Special Alfaham","category":"Grills & Fries","info":"Peri Peri, Orange, Pepper, or BBQ.","isBestseller":true,"specializations":[{"name":"Full","price":620,"isVeg":false},{"name":"Half","price":340,"isVeg":false},{"name":"Quarter","price":170,"isVeg":false}]},
-    {"id":46,"name":"Fried Chicken","category":"Grills & Fries","info":"Classic crispy fried chicken.","isBestseller":false,"specializations":[{"name":"Full","price":620,"isVeg":false},{"name":"Half","price":340,"isVeg":false},{"name":"Quarter","price":170,"isVeg":false}]},
-    {"id":47,"name":"Shawaya Chicken","category":"Grills & Fries","info":"Roasted Arabian chicken.","isBestseller":false,"specializations":[{"name":"Full","price":600,"isVeg":false},{"name":"Half","price":320,"isVeg":false},{"name":"Quarter","price":160,"isVeg":false}]},
-    {"id":48,"name":"Masala Shawaya","category":"Grills & Fries","info":"Spiced roasted chicken.","isBestseller":false,"specializations":[{"name":"Full","price":620,"isVeg":false},{"name":"Half","price":340,"isVeg":false},{"name":"Quarter","price":170,"isVeg":false}]},
-    {"id":49,"name":"Veg Noodles","category":"Noodles","info":"Stir-fried noodles with vegetables.","isBestseller":false,"specializations":[{"name":"","price":140,"isVeg":true}]},
-    {"id":50,"name":"Egg Noodles","category":"Noodles","info":"Stir-fried noodles with egg.","isBestseller":false,"specializations":[{"name":"","price":150,"isVeg":false}]},
-    {"id":51,"name":"Chicken Noodles","category":"Noodles","info":"Stir-fried noodles with chicken.","isBestseller":false,"specializations":[{"name":"","price":170,"isVeg":false}]},
-    {"id":52,"name":"Mixed Noodles","category":"Noodles","info":"Noodles with chicken, egg, and shrimp.","isBestseller":false,"specializations":[{"name":"","price":200,"isVeg":false}]},
-    {"id":53,"name":"Szechwan Veg Noodles","category":"Noodles","info":"Spicy Szechwan noodles with vegetables.","isBestseller":false,"specializations":[{"name":"","price":150,"isVeg":true}]},
-    {"id":54,"name":"Szechwan Egg Noodles","category":"Noodles","info":"Spicy Szechwan noodles with egg.","isBestseller":false,"specializations":[{"name":"","price":160,"isVeg":false}]},
-    {"id":55,"name":"Szechwan Chicken Noodles","category":"Noodles","info":"Spicy Szechwan noodles with chicken.","isBestseller":false,"specializations":[{"name":"","price":180,"isVeg":false}]},
-    {"id":56,"name":"Szechwan Mixed Noodles","category":"Noodles","info":"Spicy Szechwan noodles with mixed meats.","isBestseller":false,"specializations":[{"name":"","price":210,"isVeg":false}]},
-    {"id":58,"name":"Mushroom Noodles","category":"Noodles","info":"Stir-fried noodles with mushrooms.","isBestseller":false,"specializations":[{"name":"","price":150,"isVeg":true}]},
-    {"id":59,"name":"Paal Kappa Beef Varattu","category":"Traditional Highlights","info":"Tapioca and beef roast.","isBestseller":true,"specializations":[{"name":"","price":220,"isVeg":false}]},
-    {"id":60,"name":"Pothi Porotta Chicken","category":"Traditional Highlights","info":"Layered bread with chicken, wrapped.","isBestseller":false,"specializations":[{"name":"","price":150,"isVeg":false}]},
-    {"id":61,"name":"Kothu Porotta Beef","category":"Traditional Highlights","info":"Minced bread with beef.","isBestseller":false,"specializations":[{"name":"","price":150,"isVeg":false}]},
-    {"id":62,"name":"Kappa Beef Kuzhachathu","category":"Traditional Highlights","info":"Mashed tapioca with beef curry.","isBestseller":false,"specializations":[{"name":"","price":200,"isVeg":false}]},
-    {"id":63,"name":"Pothichoru","category":"Traditional Highlights","info":"Meal wrapped in a banana leaf.","isBestseller":false,"specializations":[{"name":"Veg","price":130,"isVeg":true},{"name":"Non Veg","price":150,"isVeg":false}]},
-    {"id":64,"name":"Kerala Porotta","category":"Breads","info":"Layered flatbread.","isBestseller":true,"specializations":[{"name":"","price":17,"isVeg":true}]},
-    {"id":65,"name":"Wheat Porotta","category":"Breads","info":"Whole wheat flatbread.","isBestseller":false,"specializations":[{"name":"","price":25,"isVeg":true}]},
-    {"id":66,"name":"Chappathi","category":"Breads","info":"Thin whole wheat bread.","isBestseller":false,"specializations":[{"name":"","price":20,"isVeg":true}]},
-    {"id":67,"name":"Phulka","category":"Breads","info":"Puffed whole wheat bread.","isBestseller":false,"specializations":[{"name":"","price":15,"isVeg":true}]},
-    {"id":107,"name":"Nice Pathiri","category":"Breads","info":"Very thin rice pancake.","isBestseller":false,"specializations":[{"name":"","price":12,"isVeg":true}]},
-    {"id":68,"name":"Paneer Butter Masala","category":"Farms & Flames","info":"Creamy paneer curry.","isBestseller":true,"specializations":[{"name":"","price":210,"isVeg":true}]},
-    {"id":69,"name":"Kadai Vegetable","category":"Farms & Flames","info":"Mixed vegetables in a wok.","isBestseller":false,"specializations":[{"name":"","price":210,"isVeg":true}]},
-    {"id":70,"name":"Matar Paneer Masala","category":"Farms & Flames","info":"Peas and paneer in a tomato gravy.","isBestseller":false,"specializations":[{"name":"","price":210,"isVeg":true}]},
-    {"id":71,"name":"Mix Veg. Khuruma","category":"Farms & Flames","info":"Mixed vegetables in a coconut gravy.","isBestseller":false,"specializations":[{"name":"","price":140,"isVeg":true}]},
-    {"id":72,"name":"Mushroom Masala","category":"Farms & Flames","info":"Mushroom in a spicy gravy.","isBestseller":false,"specializations":[{"name":"","price":190,"isVeg":true}]},
-    {"id":73,"name":"Mushroom Paneer Varattiyathu","category":"Farms & Flames","info":"Mushroom and paneer roast.","isBestseller":false,"specializations":[{"name":"","price":210,"isVeg":true}]},
-    {"id":74,"name":"Green Peas Masala","category":"Farms & Flames","info":"Green peas in a spicy gravy.","isBestseller":false,"specializations":[{"name":"","price":140,"isVeg":true}]},
-    {"id":75,"name":"Chinese Side Dishes (Dry / Gravy)","category":"Farms & Flames","info":"Chilli, Manchurian, Garlic, or Ginger style.","isBestseller":false,"specializations":[{"name":"Mushroom","price":190,"isVeg":true},{"name":"Paneer","price":210,"isVeg":true},{"name":"Gobi","price":190,"isVeg":true}]},
-    {"id":76,"name":"Chicken Kondattam","category":"Chicken","info":"Spicy dry fried chicken.","isBestseller":false,"specializations":[{"name":"","price":260,"isVeg":false}]},
-    {"id":77,"name":"Malabari Kozhi Roast","category":"Chicken","info":"Malabar style chicken roast.","isBestseller":false,"specializations":[{"name":"","price":250,"isVeg":false}]},
-    {"id":78,"name":"Varutharacha Kozhi Curry","category":"Chicken","info":"Chicken curry with roasted coconut gravy.","isBestseller":false,"specializations":[{"name":"","price":240,"isVeg":false}]},
-    {"id":79,"name":"Chettinad Pepper Chicken Masala","category":"Chicken","info":"Spicy Chettinad style chicken.","isBestseller":false,"specializations":[{"name":"","price":260,"isVeg":false}]},
-    {"id":80,"name":"Kanjirapally Kozhi Curry","category":"Chicken","info":"A special chicken curry.","isBestseller":false,"specializations":[{"name":"","price":260,"isVeg":false}]},
-    {"id":81,"name":"Butter Chicken Masala","category":"Chicken","info":"Creamy tomato-based chicken curry.","isBestseller":true,"specializations":[{"name":"","price":275,"isVeg":false}]},
-    {"id":82,"name":"Kadai Chicken","category":"Chicken","info":"Chicken cooked in a wok.","isBestseller":false,"specializations":[{"name":"","price":275,"isVeg":false}]},
-    {"id":83,"name":"Chicken Kolhapuri","category":"Chicken","info":"Spicy Kolhapuri style chicken.","isBestseller":false,"specializations":[{"name":"","price":280,"isVeg":false}]},
-    {"id":84,"name":"Murgh Do Pyaza","category":"Chicken","info":"Chicken curry with onions.","isBestseller":false,"specializations":[{"name":"","price":280,"isVeg":false}]},
-    {"id":85,"name":"Kozhi Malli Peralan","category":"Chicken","info":"Coriander based chicken dish.","isBestseller":false,"specializations":[{"name":"","price":260,"isVeg":false}]},
-    {"id":86,"name":"Chicken 65","category":"Chicken","info":"Spicy deep-fried chicken.","isBestseller":false,"specializations":[{"name":"","price":200,"isVeg":false}]},
-    {"id":128,"name":"Chinese Side Dishes (Chicken)","category":"Chicken","info":"Chilli, Manchurian, Ginger, or Garlic style.","isBestseller":false,"specializations":[{"name":"","price":260,"isVeg":false}]},
-    {"id":87,"name":"Beef Coconut Ularthu","category":"Beef","info":"Beef roast with coconut pieces.","isBestseller":true,"specializations":[{"name":"","price":220,"isVeg":false}]},
-    {"id":88,"name":"Achayan's Beef Curry","category":"Beef","info":"A traditional style beef curry.","isBestseller":false,"specializations":[{"name":"","price":230,"isVeg":false}]},
-    {"id":89,"name":"Wayanadan Beef Fry","category":"Beef","info":"Wayanad style beef fry.","isBestseller":false,"specializations":[{"name":"","price":230,"isVeg":false}]},
-    {"id":90,"name":"High Range Beef Roast","category":"Beef","info":"Spicy beef roast from the high ranges.","isBestseller":false,"specializations":[{"name":"","price":230,"isVeg":false}]},
-    {"id":91,"name":"Beef Idmulaku Fry","category":"Beef","info":"Spicy beef fry.","isBestseller":false,"specializations":[{"name":"","price":220,"isVeg":false}]},
-    {"id":92,"name":"Mutton Varutharachathu","category":"Mutton","info":"Mutton with roasted coconut gravy.","isBestseller":false,"specializations":[{"name":"","price":360,"isVeg":false}]},
-    {"id":93,"name":"Mutton Pepper Fry","category":"Mutton","info":"Spicy mutton pepper fry.","isBestseller":false,"specializations":[{"name":"","price":360,"isVeg":false}]},
-    {"id":94,"name":"Mutton Roganjosh","category":"Mutton","info":"Aromatic mutton curry.","isBestseller":false,"specializations":[{"name":"","price":360,"isVeg":false}]},
-    {"id":95,"name":"Chettinad Mutton Curry","category":"Mutton","info":"Spicy Chettinad style mutton.","isBestseller":false,"specializations":[{"name":"","price":360,"isVeg":false}]},
-    {"id":96,"name":"Tharavu Mappas","category":"Duck","info":"Duck curry in a creamy coconut gravy.","isBestseller":false,"specializations":[{"name":"","price":390,"isVeg":false}]},
-    {"id":97,"name":"Tharavu Kurumulaku Varattiyathu","category":"Duck","info":"Duck pepper roast.","isBestseller":false,"specializations":[{"name":"","price":390,"isVeg":false}]},
-    {"id":98,"name":"Kerala Duck Curry","category":"Duck","info":"Traditional Kerala style duck curry.","isBestseller":false,"specializations":[{"name":"","price":390,"isVeg":false}]},
-    {"id":99,"name":"Thattukada Duck Roast","category":"Duck","info":"Street style duck roast.","isBestseller":false,"specializations":[{"name":"","price":390,"isVeg":false}]},
-    {"id":108,"name":"Mix Berry Cooler","category":"Mocktails","info":"Refreshing mixed berry drink.","isBestseller":false,"specializations":[{"name":"","price":100,"isVeg":true}]},
-    {"id":109,"name":"Cindrella","category":"Mocktails","info":"A magical mocktail.","isBestseller":false,"specializations":[{"name":"","price":100,"isVeg":true}]},
-    {"id":110,"name":"Melon Berry","category":"Mocktails","info":"Watermelon and berry fusion.","isBestseller":false,"specializations":[{"name":"","price":100,"isVeg":true}]},
-    {"id":111,"name":"Asian Ginger Fizz","category":"Mocktails","info":"A zesty ginger drink.","isBestseller":false,"specializations":[{"name":"","price":100,"isVeg":true}]},
-    {"id":112,"name":"Blue Lagoon","category":"Mocktails","info":"A classic blue mocktail.","isBestseller":false,"specializations":[{"name":"","price":100,"isVeg":true}]},
-    {"id":113,"name":"Choice of Mojito","category":"Mocktails","info":"Virgin (Plain), Passion Fruit, Green Apple, Strawberry, etc.","isBestseller":false,"specializations":[{"name":"","price":100,"isVeg":true}]},
-    {"id":114,"name":"Cookie & Cream","category":"Shakes & Juices","info":"A classic cookie shake.","isBestseller":false,"specializations":[{"name":"","price":130,"isVeg":true}]},
-    {"id":115,"name":"Cotton Candy Magic","category":"Shakes & Juices","info":"A sweet and magical shake.","isBestseller":false,"specializations":[{"name":"","price":130,"isVeg":true}]},
-    {"id":116,"name":"Seasonal Specialities","category":"Shakes & Juices","info":"Apple, Mango, Papaya, Chikku, Guava, etc.","isBestseller":false,"specializations":[{"name":"","price":100,"isVeg":true}]},
-    {"id":117,"name":"Ice Cream Shakes","category":"Shakes & Juices","info":"Vanilla, Butter Scotch, Chocolate, Mango, Berry, etc.","isBestseller":false,"specializations":[{"name":"","price":100,"isVeg":true}]},
-    {"id":118,"name":"Seasonal Fruit Juices","category":"Shakes & Juices","info":"Pineapple, Mango, Orange, Watermelon, Grape.","isBestseller":false,"specializations":[{"name":"","price":90,"isVeg":true}]},
-    {"id":119,"name":"Tea","category":"Hot Beverages","info":"A classic cup of tea.","isBestseller":false,"specializations":[{"name":"","price":15,"isVeg":true}]},
-    {"id":120,"name":"Coffee","category":"Hot Beverages","info":"A strong cup of coffee.","isBestseller":false,"specializations":[{"name":"","price":22,"isVeg":true}]},
-    {"id":121,"name":"Lemon Tea","category":"Hot Beverages","info":"A refreshing lemon tea.","isBestseller":false,"specializations":[{"name":"","price":12,"isVeg":true}]},
-    {"id":122,"name":"Health Drink","category":"Hot Beverages","info":"Boost or Horlicks.","isBestseller":false,"specializations":[{"name":"","price":30,"isVeg":true}]},
-    {"id":123,"name":"Falooda","category":"Specialities","info":"Rich dessert with vermicelli, ice cream, and nuts.","isBestseller":true,"specializations":[{"name":"","price":120,"isVeg":true}]},
-    {"id":124,"name":"Fruit Salad","category":"Specialities","info":"A mix of fresh fruits.","isBestseller":false,"specializations":[{"name":"","price":80,"isVeg":true}]},
-    {"id":125,"name":"Gulab Jamun","category":"Specialities","info":"Sweet milk-solid balls in syrup.","isBestseller":false,"specializations":[{"name":"","price":50,"isVeg":true}]},
-    {"id":126,"name":"Elaneer Payasam","category":"Specialities","info":"Tender coconut pudding.","isBestseller":false,"specializations":[{"name":"","price":90,"isVeg":true}]},
-    {"id":127,"name":"Ice Cream Scoop","category":"Specialities","info":"Vanilla, Butter Scotch, Strawberry, Pista, Mango.","isBestseller":false,"specializations":[{"name":"","price":40,"isVeg":true}]},
-    {"id":129,"name":"Mint Porotta","category":"Breads","info":"Porotta with a touch of mint.","isBestseller":false,"specializations":[{"name":"","price":25,"isVeg":true}]}
+  // 2. Soups
+  {"id":201,"name":"Manchow Soup","category":"Soups","info":"Spicy and sour soup with fried noodles.","isBestseller":true,"specializations":[{"price":140}]},
+  {"id":202,"name":"Sweet Corn Veg Soup","category":"Soups","info":"Classic comforting sweet corn soup.","isBestseller":false,"specializations":[{"price":130}]},
+  {"id":203,"name":"Hot & Sour Chicken Soup","category":"Soups","info":"Spicy, tangy soup with chicken shreds.","isBestseller":true,"specializations":[{"price":160}]},
+  {"id":204,"name":"Cream of Tomato","category":"Soups","info":"Rich and creamy tomato soup.","isBestseller":false,"specializations":[{"price":120}]},
+  {"id":205,"name":"Cream of Mushroom","category":"Soups","info":"Earth mushroom blended with cream.","isBestseller":false,"specializations":[{"price":140}]},
+  {"id":206,"name":"Lemon Coriander Soup","category":"Soups","info":"Clear soup with lemon and coriander.","isBestseller":false,"specializations":[{"price":140}]},
+  {"id":207,"name":"Clear Chicken Soup","category":"Soups","info":"Light and healthy clear chicken broth.","isBestseller":false,"specializations":[{"price":150}]},
+  {"id":208,"name":"Seafood Chowder","category":"Soups","info":"Creamy soup loaded with mixed seafood.","isBestseller":false,"specializations":[{"price":180}]},
+  {"id":209,"name":"Mutton Paya Soup","category":"Soups","info":"Traditional slow-cooked mutton broth.","isBestseller":false,"specializations":[{"price":190}]},
+  {"id":210,"name":"Roasted Pumpkin Soup","category":"Soups","info":"Smooth and savory roasted pumpkin.","isBestseller":false,"specializations":[{"price":130}]},
+
+  // 3. Starters
+  {"id":301,"name":"Dragon Chicken","category":"Starters","info":"Spicy fried chicken starter in dark sauce.","isBestseller":true,"specializations":[{"price":280}]},
+  {"id":302,"name":"Chicken Lollipop","category":"Starters","info":"Frenched chicken winglet, crispy fried.","isBestseller":false,"specializations":[{"price":250}]},
+  {"id":303,"name":"Gobi Manchurian","category":"Starters","info":"Crispy cauliflower in tangy soy sauce.","isBestseller":true,"specializations":[{"price":180}]},
+  {"id":304,"name":"Chilli Paneer Dry","category":"Starters","info":"Wok tossed paneer with bell peppers.","isBestseller":false,"specializations":[{"price":220}]},
+  {"id":305,"name":"Tawa Fried Prawns","category":"Starters","info":"Prawns pan-fried on a griddle.","isBestseller":true,"specializations":[{"price":320}]},
+  {"id":306,"name":"Crispy Garlic Potato","category":"Starters","info":"Crispy potatoes in a rich garlic sauce.","isBestseller":false,"specializations":[{"price":180}]},
+  {"id":307,"name":"Mushroom Pepper Dry","category":"Starters","info":"Mushroom roast with cracked black pepper.","isBestseller":false,"specializations":[{"price":200}]},
+  {"id":308,"name":"Chicken Tikka","category":"Starters","info":"Tandoor-roasted marinated chicken chunks.","isBestseller":false,"specializations":[{"price":260}]},
+  {"id":309,"name":"Fish Fingers","category":"Starters","info":"Crumb-fried strips of white fish.","isBestseller":false,"specializations":[{"price":280}]},
+  {"id":310,"name":"Veg Spring Rolls","category":"Starters","info":"Crispy rolls stuffed with julienne veggies.","isBestseller":false,"specializations":[{"price":160}]},
+
+  // 4. Rice & Biryani
+  {"id":401,"name":"CAPS Dhum Chicken Biriyani","category":"Rice & Biryani","info":"Our special slow-cooked layered biryani.","isBestseller":true,"specializations":[{"price":175}]},
+  {"id":402,"name":"Beef Biriyani","category":"Rice & Biryani","info":"Flavorful and aromatic beef biryani.","isBestseller":true,"specializations":[{"price":200}]},
+  {"id":403,"name":"Mutton Biriyani","category":"Rice & Biryani","info":"Rich and traditional mutton biryani.","isBestseller":false,"specializations":[{"price":340}]},
+  {"id":404,"name":"Veg Fried Rice","category":"Rice & Biryani","info":"Wok-tossed fried rice with vegetables.","isBestseller":false,"specializations":[{"price":140}]},
+  {"id":405,"name":"Chicken Fried Rice","category":"Rice & Biryani","info":"Classic Indo-Chinese chicken fried rice.","isBestseller":true,"specializations":[{"price":170}]},
+  {"id":406,"name":"Mixed Fried Rice","category":"Rice & Biryani","info":"Fried rice with chicken, egg, and shrimp.","isBestseller":false,"specializations":[{"price":200}]},
+  {"id":407,"name":"Ghee Rice","category":"Rice & Biryani","info":"Aromatic rice cooked with clarified butter.","isBestseller":false,"specializations":[{"price":120}]},
+  {"id":408,"name":"Szechwan Chicken Rice","category":"Rice & Biryani","info":"Spicy Szechwan-style fried rice.","isBestseller":false,"specializations":[{"price":180}]},
+  {"id":409,"name":"Prawns Biriyani","category":"Rice & Biryani","info":"Aromatic basmati rice cooked with fresh prawns.","isBestseller":false,"specializations":[{"price":320}]},
+  {"id":410,"name":"Jeera Rice","category":"Rice & Biryani","info":"Basmati rice tempered with cumin seeds.","isBestseller":false,"specializations":[{"price":110}]},
+
+  // 5. Seafood
+  {"id":501,"name":"Meen Mulakitathu","category":"Seafood","info":"Spicy red fish curry, Kerala style.","isBestseller":true,"specializations":[{"price":250}]},
+  {"id":502,"name":"Fish Mango Curry","category":"Seafood","info":"Fish curry simmered with raw mango.","isBestseller":false,"specializations":[{"price":260}]},
+  {"id":503,"name":"Fish Tawa Fry","category":"Seafood","info":"Catch of the day, marinated and pan-fried.","isBestseller":true,"specializations":[{"price":280}]},
+  {"id":504,"name":"Crab Roast","category":"Seafood","info":"Spicy and aromatic crab masala dry roast.","isBestseller":false,"specializations":[{"price":350}]},
+  {"id":505,"name":"Squid Coconut Fry","category":"Seafood","info":"Squid rings stir-fried with coconut slices.","isBestseller":false,"specializations":[{"price":290}]},
+  {"id":506,"name":"Prawns Mango Curry","category":"Seafood","info":"Prawns in a tangy coconut and mango gravy.","isBestseller":false,"specializations":[{"price":320}]},
+  {"id":507,"name":"Malabari Fish Curry","category":"Seafood","info":"Rich coconut milk based fish curry.","isBestseller":false,"specializations":[{"price":260}]},
+  {"id":508,"name":"Natholi Fry","category":"Seafood","info":"Crispy fried anchovies with curry leaves.","isBestseller":true,"specializations":[{"price":180}]},
+  {"id":509,"name":"Karimeen Pollichathu","category":"Seafood","info":"Pearl spot fish baked in banana leaves.","isBestseller":true,"specializations":[{"price":380}]},
+  {"id":510,"name":"Chemmeen Ularthiyathu","category":"Seafood","info":"Kerala style spicy prawn dry roast.","isBestseller":false,"specializations":[{"price":310}]},
+
+  // 6. Noodles
+  {"id":601,"name":"Veg Noodles","category":"Noodles","info":"Stir-fried noodles with crisp vegetables.","isBestseller":false,"specializations":[{"price":140}]},
+  {"id":602,"name":"Egg Noodles","category":"Noodles","info":"Stir-fried noodles tossed with scrambled egg.","isBestseller":false,"specializations":[{"price":150}]},
+  {"id":603,"name":"Chicken Hakka Noodles","category":"Noodles","info":"Classic non-spicy chicken noodles.","isBestseller":true,"specializations":[{"price":170}]},
+  {"id":604,"name":"Szechwan Chicken Noodles","category":"Noodles","info":"Spicy noodles with red pepper sauce.","isBestseller":true,"specializations":[{"price":180}]},
+  {"id":605,"name":"Mixed Noodles","category":"Noodles","info":"Loaded with chicken, egg, and prawns.","isBestseller":false,"specializations":[{"price":200}]},
+  {"id":606,"name":"Mushroom Noodles","category":"Noodles","info":"Wok-tossed noodles with button mushrooms.","isBestseller":false,"specializations":[{"price":160}]},
+  {"id":607,"name":"Chilli Garlic Veg Noodles","category":"Noodles","info":"Spicy garlic-infused vegetable noodles.","isBestseller":false,"specializations":[{"price":150}]},
+  {"id":608,"name":"Singapore Chicken Noodles","category":"Noodles","info":"Curry-flavored stir-fried rice noodles.","isBestseller":false,"specializations":[{"price":190}]},
+  {"id":609,"name":"Szechwan Mixed Noodles","category":"Noodles","info":"Extra spicy noodles with mixed meats.","isBestseller":false,"specializations":[{"price":210}]},
+  {"id":610,"name":"Paneer Noodles","category":"Noodles","info":"Noodles tossed with soft paneer cubes.","isBestseller":false,"specializations":[{"price":170}]},
+
+  // 7. Traditional Highlights
+  {"id":701,"name":"Paal Kappa Beef Varattu","category":"Traditional Highlights","info":"Creamy tapioca topped with spicy beef roast.","isBestseller":true,"specializations":[{"price":220}]},
+  {"id":702,"name":"Pothichoru (Non-Veg)","category":"Traditional Highlights","info":"Traditional meal wrapped in a banana leaf.","isBestseller":true,"specializations":[{"price":150}]},
+  {"id":703,"name":"Kothu Porotta Beef","category":"Traditional Highlights","info":"Minced flatbread stir-fried with beef.","isBestseller":false,"specializations":[{"price":150}]},
+  {"id":704,"name":"Pothi Porotta Chicken","category":"Traditional Highlights","info":"Layered bread and chicken wrapped in leaf.","isBestseller":false,"specializations":[{"price":150}]},
+  {"id":705,"name":"Kappa Meen Curry","category":"Traditional Highlights","info":"Boiled tapioca with fiery red fish curry.","isBestseller":true,"specializations":[{"price":240}]},
+  {"id":706,"name":"Chatti Choru","category":"Traditional Highlights","info":"Rice and curries served in an earthen pot.","isBestseller":false,"specializations":[{"price":280}]},
+  {"id":707,"name":"Pothichoru (Veg)","category":"Traditional Highlights","info":"Vegetarian leaf-wrapped traditional meal.","isBestseller":false,"specializations":[{"price":130}]},
+  {"id":708,"name":"Kothu Porotta Chicken","category":"Traditional Highlights","info":"Minced flatbread stir-fried with chicken.","isBestseller":false,"specializations":[{"price":140}]},
+  {"id":709,"name":"Kappa Beef Kuzhachathu","category":"Traditional Highlights","info":"Tapioca mashed thoroughly with beef curry.","isBestseller":false,"specializations":[{"price":200}]},
+  {"id":710,"name":"Pazham Pori Beef","category":"Traditional Highlights","info":"Sweet banana fritters paired with beef roast.","isBestseller":true,"specializations":[{"price":180}]},
+
+  // 8. Breads
+  {"id":801,"name":"Kerala Porotta","category":"Breads","info":"Flaky, layered traditional flatbread.","isBestseller":true,"specializations":[{"price":17}]},
+  {"id":802,"name":"Wheat Porotta","category":"Breads","info":"Healthier layered whole wheat flatbread.","isBestseller":false,"specializations":[{"price":25}]},
+  {"id":803,"name":"Chappathi","category":"Breads","info":"Soft, thin whole wheat bread.","isBestseller":false,"specializations":[{"price":20}]},
+  {"id":804,"name":"Phulka","category":"Breads","info":"Puffed, oil-free whole wheat bread.","isBestseller":false,"specializations":[{"price":15}]},
+  {"id":805,"name":"Nice Pathiri","category":"Breads","info":"Extremely thin and soft rice pancake.","isBestseller":false,"specializations":[{"price":12}]},
+  {"id":806,"name":"Butter Naan","category":"Breads","info":"Tandoor baked bread brushed with butter.","isBestseller":true,"specializations":[{"price":45}]},
+  {"id":807,"name":"Garlic Naan","category":"Breads","info":"Tandoor bread topped with minced garlic.","isBestseller":false,"specializations":[{"price":55}]},
+  {"id":808,"name":"Tandoori Roti","category":"Breads","info":"Whole wheat bread baked in a clay oven.","isBestseller":false,"specializations":[{"price":30}]},
+  {"id":809,"name":"Kulcha","category":"Breads","info":"Soft, mildly leavened Indian flatbread.","isBestseller":false,"specializations":[{"price":40}]},
+  {"id":810,"name":"Coin Porotta","category":"Breads","info":"Miniature, bite-sized flaky porottas.","isBestseller":false,"specializations":[{"price":10}]},
+
+  // 9. Farms & Flames
+  {"id":901,"name":"Paneer Butter Masala","category":"Farms & Flames","info":"Creamy tomato gravy with soft paneer cubes.","isBestseller":true,"specializations":[{"price":210}]},
+  {"id":902,"name":"Kadai Vegetable","category":"Farms & Flames","info":"Mixed veggies tossed with ground spices.","isBestseller":false,"specializations":[{"price":190}]},
+  {"id":903,"name":"Mushroom Masala","category":"Farms & Flames","info":"Button mushrooms in a robust, spicy gravy.","isBestseller":false,"specializations":[{"price":190}]},
+  {"id":904,"name":"Mix Veg Khuruma","category":"Farms & Flames","info":"Vegetables in a mild, sweet coconut base.","isBestseller":false,"specializations":[{"price":140}]},
+  {"id":905,"name":"Gobi Manchurian Gravy","category":"Farms & Flames","info":"Cauliflower florets in tangy Chinese gravy.","isBestseller":true,"specializations":[{"price":170}]},
+  {"id":906,"name":"Palak Paneer","category":"Farms & Flames","info":"Paneer cubes cooked in a smooth spinach puree.","isBestseller":false,"specializations":[{"price":220}]},
+  {"id":907,"name":"Aloo Gobi Masala","category":"Farms & Flames","info":"Classic potato and cauliflower dry curry.","isBestseller":false,"specializations":[{"price":160}]},
+  {"id":908,"name":"Dal Fry","category":"Farms & Flames","info":"Yellow lentils tempered with ghee and spices.","isBestseller":false,"specializations":[{"price":130}]},
+  {"id":909,"name":"Dal Makhani","category":"Farms & Flames","info":"Slow-cooked black lentils in butter and cream.","isBestseller":true,"specializations":[{"price":180}]},
+  {"id":910,"name":"Mushroom Paneer Varattiyathu","category":"Farms & Flames","info":"Mushroom and paneer dry pepper roast.","isBestseller":false,"specializations":[{"price":210}]},
+
+  // 10. Chicken
+  {"id":1001,"name":"Butter Chicken Masala","category":"Chicken","info":"Creamy, mildly sweet tomato-based chicken.","isBestseller":true,"specializations":[{"price":275}]},
+  {"id":1002,"name":"Chicken Kondattam","category":"Chicken","info":"Spicy, sun-dried chili infused chicken fry.","isBestseller":true,"specializations":[{"price":260}]},
+  {"id":1003,"name":"Malabari Kozhi Roast","category":"Chicken","info":"Traditional thick, onion-based Malabar roast.","isBestseller":false,"specializations":[{"price":250}]},
+  {"id":1004,"name":"Chettinad Pepper Chicken","category":"Chicken","info":"Highly spiced chicken with black pepper.","isBestseller":false,"specializations":[{"price":260}]},
+  {"id":1005,"name":"Kadai Chicken","category":"Chicken","info":"Chicken chunks cooked with bell peppers.","isBestseller":false,"specializations":[{"price":275}]},
+  {"id":1006,"name":"Chilli Chicken Gravy","category":"Chicken","info":"Indo-Chinese style spicy chicken gravy.","isBestseller":true,"specializations":[{"price":240}]},
+  {"id":1007,"name":"Chicken Tikka Masala","category":"Chicken","info":"Roasted chicken chunks in a spicy sauce.","isBestseller":false,"specializations":[{"price":280}]},
+  {"id":1008,"name":"Garlic Chicken","category":"Chicken","info":"Wok-tossed chicken in a pungent garlic sauce.","isBestseller":false,"specializations":[{"price":250}]},
+  {"id":1009,"name":"Varutharacha Kozhi Curry","category":"Chicken","info":"Chicken in roasted coconut and spice paste.","isBestseller":false,"specializations":[{"price":240}]},
+  {"id":1010,"name":"Ginger Chicken","category":"Chicken","info":"Zesty chicken preparation with fresh ginger.","isBestseller":false,"specializations":[{"price":250}]},
+
+  // 11. Beef
+  {"id":1101,"name":"Beef Coconut Ularthu","category":"Beef","info":"Beef chunks roasted with coconut slices.","isBestseller":true,"specializations":[{"price":220}]},
+  {"id":1102,"name":"Achayan's Beef Curry","category":"Beef","info":"Traditional central-Kerala style beef curry.","isBestseller":false,"specializations":[{"price":230}]},
+  {"id":1103,"name":"Wayanadan Beef Fry","category":"Beef","info":"Dark, peppery, and spicy beef fry.","isBestseller":true,"specializations":[{"price":230}]},
+  {"id":1104,"name":"Beef Idmulaku Fry","category":"Beef","info":"Fiercely spicy crushed chili beef fry.","isBestseller":false,"specializations":[{"price":220}]},
+  {"id":1105,"name":"Beef Chilli","category":"Beef","info":"Indo-Chinese style spicy beef chunks.","isBestseller":false,"specializations":[{"price":210}]},
+  {"id":1106,"name":"Beef Roast","category":"Beef","info":"Slow-roasted beef in a thick onion-tomato gravy.","isBestseller":false,"specializations":[{"price":200}]},
+  {"id":1107,"name":"Beef Dry Fry (BDF)","category":"Beef","info":"Crispy, deep-fried spiced beef slices.","isBestseller":true,"specializations":[{"price":240}]},
+  {"id":1108,"name":"High Range Beef Roast","category":"Beef","info":"Spicy roast inspired by the Western Ghats.","isBestseller":false,"specializations":[{"price":230}]},
+  {"id":1109,"name":"Beef Vindaloo","category":"Beef","info":"Tangy and fiery Goan-style beef curry.","isBestseller":false,"specializations":[{"price":250}]},
+  {"id":1110,"name":"Beef Pepper Masala","category":"Beef","info":"Semi-gravy beef with heavily crushed pepper.","isBestseller":false,"specializations":[{"price":230}]},
+
+  // 12. Mutton
+  {"id":1201,"name":"Mutton Varutharachathu","category":"Mutton","info":"Mutton cooked in a roasted coconut paste.","isBestseller":true,"specializations":[{"price":360}]},
+  {"id":1202,"name":"Mutton Pepper Fry","category":"Mutton","info":"Dry mutton preparation with strong black pepper.","isBestseller":false,"specializations":[{"price":360}]},
+  {"id":1203,"name":"Mutton Roganjosh","category":"Mutton","info":"Aromatic, bright red Kashmiri mutton curry.","isBestseller":true,"specializations":[{"price":380}]},
+  {"id":1204,"name":"Chettinad Mutton Curry","category":"Mutton","info":"Fiercely spicy South Indian mutton preparation.","isBestseller":false,"specializations":[{"price":360}]},
+  {"id":1205,"name":"Mutton Stew","category":"Mutton","info":"Mild, creamy coconut milk gravy with veggies.","isBestseller":false,"specializations":[{"price":350}]},
+  {"id":1206,"name":"Mutton Kurma","category":"Mutton","info":"Rich, nut and coconut based mild gravy.","isBestseller":false,"specializations":[{"price":340}]},
+  {"id":1207,"name":"Mutton Roast","category":"Mutton","info":"Thick onion and tomato based semi-dry roast.","isBestseller":false,"specializations":[{"price":350}]},
+  {"id":1208,"name":"Bhuna Gosht","category":"Mutton","info":"Slow-cooked mutton with intense, reduced spices.","isBestseller":true,"specializations":[{"price":390}]},
+  {"id":1209,"name":"Mutton Chukka","category":"Mutton","info":"Dry-roasted mutton chunks with curry leaves.","isBestseller":false,"specializations":[{"price":370}]},
+  {"id":1210,"name":"Mutton Keema Masala","category":"Mutton","info":"Minced mutton cooked with peas and spices.","isBestseller":false,"specializations":[{"price":320}]},
+
+  // 13. Duck
+  {"id":1301,"name":"Tharavu Mappas","category":"Duck","info":"Duck cooked in a rich, creamy coriander and coconut gravy.","isBestseller":true,"specializations":[{"price":390}]},
+  {"id":1302,"name":"Tharavu Kurumulaku Varattiyathu","category":"Duck","info":"Spicy duck pepper dry roast.","isBestseller":false,"specializations":[{"price":390}]},
+  {"id":1303,"name":"Kerala Duck Curry","category":"Duck","info":"Traditional Kuttanadan style spicy duck curry.","isBestseller":true,"specializations":[{"price":390}]},
+  {"id":1304,"name":"Thattukada Duck Roast","category":"Duck","info":"Street-style thick duck roast with shallots.","isBestseller":false,"specializations":[{"price":390}]},
+  {"id":1305,"name":"Duck Chilli","category":"Duck","info":"Indo-Chinese twist to traditional duck chunks.","isBestseller":false,"specializations":[{"price":400}]},
+  {"id":1306,"name":"Duck Stew","category":"Duck","info":"Mild duck preparation in coconut milk.","isBestseller":false,"specializations":[{"price":380}]},
+  {"id":1307,"name":"Duck Coconut Fry","category":"Duck","info":"Fried duck pieces tossed with toasted coconut.","isBestseller":false,"specializations":[{"price":410}]},
+  {"id":1308,"name":"Duck Vindaloo","category":"Duck","info":"Tangy, vinegar and chili-based duck curry.","isBestseller":false,"specializations":[{"price":390}]},
+  {"id":1309,"name":"Kuttanadan Duck Roast","category":"Duck","info":"Authentic backwater-style rich duck roast.","isBestseller":true,"specializations":[{"price":420}]},
+  {"id":1310,"name":"Duck Pepper Masala","category":"Duck","info":"Semi-gravy preparation heavily spiced with pepper.","isBestseller":false,"specializations":[{"price":390}]},
+
+  // 14. Salads & Sides
+  {"id":1401,"name":"Fresh Garden Salad","category":"Salads & Sides","info":"Sliced cucumbers, carrots, onions, and tomatoes.","isBestseller":false,"specializations":[{"price":90}]},
+  {"id":1402,"name":"Russian Salad","category":"Salads & Sides","info":"Diced veg and fruits in a creamy mayo dressing.","isBestseller":false,"specializations":[{"price":140}]},
+  {"id":1403,"name":"Mixed Raita","category":"Salads & Sides","info":"Cool yogurt with chopped onions and tomatoes.","isBestseller":true,"specializations":[{"price":60}]},
+  {"id":1404,"name":"Roasted Papad (2 pcs)","category":"Salads & Sides","info":"Crispy, fire-roasted lentil wafers.","isBestseller":false,"specializations":[{"price":30}]},
+  {"id":1405,"name":"Masala Papad","category":"Salads & Sides","info":"Fried papad topped with spicy onion-tomato mix.","isBestseller":false,"specializations":[{"price":50}]},
+  {"id":1406,"name":"Kachumber Salad","category":"Salads & Sides","info":"Finely chopped tangy Indian salad.","isBestseller":false,"specializations":[{"price":80}]},
+  {"id":1407,"name":"Pineapple Raita","category":"Salads & Sides","info":"Sweet and savory yogurt with pineapple chunks.","isBestseller":false,"specializations":[{"price":90}]},
+  {"id":1408,"name":"Tossed Green Salad","category":"Salads & Sides","info":"Lettuce and greens lightly tossed in vinaigrette.","isBestseller":false,"specializations":[{"price":120}]},
+  {"id":1409,"name":"Cucumber Salad","category":"Salads & Sides","info":"Refreshing sliced cucumbers with lemon and salt.","isBestseller":false,"specializations":[{"price":70}]},
+  {"id":1410,"name":"Fried Papad (2 pcs)","category":"Salads & Sides","info":"Deep-fried crispy lentil wafers.","isBestseller":false,"specializations":[{"price":40}]},
+
+  // 15. Shawarma (Arabic Corner)
+  {"id":1501,"name":"Grilled Shawarma Roll","category":"Shawarma","info":"Marinated meat roasted on a spit, wrapped in bread.","isBestseller":true,"specializations":[{"price":150}]},
+  {"id":1502,"name":"Shawarma Plate","category":"Shawarma","info":"Deconstructed shawarma served with hummus and pita.","isBestseller":true,"specializations":[{"price":180}]},
+  {"id":1503,"name":"Spicy Mexican Shawarma","category":"Shawarma","info":"Shawarma loaded with jalapenos and spicy sauce.","isBestseller":false,"specializations":[{"price":160}]},
+  {"id":1504,"name":"Whole Meat Shawarma","category":"Shawarma","info":"Extra meat, no veggies, packed with flavor.","isBestseller":true,"specializations":[{"price":190}]},
+  {"id":1505,"name":"Special Cheese Shawarma","category":"Shawarma","info":"Classic roll loaded with melted cheese.","isBestseller":false,"specializations":[{"price":180}]},
+  {"id":1506,"name":"Beef Shawarma Roll","category":"Shawarma","info":"Slow-roasted beef slices in classic Arabic bread.","isBestseller":false,"specializations":[{"price":170}]},
+  {"id":1507,"name":"Rumali Shawarma","category":"Shawarma","info":"Shawarma meat wrapped in thin Rumali roti.","isBestseller":false,"specializations":[{"price":160}]},
+  {"id":1508,"name":"Jumbo Shawarma","category":"Shawarma","info":"Extra-large roll for the ultimate craving.","isBestseller":false,"specializations":[{"price":220}]},
+  {"id":1509,"name":"Shawarma Burger","category":"Shawarma","info":"Shawarma meat stuffed inside a toasted burger bun.","isBestseller":false,"specializations":[{"price":150}]},
+  {"id":1510,"name":"Hummus Plate with Meat","category":"Shawarma","info":"Creamy hummus topped with fresh shawarma slices.","isBestseller":false,"specializations":[{"price":210}]},
+
+  // 16. Mandi (Arabic Corner)
+  {"id":1601,"name":"Alfaham Mandi","category":"Mandi","info":"Grilled chicken served over fragrant Mandi rice.","isBestseller":true,"specializations":[{"price":420}]},
+  {"id":1602,"name":"Shawaya Mandi","category":"Mandi","info":"Roasted whole chicken with aromatic rice.","isBestseller":false,"specializations":[{"price":420}]},
+  {"id":1603,"name":"Beef Mandi","category":"Mandi","info":"Tender, slow-cooked beef over traditional Mandi rice.","isBestseller":true,"specializations":[{"price":460}]},
+  {"id":1604,"name":"Mutton Mandi","category":"Mandi","info":"Fall-off-the-bone mutton with authentic Yemeni rice.","isBestseller":true,"specializations":[{"price":580}]},
+  {"id":1605,"name":"Chicken Madghout","category":"Mandi","info":"Chicken and rice cooked together in a pressure pot.","isBestseller":false,"specializations":[{"price":440}]},
+  {"id":1606,"name":"Peri Peri Alfaham Mandi","category":"Mandi","info":"Spicy peri peri grilled chicken over rice.","isBestseller":false,"specializations":[{"price":450}]},
+  {"id":1607,"name":"Fish Mandi","category":"Mandi","info":"Grilled Arabian style fish served with Mandi rice.","isBestseller":false,"specializations":[{"price":480}]},
+  {"id":1608,"name":"Prawns Mandi","category":"Mandi","info":"Flavorful rice topped with spicy grilled prawns.","isBestseller":false,"specializations":[{"price":520}]},
+  {"id":1609,"name":"BBQ Chicken Mandi","category":"Mandi","info":"Smoky BBQ coated chicken with traditional rice.","isBestseller":false,"specializations":[{"price":440}]},
+  {"id":1610,"name":"Plain Mandi Rice","category":"Mandi","info":"A generous portion of flavorful, aromatic rice.","isBestseller":false,"specializations":[{"price":150}]},
+
+  // 17. Arabic Grills (Arabic Corner)
+  {"id":1701,"name":"Alfaham Chicken","category":"Arabic Grills","info":"Classic charcoal-grilled Arabian chicken.","isBestseller":true,"specializations":[{"price":320}]},
+  {"id":1702,"name":"Shawaya Chicken","category":"Arabic Grills","info":"Machine-roasted juicy Arabic chicken.","isBestseller":false,"specializations":[{"price":320}]},
+  {"id":1703,"name":"Peri Peri Alfaham","category":"Arabic Grills","info":"Grilled chicken coated in spicy Peri Peri sauce.","isBestseller":true,"specializations":[{"price":340}]},
+  {"id":1704,"name":"Pepper Alfaham","category":"Arabic Grills","info":"Grilled chicken with a heavy black pepper rub.","isBestseller":false,"specializations":[{"price":340}]},
+  {"id":1705,"name":"Honey Glazed Alfaham","category":"Arabic Grills","info":"Sweet and savory honey-brushed grilled chicken.","isBestseller":false,"specializations":[{"price":350}]},
+  {"id":1706,"name":"Shish Taouk","category":"Arabic Grills","info":"Skewered and grilled marinated chicken cubes.","isBestseller":true,"specializations":[{"price":380}]},
+  {"id":1707,"name":"Mutton Kebab","category":"Arabic Grills","info":"Minced mutton skewers grilled over charcoal.","isBestseller":false,"specializations":[{"price":420}]},
+  {"id":1708,"name":"Chicken Tikka Kebab","category":"Arabic Grills","info":"Spicy, yogurt-marinated boneless chicken chunks.","isBestseller":false,"specializations":[{"price":360}]},
+  {"id":1709,"name":"Mixed Arabic Grill","category":"Arabic Grills","info":"A grand platter of Alfaham, Kebabs, and Taouk.","isBestseller":true,"specializations":[{"price":850}]},
+  {"id":1710,"name":"Green Chilli Alfaham","category":"Arabic Grills","info":"Grilled chicken marinated in fresh green chili paste.","isBestseller":false,"specializations":[{"price":340}]},
+
+  // 18. Mocktails (Chill N Chai)
+  {"id":1801,"name":"Blue Lagoon","category":"Mocktails","info":"A classic refreshing blue curacao mocktail.","isBestseller":true,"specializations":[{"price":100}]},
+  {"id":1802,"name":"Mix Berry Cooler","category":"Mocktails","info":"Fizzy and sweet mixed berry drink.","isBestseller":false,"specializations":[{"price":100}]},
+  {"id":1803,"name":"Virgin Mojito","category":"Mocktails","info":"Mint, lime, and soda perfectly muddled together.","isBestseller":true,"specializations":[{"price":90}]},
+  {"id":1804,"name":"Green Apple Fizz","category":"Mocktails","info":"Crisp and tart green apple soda drink.","isBestseller":false,"specializations":[{"price":100}]},
+  {"id":1805,"name":"Passion Fruit Mojito","category":"Mocktails","info":"Tropical passion fruit blended with mint.","isBestseller":false,"specializations":[{"price":110}]},
+  {"id":1806,"name":"Cindrella","category":"Mocktails","info":"A sweet, magical fruit punch mocktail.","isBestseller":false,"specializations":[{"price":110}]},
+  {"id":1807,"name":"Strawberry Delight","category":"Mocktails","info":"Crushed strawberries topped with fizz.","isBestseller":false,"specializations":[{"price":100}]},
+  {"id":1808,"name":"Watermelon Breeze","category":"Mocktails","info":"Fresh watermelon juice lightly carbonated.","isBestseller":false,"specializations":[{"price":90}]},
+  {"id":1809,"name":"Asian Ginger Fizz","category":"Mocktails","info":"Zesty ginger and lime refreshing cooler.","isBestseller":false,"specializations":[{"price":100}]},
+  {"id":1810,"name":"Pina Colada (Virgin)","category":"Mocktails","info":"Creamy coconut and pineapple tropical blend.","isBestseller":true,"specializations":[{"price":130}]},
+
+  // 19. Shakes & Juices (Chill N Chai)
+  {"id":1901,"name":"Cookie & Cream Shake","category":"Shakes & Juices","info":"Thick, creamy shake loaded with crushed cookies.","isBestseller":true,"specializations":[{"price":130}]},
+  {"id":1902,"name":"Chocolate Truffle Shake","category":"Shakes & Juices","info":"Rich chocolate shake for extreme cocoa lovers.","isBestseller":true,"specializations":[{"price":140}]},
+  {"id":1903,"name":"Fresh Watermelon Juice","category":"Shakes & Juices","info":"Pure, cold-pressed refreshing watermelon.","isBestseller":false,"specializations":[{"price":90}]},
+  {"id":1904,"name":"Fresh Orange Juice","category":"Shakes & Juices","info":"Freshly squeezed sweet citrus juice.","isBestseller":false,"specializations":[{"price":100}]},
+  {"id":1905,"name":"Mango Alphanso Shake","category":"Shakes & Juices","info":"Thick shake made with premium mango puree.","isBestseller":false,"specializations":[{"price":120}]},
+  {"id":1906,"name":"Sharjah Shake","category":"Shakes & Juices","info":"Classic Kerala style banana and milk shake.","isBestseller":true,"specializations":[{"price":100}]},
+  {"id":1907,"name":"Strawberry Milkshake","category":"Shakes & Juices","info":"Creamy and sweet classic strawberry shake.","isBestseller":false,"specializations":[{"price":110}]},
+  {"id":1908,"name":"Pineapple Juice","category":"Shakes & Juices","info":"Fresh, tangy, and sweet pineapple juice.","isBestseller":false,"specializations":[{"price":90}]},
+  {"id":1909,"name":"Cotton Candy Magic","category":"Shakes & Juices","info":"A sweet, colorful, and magical kids' favorite.","isBestseller":false,"specializations":[{"price":130}]},
+  {"id":1910,"name":"Dry Fruit Shake","category":"Shakes & Juices","info":"Energy-packed shake with premium nuts and dates.","isBestseller":true,"specializations":[{"price":160}]},
+
+  // 20. Hot Beverages (Chill N Chai)
+  {"id":2001,"name":"Classic Chai","category":"Hot Beverages","info":"Traditional, strong Indian spiced milk tea.","isBestseller":true,"specializations":[{"price":15}]},
+  {"id":2002,"name":"Filter Coffee","category":"Hot Beverages","info":"Strong, frothy South Indian style coffee.","isBestseller":true,"specializations":[{"price":22}]},
+  {"id":2003,"name":"Masala Chai","category":"Hot Beverages","info":"Tea infused with cardamom, ginger, and cloves.","isBestseller":false,"specializations":[{"price":20}]},
+  {"id":2004,"name":"Black Tea (Kattan)","category":"Hot Beverages","info":"Strong black tea, lightly sweetened.","isBestseller":false,"specializations":[{"price":12}]},
+  {"id":2005,"name":"Black Coffee","category":"Hot Beverages","info":"Strong, plain brewed dark coffee.","isBestseller":false,"specializations":[{"price":15}]},
+  {"id":2006,"name":"Lemon Tea","category":"Hot Beverages","info":"Refreshing hot tea with a squeeze of fresh lime.","isBestseller":false,"specializations":[{"price":15}]},
+  {"id":2007,"name":"Green Tea","category":"Hot Beverages","info":"Light, healthy, and antioxidant-rich tea.","isBestseller":false,"specializations":[{"price":25}]},
+  {"id":2008,"name":"Hot Chocolate","category":"Hot Beverages","info":"Warm, creamy, and rich chocolate drink.","isBestseller":true,"specializations":[{"price":60}]},
+  {"id":2009,"name":"Horlicks / Boost","category":"Hot Beverages","info":"Classic malt-based hot milk drink.","isBestseller":false,"specializations":[{"price":30}]},
+  {"id":2010,"name":"Ginger Tea","category":"Hot Beverages","info":"Soothing milk tea infused with crushed ginger.","isBestseller":false,"specializations":[{"price":20}]},
+
+  // 21. Specialities (Chill N Chai)
+  {"id":2101,"name":"Royal Rose Falooda","category":"Specialities","info":"Layered dessert drink with vermicelli and ice cream.","isBestseller":true,"specializations":[{"price":190}]},
+  {"id":2102,"name":"Dry Fruit Falooda","category":"Specialities","info":"Rich falooda loaded with premium nuts and dates.","isBestseller":true,"specializations":[{"price":220}]},
+  {"id":2103,"name":"Fresh Fruit Salad","category":"Specialities","info":"A healthy mix of freshly diced seasonal fruits.","isBestseller":false,"specializations":[{"price":80}]},
+  {"id":2104,"name":"Fruit Salad with Ice Cream","category":"Specialities","info":"Fresh fruits topped with a scoop of vanilla.","isBestseller":true,"specializations":[{"price":110}]},
+  {"id":2105,"name":"Sizzling Brownie","category":"Specialities","info":"Hot chocolate brownie with vanilla ice cream.","isBestseller":true,"specializations":[{"price":180}]},
+  {"id":2106,"name":"Elaneer Payasam","category":"Specialities","info":"Sweet, creamy pudding made with tender coconut.","isBestseller":true,"specializations":[{"price":120}]},
+  {"id":2107,"name":"Gulab Jamun (2 pcs)","category":"Specialities","info":"Sweet milk-solid balls deep-fried in sugar syrup.","isBestseller":false,"specializations":[{"price":50}]},
+  {"id":2108,"name":"Vanilla Ice Cream (2 Scoops)","category":"Specialities","info":"Classic, rich, and creamy vanilla ice cream.","isBestseller":false,"specializations":[{"price":60}]},
+  {"id":2109,"name":"Chocolate Ice Cream (2 Scoops)","category":"Specialities","info":"Deep chocolate flavored premium ice cream.","isBestseller":false,"specializations":[{"price":70}]},
+  {"id":2110,"name":"Caramel Custard","category":"Specialities","info":"Smooth egg custard glazed with sweet caramel.","isBestseller":false,"specializations":[{"price":90}]}
+];
+
+// Combine raw data with dynamic mappings (image IDs and slider logic)
+const enhancedMenuData = ref(
+  rawData.map(item => {
+    const mapping = categoryMap[item.category] || { id: 1, outlet: 'Restaurant' };
+    return {
+      ...item,
+      categoryId: mapping.id,
+      outlet: mapping.outlet,
+      image: `/images/menu/${mapping.id}.jpg`, // e.g. /images/menu/1.jpg through 21.jpg
+      isSpecial: item.isBestseller 
+    };
+  })
+);
+
+// Define the data for our hero section
+const heroImages = ref([
+  '/images/menu/menu.jpg'
 ]);
-
-// --- STATE MANAGEMENT ---
-const isVegOnly = ref(false);
-const activeCategory = ref(null);
-const isCollapsedNavOpen = ref(false);
-const isSticky = ref(false);
-
-// --- COMPUTED PROPERTIES ---
-const filteredMenu = computed(() => {
-    if (!isVegOnly.value) return menuData.value;
-    return menuData.value.map(item => ({
-        ...item,
-        specializations: item.specializations.filter(spec => spec.isVeg)
-    })).filter(item => item.specializations.length > 0);
-});
-
-const filteredCategories = computed(() => {
-    const categories = [...new Set(filteredMenu.value.map(item => item.category))];
-    if (categories.length > 0 && !activeCategory.value) {
-      activeCategory.value = categories[0];
-    }
-    return categories;
-});
-
-const bestsellers = computed(() => {
-    return menuData.value.filter(item => item.isBestseller);
-});
-
-// --- CONFIGURATION OBJECTS ---
-const categoryConfig = {
-  "Breakfast": { color: "yellow" }, "Soups": { color: "green" },
-  "Starters": { color: "orange" }, "Rice & Biryani": { color: "amber" },
-  "Seafood": { color: "blue" }, "Grills & Fries": { color: "crimson" },
-  "Noodles": { color: "rose" }, "Traditional Highlights": { color: "lime" },
-  "Breads": { color: "cyan" }, "Farms & Flames": { color: "emerald" },
-  "Chicken": { color: "red"}, "Beef": { color: "red"},
-  "Mutton": { color: "red"}, "Duck": { color: "red"},
-  "Mocktails": { color: "blue"}, "Shakes & Juices": { color: "orange"},
-  "Hot Beverages": { color: "amber"}, "Specialities": { color: "yellow"},
-  "Default": { color: "slate" }
-};
-
-const tailwindColors = {
-  orange: {text:'text-orange-500',border:'border-orange-200',bgColor:'bg-orange-500',shadowColor:'rgb(251 146 60 / 0.4)',cardBg:'bg-orange-200'},
-  yellow: {text:'text-yellow-500',border:'border-yellow-200',bgColor:'bg-yellow-500',shadowColor:'rgb(234 179 8 / 0.4)',cardBg:'bg-yellow-200'},
-  blue: {text:'text-blue-500',border:'border-blue-200',bgColor:'bg-blue-500',shadowColor:'rgb(59 130 246 / 0.4)',cardBg:'bg-blue-200'},
-  green: {text:'text-green-500',border:'border-green-200',bgColor:'bg-green-500',shadowColor:'rgb(34 197 94 / 0.4)',cardBg:'bg-green-200'},
-  crimson: {text:'text-red-600',border:'border-red-200',bgColor:'bg-red-600',shadowColor:'rgb(220 38 38 / 0.4)',cardBg:'bg-red-200'},
-  amber: {text:'text-amber-500',border:'border-amber-200',bgColor:'bg-amber-500',shadowColor:'rgb(245 158 11 / 0.4)',cardBg:'bg-amber-200'},
-  rose: {text:'text-rose-500',border:'border-rose-200',bgColor:'bg-rose-500',shadowColor:'rgb(244 63 94 / 0.4)',cardBg:'bg-rose-200'},
-  lime: {text:'text-lime-500',border:'border-lime-200',bgColor:'bg-lime-500',shadowColor:'rgb(132 204 22 / 0.4)',cardBg:'bg-lime-200'},
-  cyan: {text:'text-cyan-500',border:'border-cyan-200',bgColor:'bg-cyan-500',shadowColor:'rgb(6 182 212 / 0.4)',cardBg:'bg-cyan-200'},
-  emerald: {text:'text-emerald-500',border:'border-emerald-200',bgColor:'bg-emerald-500',shadowColor:'rgb(16 185 129 / 0.4)',cardBg:'bg-emerald-200'},
-  red: {text:'text-red-500',border:'border-red-200',bgColor:'bg-red-500',shadowColor:'rgb(239 68 68 / 0.4)',cardBg:'bg-red-200'},
-  slate: {text:'text-slate-500',border:'border-slate-200',bgColor:'bg-slate-500',shadowColor:'rgb(100 116 139 / 0.4)',cardBg:'bg-slate-200'}
-};
-
-const activeCategoryInfo = computed(() => {
-  const category = activeCategory.value || 'Default';
-  const config = categoryConfig[category] || categoryConfig.Default;
-  return tailwindColors[config.color] || tailwindColors.slate;
-});
-
-const getCategoryStyles = (category) => {
-  const config = categoryConfig[category] || categoryConfig.Default;
-  return tailwindColors[config.color] || tailwindColors.slate;
-};
 
 const restaurantGalleryData = {
   eyebrow: "Our Delicacies",
@@ -243,147 +334,6 @@ const restaurantGalleryData = {
   ]
 };
 
-// --- REFS for DOM elements ---
-const bestsellerSwiperEl = ref(null);
-
-// --- METHODS ---
-const handleScrollToCategory = (category) => {
-  const safeId = category.replace(/[^a-zA-Z0-9]/g, '-');
-  const navEl = document.getElementById('category-nav-container');
-  const infoEl = document.getElementById('info-section');
-  let navHeight = navEl ? navEl.offsetHeight : 0;
-  
-  const currentScrollPosition = window.scrollY || window.pageYOffset;
-  const navTop = navEl.getBoundingClientRect().top + navEl.offsetHeight;
-
-  if(currentScrollPosition < navTop + navHeight + 500) {
-    gsap.to(window, {
-      duration: 1, 
-      scrollTo: { y: `#section-${safeId}`, offsetY: 400}, // Adjusted offset
-      ease: 'power2.inOut'
-    });
-  } else {
-    gsap.to(window, {
-      duration: 1, 
-      scrollTo: { y: `#section-${safeId}`, offsetY: 200 }, // Adjusted offset
-      ease: 'power2.inOut'
-    });
-  }
-  
-  if (isSticky.value) {
-    isCollapsedNavOpen.value = false;
-  }
-  
-};
-
-const getItemsForCategory = (category) => {
-  return filteredMenu.value.filter(item => item.category === category);
-};
-
-// ---- CLICKED OUTSIDE ---
-const accordionRef = ref(null);
-
-const handleClickOutside = (event) => {
-  // If the accordion exists and the click was NOT inside it, close it.
-  if (accordionRef.value && !accordionRef.value.contains(event.target)) {
-    isCollapsedNavOpen.value = false; // Replace with your state variable
-  }
-};
-
-// Add and remove the listener to prevent memory leaks
-onMounted(() => {
-  document.addEventListener('click', handleClickOutside);
-});
-onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside);
-});
-
-// --- ACCORDION OVERFLOW ---
-const expandedNavRef = ref(null);
-const isNavOverflowing = ref(false);
-
-watch(isCollapsedNavOpen, async (isOpen) => {
-  if (isOpen) {
-    // Wait for the DOM to update so the element is visible
-    await nextTick(); 
-    if (expandedNavRef.value) {
-      const navTop = expandedNavRef.value.getBoundingClientRect().top;
-      const availableHeight = window.innerHeight - navTop;
-      
-      // Check if the content is taller than the available space
-      if (expandedNavRef.value.scrollHeight > availableHeight) {
-        isNavOverflowing.value = true;
-        document.body.style.overflow = 'hidden'; // Lock background scroll
-      }
-    }
-  } else {
-    // Reset everything when the menu closes
-    isNavOverflowing.value = false;
-    document.body.style.overflow = ''; 
-  }
-});
-
-// --- LIFECYCLE HOOKS ---
-let scrollTriggerObserver;
-let categoryObservers = [];
-
-onMounted(() => {
-
-  window.scrollTo(0, 0); // Scrolls to the top (x: 0, y: 0)
-
-  // Init Bestseller Swiper
-  if (bestsellerSwiperEl.value) {
-    new Swiper(bestsellerSwiperEl.value, {
-      modules: [Autoplay],
-      slidesPerView: 'auto',
-      spaceBetween: 24,
-      loop: true,
-      delay: 0,
-      speed: 3000,
-      freeMode: true,
-      autoplay: { delay: 0, disableOnInteraction: false },
-    });
-  }
-
-  // Sticky Nav Logic
-  const sentinel = document.querySelector('#sticky-sentinel');
-  const sections = document.querySelectorAll('.menu-category-section');
-  const navEl = document.getElementById('category-nav-container');
-
-  if (sentinel) {
-    const handleScroll = () => {
-      const sentinelTop = sentinel.getBoundingClientRect().top;
-      isSticky.value = sentinelTop <= 80; // 80px is 5rem (h-20 of header)
-      if (!isSticky.value) {
-        isCollapsedNavOpen.value = false;
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    onUnmounted(() => window.removeEventListener('scroll', handleScroll));
-  }
-
-  // Scroll Spy Logic
-  nextTick(() => {
-    const navHeight = document.getElementById('category-nav-container')?.offsetHeight || 100;
-    const offset = 80 + navHeight; // Header height + nav height
-
-    sections.forEach(section => {
-      const observer = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting) {
-          activeCategory.value = entry.target.dataset.category;
-        }
-      }, { rootMargin: `-${offset}px 0px -${window.innerHeight - offset - 100}px 0px` });
-      observer.observe(section);
-      categoryObservers.push(observer);
-    });
-  });
-});
-
-onUnmounted(() => {
-  if (scrollTriggerObserver) scrollTriggerObserver.disconnect();
-  categoryObservers.forEach(observer => observer.disconnect());
-});
 
 // 1. Core Meta Values
 const pageTitle = 'Interactive Restaurant Menu | Hotel CAPS, Koduvayur, Palakkad'
@@ -444,43 +394,13 @@ useSeoMeta({
 </script>
 
 <template>
-  <div class="menu-page-wrapper">
-    <div class="gradient-background"></div>
-    <!-- The MenuHeader component is now defined inside this file -->
-    <header id="menu-header" class="bg-gradient-to-t from-emerald-600 to-emerald-950 relative text-center border-b-8 border-white border-opacity-60 px-4 sm:px-6 lg:px-8 pt-24 md:pt-32 pb-16">
-      <div class="relative z-10 flex flex-col items-center">
-        <div class="font-display text-gray-900">
-          <div class="my-8">
-            <p class="font-decorative font-semibold text-3xl md:text-4xl text-red-300">Multi-Cuisine Restaurant</p>
-          </div>
-          <h2 class="font-sans text-4xl font-bold text-amber-500 md:text-5xl lg:text-6xl tracking-widest ">MENU</h2>
-          <h3 class="text-2xl font-semibold text-violet-200 md:text-3xl lg:text-4xl tracking-widest pt-16">FAST HOME DELIVERY</h3>
-        </div>
-      </div>
-    </header>
+  <main class="menu-page-wrapper min-h-screen bg-[#f9f7f3] dark:bg-[#040404]">
 
-    <!-- The Bestsellers component is now defined inside this file -->
-    <section id="bestsellers-section" class="py-8 lg:py-16 bg-gradient-to-b from-emerald-600 to-emerald-950 border-t-8 border-white border-opacity-60 backdrop-blur-sm">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h3 class="font-display text-3xl font-semibold text-amber-300 tracking-wider text-center mb-12">Bestsellers</h3>
-        <div ref="bestsellerSwiperEl" class="swiper bestseller-swiper">
-          <div class="swiper-wrapper pb-4">
-            <div v-for="item in bestsellers" :key="item.id" class="swiper-slide " style="width: 280px;">
-              <div class="bg-white p-6 rounded-xl bg-gradient-to-r from-amber-200 to-yellow-500 shadow-lg text-center h-full border-b-4 border-amber-400">
-                <div class="w-12 h-12 mx-auto mb-4"></div>
-                <h4 class="font-sans font-bold text-lg">{{ item.name }}</h4>
-                <div class="mt-2 space-y-1 text-sm text-left">
-                  <div v-for="(spec, i) in item.specializations" :key="i" class="flex justify-between items-center">
-                    <span class="text-gray-600 font-sans">{{ spec.name || 'Regular' }}</span>
-                    <span class="font-number font-semibold text-gray-800">{{ spec.price > 0 ? `₹${spec.price}` : '' }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- Hero -->
+    <PageHero 
+      :images="heroImages"
+      themeColorClass="text-[#125b12]"
+    />
 
     <!-- Delicacies -->
     <PageGallery 
@@ -491,177 +411,14 @@ useSeoMeta({
       :themeBgClass="restaurantGalleryData.themeBgClass"
     />
 
-    <!-- The MenuInfo component is now defined inside this file -->
-    <section id="info-section" class="p-10 bg-gradient-to-r from-rose-400 to-orange-400">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 gap-8">
-        <div class="text-center border-2 border-yellow-300 bg-yellow-50/50 rounded-2xl p-6 space-y-2">
-          <div class="flex items-center justify-center space-x-2">
-            <h4 class="text-xl font-bold text-yellow-800 font-sans">Food Allergy Notice</h4>
-          </div>
-          <p class="text-yellow-700 font-body">If you have a food allergy or special dietary requirement, please inform a member of staff.</p>
-        </div>
-        <p class="text-center text-gray-500 text-sm font-sans">GST extra applicable.</p>
-      </div>
-    </section>
-    
-    <div id="sticky-sentinel"></div>
-    
-    <!-- The MenuNav component is now defined inside this file -->
-    <ClientOnly>
-      <nav 
-        id="category-nav-container" ref="accordionRef"
-        class="sticky z-20 transition-all duration-300"
-        :class="{ 'is-sticky': isSticky, 'top-[5rem]': isSticky }"
-      >
-        <div class="flex justify-center items-center pt-4 mb-2 space-x-4">
-          <span class="font-sans font-semibold text-gray-700 transition-colors">{{ isVegOnly ? 'Pure Veg Only' : 'All Items' }}</span>
-          <input type="checkbox" id="veg-toggle" class="hidden peer" :checked="isVegOnly" @change="isVegOnly = $event.target.checked">
-          <label for="veg-toggle" class="relative w-14 h-8 bg-red-200 rounded-full cursor-pointer p-1 veg-toggle-label">
-            <div class="w-6 h-6 bg-rose-800 rounded-full shadow-md transform transition-transform veg-toggle-dot"></div>
-          </label>
-        </div>
-        
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div 
-            v-if="isSticky" 
-            class="w-full flex justify-between items-center cursor-pointer p-3 rounded-lg shadow-md bg-slate-100"
-            @click="isCollapsedNavOpen = !isCollapsedNavOpen"
-          >
-            <div class="flex items-center space-x-3">
-              <div class="w-6 h-6 rounded-full" :class="activeCategoryInfo.bgColor"></div>
-              <span class="font-sans font-bold">{{ activeCategory || 'Select Category' }}</span>
-            </div>
-            <PhCaretDown class="text-2xl transition-transform duration-300" :class="{ 'rotate-180': isCollapsedNavOpen }" />
-          </div>
+    <!-- THE MENU COMPONENT -->
+    <CapsMenu :menuData="enhancedMenuData" />
 
-          <div 
-            ref="expandedNavRef"
-            class="flex flex-wrap overflow-x-hidden overflow-y-auto gap-3 justify-center py-4 transition-all duration-300"
-            :class="{ 'hidden': isSticky && !isCollapsedNavOpen }"
-            :style="isNavOverflowing ? { maxHeight: `calc(100vh - 6rem)` } : {}"
-          >
-            <template v-for="category in filteredCategories" :key="category">
-              <button 
-                @click="handleScrollToCategory(category)"
-                class="flex items-center space-x-2 py-2 px-4 rounded-full font-sans font-bold"
-                :class="[
-                  category === activeCategory ? ` category-btn border: isHovered active text-white ${getCategoryStyles(category).bgColor} ` : ` ${getCategoryStyles(category).border} category-btn border-solid border shadow-md text-gray-700 `
-                ]"
-                :style="category === activeCategory ? { '--shadow-color': getCategoryStyles(category).shadowColor } : {}"
-              >
-                <div class="w-6 h-6 rounded-full" 
-                :class="[
-                  category === activeCategory ? 'bg-white': `${getCategoryStyles(category).bgColor}` 
-                ]"></div>
-                <span class="text-sm">{{ category }}</span>
-              </button>
-            </template>
-          </div>
-        </div>
-      </nav>
-    </ClientOnly>
-    
-    <!-- The MenuList component is now defined inside this file -->
-    <section id="full-menu-section" class="py-16 lg:py-24 bg-[linear-gradient(to_bottom,_theme(colors.red.50),_theme(colors.orange.50),_theme(colors.amber.50),_theme(colors.yellow.50),_theme(colors.lime.50),_theme(colors.green.50),_theme(colors.emerald.50),_theme(colors.teal.50),_theme(colors.cyan.50),_theme(colors.sky.50),_theme(colors.blue.50),_theme(colors.indigo.50),_theme(colors.violet.50),_theme(colors.purple.50),_theme(colors.fuchsia.50),_theme(colors.pink.50),_theme(colors.rose.50),_theme(colors.slate.50),_theme(colors.gray.50),_theme(colors.zinc.50),_theme(colors.neutral.50),_theme(colors.stone.50))]">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div id="menu-display-area" class="space-y-20">
-          <section 
-            v-for="category in filteredCategories" 
-            :key="category"
-            :id="`section-${category.replace(/[^a-zA-Z0-9]/g, '-')}`"
-            class="menu-category-section pt-4"
-            :data-category="category"
-          >
-            <h3 
-              class="menu-category-title font-display text-2xl sm:text-3xl font-semibold mb-10"
-              :class="[getCategoryStyles(category).text, getCategoryStyles(category).border]"
-            >
-              <span class="px-4 bg-slate-50">{{ category }}</span>
-            </h3>
-            
-            <div class="grid md:grid-cols-2 gap-x-12 gap-y-10">
-              <div :class="getCategoryStyles(category).border, getCategoryStyles(category).cardBg"  v-for="item in getItemsForCategory(category)" :key="item.id" class="rounded-2xl border-4 p-4 shadow-xl menu-item flex flex-col space-y-2 " >
-                <div class="flex items-start  space-x-4">
-                  <div class="w-10 h-10 flex-shrink rounded-full" :class="getCategoryStyles(category).bgColor"></div>
-                  <div>
-                    <h4 class="font-sans font-bold text-lg">{{ item.name }}</h4>
-                    <p class="text-sm text-gray-500 font-body">{{ item.info }}</p>
-                  </div>
-                </div>
-                <div class="pl-14 space-y-1">
-                  <div 
-                    v-for="(spec, i) in item.specializations" 
-                    :key="i" 
-                    class="specialization-row flex justify-between items-center text-sm"
-                  >
-                    <div class="flex items-center font-sans">
-                      <span class="h-2 w-2 rounded-full mr-2" :class="spec.isVeg ? 'bg-green-500' : 'bg-red-600'"></span>
-                      <span class="text-base">{{ spec.name || '' }}</span>
-                    </div>
-                    <span class="font-number text-xl font-semibold text-gray-800">{{ spec.price > 0 ? `₹${spec.price}` : 'Market Price' }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
-    </section>
-  </div>
+  </main>
 </template>
 
 <style>
 /* Global styles for the menu page */
-:root {
-  --color-orange-rgb: 249 115 22; --color-yellow-rgb: 234 179 8; --color-blue-rgb: 59 130 246;
-  --color-green-rgb: 34 197 94; --color-crimson-rgb: 220 38 38;
-}
-.menu-page-wrapper {
-  background-color: #f8fafc;
-  color: #1f2937;
-  overflow-x: hidden;
-}
-#category-nav-container.is-sticky {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  background-color: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(8px);
-  position: fixed;
-  top: 5rem;
-  width: 100%;
-}
-.category-btn {
-  transition: all 0.2s ease-in-out;
-  /* box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); */
-  white-space: nowrap;
-}
-.category-btn.active {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -4px var(--shadow-color);
-}
-.category-btn:not(.active):hover {
-  background-color: rgba(0,0,0, 0.3);
-  color: white;
-}
-.veg-toggle-label { transition: background-color 0.3s ease; }
-#veg-toggle:checked + .veg-toggle-label { background-color: #16a34a; }
-#veg-toggle:checked + .veg-toggle-label .veg-toggle-dot { transform: translateX(100%); background-color: white; }
 
-.menu-category-title { 
-  display: flex; 
-  align-items: center; 
-  text-align: center; 
-}
-.menu-category-title::before, .menu-category-title::after { 
-  content: ''; 
-  flex-grow: 1; 
-  border-bottom: 2px solid; 
-}
-.menu-category-title:not(:empty)::before { 
-  margin-right: 1.5rem; 
-}
-.menu-category-title:not(:empty)::after { 
-  margin-left: 1.5rem; 
-}
+
 </style>

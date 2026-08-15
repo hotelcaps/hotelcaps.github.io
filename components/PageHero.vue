@@ -5,9 +5,9 @@ import { gsap } from 'gsap';
 // --- PROPS ---
 const props = defineProps({
   eyebrow: { type: String, required: false, default: '' },
-  title: { type: String, required: true },
-  subtitle: { type: String, required: true },
-  images: { type: Array, required: true, default: () => [] },
+  title: { type: String},
+  subtitle: { type: String,  },
+  images: { type: Array, default: () => [] },
   themeColorClass: { type: String },
   eyebrowColorClass: { type: String },
   imageGradientClass: { type: String }
