@@ -103,7 +103,7 @@ export default defineNuxtConfig({
         { name: 'msapplication-TileColor', content: '#ffffff' },
         { name: 'msapplication-TileImage', content: '/images/favicons/ms-icon-144x144.png' },
         { name: 'theme-color', content: '#ffffff' },
-        { name: 'msapplication-config', content: '/images/favicons/browserconfig.xml' },
+        { name: 'msapplication-config', content: 'browserconfig.xml' },
 
         // Apple Safari Device Customizations
         // PWA & Mobile Device Customizations
@@ -125,6 +125,8 @@ export default defineNuxtConfig({
         { rel: 'apple-touch-icon', sizes: '144x144', href: '/images/favicons/apple-icon-144x144.png' },
         { rel: 'apple-touch-icon', sizes: '152x152', href: '/images/favicons/apple-icon-152x152.png' },
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/images/favicons/apple-icon-180x180.png' },
+        { rel: 'apple-touch-icon', sizes: '167x167', href: '/images/favicons/apple-icon.png' },
+        { rel: 'apple-touch-icon', sizes: '190x190', href: '/images/favicons/apple-icon-precomposed.png' },
         // Standard Favicons
         { rel: 'icon', type: 'image/png', sizes: '192x192', href: '/images/favicons/android-icon-192x192.png' },
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/images/favicons/favicon-32x32.png' },

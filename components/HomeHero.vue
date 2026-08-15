@@ -9,7 +9,7 @@
         class="h-full w-full object-cover"
       />
       <div class="absolute inset-0 bg-black/55"></div>
-      <div class="absolute bottom-0 left-0 w-full h-32 pointer-events-none gradient-fade-bottom"></div>
+      <div class="absolute bottom-0 left-0 w-full h-100 pointer-events-none gradient-fade-bottom"></div>
     </div>
 
     <!-- Foreground Content -->
@@ -55,7 +55,7 @@ const isInitialAppLoad = useState('isInitialAppLoad', () => true);
 
 // Calculate delay: use config value on first load, 0 on internal navigation
 const dynamicDelay = isInitialAppLoad.value 
-  ? Number(config.public.initialAnimationDelay) || 0 
+  ? Number(config.public.initialAnimationDelay) + .8 || 0 
   : 0;
 
 onMounted(() => {

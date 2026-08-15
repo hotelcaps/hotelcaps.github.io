@@ -12,7 +12,7 @@ onMounted(() => {
   // This is a simpler, more reliable way to handle the loader.
   // We'll show the loader for a fixed duration to allow the animation to play,
   // and then reliably fade it out.
-  const MIN_ANIMATION_TIME = 4000; // 4 seconds
+  const MIN_ANIMATION_TIME = 5500; // 5.5 seconds
 
   setTimeout(() => {
     isLoading.value = false;
