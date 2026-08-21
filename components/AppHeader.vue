@@ -119,6 +119,7 @@ const navLinks = ref([
     subLinks: [
       { text: 'View Home', link: '/', hoverClass: 'hover:bg-[#D97706]/10 hover:text-[#D97706]' },
       { text: 'About Us', link: '/about', hoverClass: 'hover:bg-[#e98206]/15 hover:text-[#e98206]' },
+      { text: 'Live', link: '/live', hoverClass: 'hover:bg-[#e982a6]/15 hover:text-[#e982a6]' },
     ]
   },
   {

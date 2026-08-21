@@ -81,18 +81,18 @@ onMounted(() => {
   const tl = gsap.timeline({
     onComplete: () => {
       // Fluidly fade out the entire loader screen (slower fade out)
-      gsap.to(loaderContainer.value, {
-        opacity: 0,
-        duration: 1.5,
-        ease: "power2.inOut",
-        onComplete: () => {
-          isVisible.value = false;
-          isInitialAppLoad.value = false; 
+      // gsap.to(loaderContainer.value, {
+      //   opacity: 0,
+      //   duration: 1.5,
+      //   ease: "power2.inOut",
+      //   onComplete: () => {
+      //     isVisible.value = false;
+      //     isInitialAppLoad.value = false; 
           
-          // 2. Unlock scrolling once the loader is completely gone
-          document.body.style.overflow = '';
-        }
-      });
+      //     // 2. Unlock scrolling once the loader is completely gone
+      //     document.body.style.overflow = '';
+      //   }
+      // });
     }
   });
 

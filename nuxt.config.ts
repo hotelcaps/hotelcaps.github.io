@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   devServer: {
     host: '0.0.0.0', // e.g., '0.0.0.0' for external access
-    port: 3000, // or your desired port
+    port: 3002, // or your desired port
   },
 
   runtimeConfig: {

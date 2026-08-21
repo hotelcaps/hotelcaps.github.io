@@ -22,6 +22,7 @@ const footerNav = ref([
   { text: 'About Us', href: '/about' },
   { text: 'Pricing', href: '/pricing' },
   { text: 'Our Menu', href: '/menu' },
+  { text: 'Live', href: '/live' },
   { text: 'Our Catering', href: '/catering' },
   { text: 'Contact Us', href: '/contact' }
 ]);
