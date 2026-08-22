@@ -1553,6 +1553,16 @@ export const capsMenuData = ref([
   },
   {
     "id": 148,
+    "name": "Mint Tea",
+    "category": "Hot beverages",
+    "outlet": "Chill N Chai",
+    "info": "A revitalizing, aromatic brew steeped with fresh garden mint leaves and light spices.",
+    "isBestseller": false,
+    "image": "/images/menu/items/mint-tea.jpg",
+    "specializations": [{ "name": "Regular", "price": "Seasonal", "isVeg": true }]
+  },
+  {
+    "id": 149,
     "name": "Mini Meals",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",

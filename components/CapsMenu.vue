@@ -1,6 +1,7 @@
 <template>
+  
   <div :class="['w-full font-sans transition-colors duration-500', isDark ? 'dark bg-[#141414]' : 'bg-[#f9f7f3]']">
-    
+
     <!-- Top Padding added to pull toggles away from the edge -->
     <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 lg:pt-12 relative">
       
@@ -84,7 +85,7 @@
               </div>
               
               <!-- Text auto-expands -->
-              <div class="w-full p-6 pb-12 flex flex-col bg-white dark:bg-[#1c1c1c] transition-colors duration-500">
+              <div class="w-full p-6 pb-12 flex flex-col bg-white dark:bg-[#2a2a2a] transition-colors duration-500">
                 <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-2">{{ special.title }}</h3>
                 <p class="text-sm text-zinc-500 dark:text-zinc-400 line-clamp-3 mb-4">{{ special.intro }}</p>
                 <div class="flex items-center gap-2 mt-auto">
@@ -104,14 +105,14 @@
         <div class="flex flex-col gap-4 pb-20">
           <div v-for="category in activeCategories" :key="category" :id="'acc-' + category.replace(/\s+/g, '')" class="bg-white dark:bg-[#2a2a2a] rounded-2xl border border-zinc-100 dark:border-[#2a2a2a] overflow-hidden shadow-sm transition-colors duration-500">
             
-            <button @click="toggleAccordion(category)" class="w-full px-5 py-4 flex justify-between items-center bg-white dark:bg-[#2a2a2a] transition-colors duration-500">
-              <span class="font-display font-bold text-lg text-zinc-900 dark:text-white">{{ category }}</span>
+            <button @click="toggleAccordion(category)" class="w-full px-5 py-3 border-b border-[#d4af37] flex justify-between items-center bg-white dark:bg-[#2a2a2a] transition-colors duration-500">
+              <span class="font-display font-bold text-xl text-[#d4af37]">{{ category }}</span>
               <svg :class="['w-5 h-5 text-[#d4af37] transition-transform duration-300', openAccordions.includes(category) ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
             
             <div class="grid transition-all duration-500 ease-in-out" :class="openAccordions.includes(category) ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'">
               <div class="overflow-hidden">
-                <div class="p-5 pt-0 flex flex-col gap-6 border-t border-zinc-50 dark:border-[#2a2a2a]">
+                <div class="p-5 pt-7 flex flex-col gap-6 border-t border-zinc-50 dark:border-[#2a2a2a]">
                   <div v-for="item in getItemsByCategory(category)" :key="item.id" class="flex gap-4">
                     <div class="w-24 h-18 shrink-0 rounded-xl overflow-hidden">
                       <img :src="item.image" :alt="item.name" class="w-full h-auto rounded-xl object-cover shadow-sm" />
@@ -119,7 +120,7 @@
                     <!-- <img :src="item.image" :alt="item.name" class="w-24 h-24 aspect-[4/3] object-contain rounded-xl border border-zinc-100 dark:border-white/5 shadow-sm" /> -->
                     <div class="flex-1 flex flex-col justify-center">
                       <h4 class="text-base font-bold text-zinc-900 dark:text-white leading-tight">{{ item.name }}</h4>
-                      <p class="text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2 mt-1 mb-2">{{ item.info }}</p>
+                      <p class="text-xs text-zinc-500 dark:text-zinc-400 line-clamp-3 mt-1 mb-2">{{ item.info }}</p>
                       
                       <div class="flex flex-col gap-1 mt-auto">
                         <!-- MOBILE INVISIBLE TEMPLATE -->
@@ -293,8 +294,13 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue';
+import { ref, computed, watch, onMounted, onUnmounted, nextTick, markRaw } from 'vue';
 import { gsap } from 'gsap';
+import { 
+  PhPhone 
+} from '@phosphor-icons/vue';
+
+const PhoneIcon = markRaw(PhPhone);
 
 const props = defineProps({
   menuData: { type: Array, required: true },
@@ -308,7 +314,7 @@ const showOnlyVeg = ref(false); // Veg filter state
 const outlets = [
   { 
     name: 'Multi Cuisine Restaurant', 
-    titleHtml: 'Multi Cuisine<br/>Restaurant',
+    titleHtml: 'Multi<br>Cuisine',
     icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 17h18M12 4v2m-7 8a7 7 0 0114 0v3H5v-3z"/></svg>` 
   },
   { 
@@ -383,10 +389,6 @@ const toggleAccordion = (category) => {
     }
   }
 };
-
-
-
-
 
 // Extract unique categories belonging to the active outlet (Filtered by Veg state)
 const activeCategories = computed(() => {

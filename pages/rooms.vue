@@ -1,19 +1,6 @@
 <script setup>
-import { ref, shallowRef, markRaw } from 'vue';
+import { ref } from 'vue';
 import PageHero from '~/components/PageHero.vue';
-import FeaturesGrid from '~/components/FeaturesGrid.vue';
-
-// We explicitly import the icon components we need on this page.
-import IconWifi from '~/components/icons/IconWifi.vue';
-import IconBed from '~/components/icons/IconBed.vue';
-import IconAirConditioner from '~/components/icons/IconAirConditioner.vue';
-import IconForkKnife from '~/components/icons/IconForkKnife.vue';
-import IconElevator from '~/components/icons/IconElevator.vue';
-import IconClockClockwise from '~/components/icons/IconClockClockwise.vue';
-import IconStorage from '~/components/icons/IconStorage.vue';
-import IconWorkdesk from '~/components/icons/IconWorkDesk.vue';
-import IconCctv from '~/components/icons/IconCctv.vue';
-import IconParking from '~/components/icons/IconParking.vue';
 
 // Define the data for our hero section
 const heroImages = ref([

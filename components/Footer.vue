@@ -8,8 +8,8 @@ import IconPhone from '~/components/icons/IconPhone.vue';
 
 // --- DATA-DRIVEN LINKS ---
 const socialLinks = shallowRef([
-  { name: 'Facebook', href: 'https://www.facebook.com/caps.koduvayur/', icon: markRaw(IconFacebook), color: "text-blue-600 hover:text-blue-700" },
-  { name: 'Instagram', href: 'https://www.instagram.com/capsfamily.in/', icon: markRaw(IconInstagram), color: "text-pink-600 hover:text-pink-700", }
+  { name: 'Facebook', aria: 'Facebook', href: 'https://www.facebook.com/hotelcapsfamily/', icon: markRaw(IconFacebook), color: "text-blue-600 hover:text-blue-700" },
+  { name: 'Instagram', aria: 'Instagram', href: 'https://www.instagram.com/hotelcapsfamily/', icon: markRaw(IconInstagram), color: "text-pink-600 hover:text-pink-700", }
 ]);
 
 
@@ -23,7 +23,7 @@ const footerNav = ref([
   { text: 'Pricing', href: '/pricing' },
   { text: 'Our Menu', href: '/menu' },
   { text: 'Live', href: '/live' },
-  { text: 'Our Catering', href: '/catering' },
+  { text: 'Our Catering', href: '/catering' }, 
   { text: 'Contact Us', href: '/contact' }
 ]);
 </script>
@@ -48,25 +48,25 @@ const footerNav = ref([
             <p class="font-sans">Follow us: </p>
             <div class="flex space-x-4">
               <a v-for="social in socialLinks" :key="social.name" :href="social.href" target="_blank" class="">
-                <component :is="social.icon" class="w-6 h-6 transition-colors duration-300" :class="social.color" />
+                <component :is="social.icon" :aria-label="social.aria" class="w-6 h-6 transition-all duration-300 hover:brightness-90" :class="social.color" />
               </a>
             </div>
           </div>
 
           <div class="flex flex-col items-center md:w-96 mb-8">
             <p class="font-sans mb-2 text-center leading-loose">Hotel CAPS - Main Road, Pittupeedika, Koduvayur, Palakkad, Kerala, India - 678501.</p>
-            <a href="capsfamilybakes@gmail.com" class="flex items-center text-stone-200 transition-all duration-300 hover:text-stone-400 hover:underline">
+            <a href="capsfamilybakes@gmail.com" aria-label="E-Mail" class="flex items-center text-stone-200 transition-all duration-300 hover:text-[#d99706] hover:underline">
               <IconEnvelope class="w-5 h-5 mr-2" />
               <span>capsfamilybakes@gmail.com</span>
             </a>
           </div>
 
           <div class="flex md:w-64 h-16 flex-col items-center md:items-end mb-4 md:justify-center space-y-2 font-sans">
-            <a href="tel:+919207517064" class="flex items-center text-stone-200 transition-all duration-300 hover:text-stone-400 hover:underline">
+            <a href="tel:+919207517064" aria-label="Phone Number" class="flex items-center text-stone-200 transition-all duration-300 hover:text-[#d99706] hover:underline">
               <IconPhone class="w-5 h-5 mr-2" />
               <span>+91 92075 17064</span>
             </a>
-            <a href="tel:+918848369567" class="flex items-center text-stone-200 transition-all duration-300 hover:text-stone-400 hover:underline">
+            <a href="tel:+918848369567" aria-label="Phone Number" class="flex items-center text-stone-200 transition-all duration-300 hover:text-[#d99706] hover:underline">
               <IconPhone class="w-5 h-5 mr-2" />
               <span>+91 8848 369 567</span>
             </a>
@@ -75,13 +75,16 @@ const footerNav = ref([
 
       <!-- Bottom Navigation Links -->
       <div class="border-t border-stone-700 pt-8">
+            <p class="font-sans text-center mb-4">Page links: </p>
         <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2">
           <template v-for="(link, index) in footerNav" :key="index">
+            <!-- Add a divider dot before each link -->
+            <!-- <li class="text-stone-300" aria-hidden="true">&bull;</li> -->
             <li>
-              <NuxtLink :to="link.href" class="text-base text-stone-200 hover:text-stone-400 transition-colors duration-300 hover:underline">{{ link.text }}</NuxtLink>
+              <NuxtLink :to="link.href" class="text-base text-stone-200 hover:text-[#d99706] transition-colors duration-300 hover:underline">{{ link.text }}</NuxtLink>
             </li>
-            <!-- Add a divider dot after each link except the last one -->
-            <li v-if="index < footerNav.length - 1" class="text-stone-300" aria-hidden="true">&bull;</li>
+            <!-- Add a divider dot after the last one -->
+            <!-- <li v-if="index === footerNav.length - 1" class="text-stone-300" aria-hidden="true">&bull;</li> -->
           </template>
         </ul>
       </div>
@@ -91,8 +94,8 @@ const footerNav = ref([
         <p class="text-stone-200 order-1">&copy; 2026 Hotel CAPS. All rights reserved.</p>
 
         <div class="flex space-x-4 order-2 sm:order-3 mt-4 sm:mt-0">
-          <NuxtLink to="/policy" class="text-stone-200 transition-all duration-300 hover:text-stone-400 hover:underline">Privacy Policy</NuxtLink>
-          <NuxtLink to="/terms" class="text-stone-200 transition-all duration-300 hover:text-stone-400 hover:underline">Terms & Conditions</NuxtLink>
+          <NuxtLink to="/policy" class="text-stone-200 transition-all duration-300 hover:text-[#d99706] hover:underline">Privacy Policy</NuxtLink>
+          <NuxtLink to="/terms" class="text-stone-200 transition-all duration-300 hover:text-[#d99706] hover:underline">Terms & Conditions</NuxtLink>
         </div>
       </div>
       

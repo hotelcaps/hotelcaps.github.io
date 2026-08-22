@@ -55,7 +55,7 @@ const isInitialAppLoad = useState('isInitialAppLoad', () => true);
 
 // Calculate delay: use config value on first load, 0 on internal navigation
 const dynamicDelay = isInitialAppLoad.value 
-  ? Number(config.public.initialAnimationDelay) + .8 || 0 
+  ? Number(config.public.initialAnimationDelay) - 0.3 || 0 
   : 0;
 
 onMounted(() => {

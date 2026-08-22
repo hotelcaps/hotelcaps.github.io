@@ -7,7 +7,10 @@
     </section>
 
     <!-- THE MENU COMPONENT -->
-    <CapsMenu :menuData="capsMenuData" :dynamicSpecials="dynamicSpecials" /> />
+    <CapsMenu :menuData="capsMenuData" :dynamicSpecials="dynamicSpecials" />
+
+    <!-- Call To Order Button on Mobile -->
+    <CallToOrderButton />
 
   </main>
 </template>

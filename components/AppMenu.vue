@@ -17,15 +17,22 @@
           :to="item.link" 
           @click="$emit('close')" 
           :style="{ '--theme-color': item.color }"
-          class="nav-link group flex items-center w-full py-4 sm:py-5 text-zinc-300 transition-colors duration-300"
+          class="nav-link group flex items-center w-full py-2 sm:py-5 transition-colors duration-300"
         >
-          <!-- Thin, Uppercase Typography -->
-          <span class="font-display font-light uppercase tracking-[0.2em] text-xl sm:text-2xl whitespace-nowrap transition-all duration-300 group-hover:text-[var(--theme-color)] group-active:text-[var(--theme-color)]">
+          <!-- SVG Icon -->
+          <component 
+            :is="item.icon" 
+            :size="24" 
+            class="mr-4 text-[var(--theme-color)] transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-110 group-active:scale-110" 
+          />
+
+          <!-- Thin, Uppercase Typography (Color applied directly) -->
+          <span class="font-display font-light uppercase tracking-[0.2em] text-lg sm:text-2xl whitespace-nowrap text-[var(--theme-color)]">
             {{ item.text }}
           </span>
           
           <!-- Liquid Smooth Horizontal Line -->
-          <div class="nav-line h-[1px] ml-6 sm:ml-8 flex-grow origin-left scale-x-0 text-xl sm:text-2xl opacity-0 bg-[var(--theme-color)] transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-x-100 group-hover:opacity-60 group-active:scale-x-100 group-active:opacity-60"></div>
+          <div class="nav-line h-[1px] ml-6 sm:ml-8 flex-grow origin-left scale-x-0 opacity-0 bg-[var(--theme-color)] transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-x-100 group-hover:opacity-60 group-active:scale-x-100 group-active:opacity-60"></div>
         </NuxtLink>
 
       </nav>
@@ -35,7 +42,7 @@
         <NuxtLink 
           to="/contact" 
           @click="$emit('close')" 
-          class="mobile-contact-btn font-light relative flex items-center justify-center w-full py-3 px-8 font-display uppercase tracking-widest text-xl sm:text-2xl text-[#D97706] border border-[#D97776]/40 rounded-lg overflow-hidden transition-all duration-300 shadow-[0_0_15px_rgba(217,119,118,0)] hover:shadow-[0_0_20px_rgba(217,119,118,0.2)]"
+          class="mobile-contact-btn font-light relative flex items-center justify-center w-full py-2 px-8 font-display uppercase tracking-widest text-xl sm:text-2xl text-[#D97706] border border-[#D97776]/40 rounded-lg overflow-hidden transition-all duration-300 shadow-[0_0_15px_rgba(217,119,118,0)] hover:shadow-[0_0_20px_rgba(217,119,118,0.2)]"
         >
           <span class="relative z-10 group-hover:text-white transition-colors duration-300">
             Contact Us
@@ -48,6 +55,8 @@
 </template>
 
 <script setup>
+import { markRaw } from 'vue';
+
 defineProps({
   isOpen: {
     type: Boolean,
@@ -58,15 +67,22 @@ defineProps({
 defineEmits(['close']);
 
 // Flat hierarchy mapping the exact corrected theme colors provided
+import { 
+  PhHouse, PhUsers, PhBed, PhTag, 
+  PhForkKnife, PhBookOpen, PhPlayCircle, 
+  PhBuildings, PhCoffee 
+} from '@phosphor-icons/vue';
+
 const menuItems = [
-  { text: 'Home', link: '/', color: '#D97706' },
-  { text: 'About Us', link: '/about', color: '#e98206' },
-  { text: 'Rooms', link: '/rooms', color: '#2563eb' },
-  { text: 'Pricing', link: '/pricing', color: '#0284c7' },
-  { text: 'Restaurant', link: '/restaurant', color: '#03a661' },
-  { text: 'Menu', link: '/menu', color: '#14b8a6' },
-  { text: 'Events Hall', link: '/hall', color: '#e22473' },
-  { text: 'Catering', link: '/catering', color: '#df4444' },
+  { text: 'Home', link: '/', color: '#D97706', icon: markRaw(PhHouse) },
+  { text: 'About Us', link: '/about', color: '#e9a206', icon: markRaw(PhUsers) },
+  { text: 'Rooms', link: '/rooms', color: '#2563eb', icon: markRaw(PhBed) },
+  { text: 'Pricing', link: '/pricing', color: '#0284c7', icon: markRaw(PhTag) },
+  { text: 'Restaurant', link: '/restaurant', color: '#03a661', icon: markRaw(PhForkKnife) },
+  { text: 'Menu', link: '/menu', color: '#14b8a6', icon: markRaw(PhBookOpen) },
+  { text: 'Live', link: '/live', color: '#82e9a6', icon: markRaw(PhPlayCircle) },
+  { text: 'Events Hall', link: '/hall', color: '#e22473', icon: markRaw(PhBuildings) },
+  { text: 'Catering', link: '/catering', color: '#df4444', icon: markRaw(PhCoffee) },
 ];
 </script>
 

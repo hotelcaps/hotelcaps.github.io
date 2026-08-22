@@ -114,18 +114,16 @@ onMounted(() => {
   .fromTo('.hotel-char',
     { opacity: 0, rotationY: -90, z: -50 },
     { opacity: 1, rotationY: 0, z: 0, duration: 1.8, stagger: 0.15, ease: "back.out(1.2)" },
-    2.0
-  )
+    1.4)
 
   // 4. "CAPS" Seal Stamp - Slower impact, softer scale drop
   .fromTo('.caps-char',
     { opacity: 0, scale: 3 },
     { opacity: 1, scale: 1, duration: 1.5, stagger: 0.25, ease: "power3.out" },
-    3.8
-  )
+    2.8)
 
   // 5. Cinematic Hold (Hold the complete logo on screen for 1.5s before fading out)
-  .to({}, { duration: 1.5 }); 
+  .to({}, { duration: .5 }); 
 });
 
 // Failsafe: Ensure overflow is restored if component is unmounted unexpectedly

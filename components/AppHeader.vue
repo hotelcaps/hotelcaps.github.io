@@ -1,10 +1,7 @@
 <template>
   <header 
-    class="fixed top-0 left-0 w-full lg:px-0 xl:px-4 z-50 transition-all duration-300 ease-in-out"
-    :class="{ 
-      'bg-transparent': !isScrolled, 
-      'bg-zinc-900/90 backdrop-blur-lg shadow-lg': isScrolled 
-    }"
+    class="fixed top-0 left-0 w-full lg:px-0 xl:px-4 z-50 transition-all duration-500 ease-in-out"
+    :class="headerBgClass"
   >
     <div class="mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
@@ -23,23 +20,26 @@
           <div 
             v-for="navItem in navLinks" 
             :key="navItem.text"
-            class="relative"
+            class="relative h-20 flex items-center"
             @mouseenter="openDropdownOnHover(navItem.text)"
             @mouseleave="closeDropdownOnMouseLeave"
           >
-            <!-- Main navigation link (Dynamic Hover Color) -->
+            <!-- Main navigation link -->
             <a 
               href="#"
               @click.prevent="toggleDropdown(navItem.subLinks.length > 0 ? navItem.text : null)"
               class="flex items-center xl:text-lg text-white font-display tracking-wider transition-all duration-300"
-              :class="navItem.mainHoverClass"
+              :class="[
+                navItem.mainHoverClass, 
+                activeDropdown === navItem.text ? navItem.mainHoverClass.split(' ')[0].replace('hover:', '') : ''
+              ]"
             >
               {{ navItem.text }}
               <PhCaretDown 
                 v-if="navItem.subLinks.length > 0" 
-                :class="{ 'rotate-180': activeDropdown === navItem.text }" 
                 :size="16" 
-                class="ml-1 transition-transform duration-300" 
+                class="ml-1.5 transition-transform duration-300 opacity-70"
+                :class="{ 'rotate-180': activeDropdown === navItem.text }" 
               />
             </a>
 
@@ -47,19 +47,25 @@
             <Transition name="dropdown">
               <div 
                 v-if="navItem.subLinks.length > 0 && activeDropdown === navItem.text"
-                class="absolute top-full left-1/2 -translate-x-1/2 pt-6 w-44 rounded-t-none rounded-md shadow-2xl overflow-hidden"
+                class="absolute top-[70px] left-1/2 -translate-x-1/2 pt-4 w-56 z-50"
               >
-                <ul class="pb-2" :class="{ 
-                  'bg-zinc-900/20 backdrop-blur-lg': !isScrolled, 
-                  'bg-zinc-900/95 backdrop-blur-lg shadow-lg': isScrolled 
-                }">
+                <!-- Upward Pointer / Caret -->
+                <div 
+                  class="absolute top-[9px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-b-[8px]"
+                  :class="dropdownCaretColor"
+                ></div>
+                
+                <!-- Dropdown Body -->
+                <ul class="rounded-xl border shadow-2xl overflow-hidden p-2 flex flex-col gap-1 backdrop-blur-xl transition-colors duration-300"
+                    :class="dropdownBgClass">
                   <li v-for="subLink in navItem.subLinks" :key="subLink.text">
                     <NuxtLink 
                       :to="subLink.link" 
                       @click="activeDropdown = null"
-                      class="flex items-center justify-center h-11 px-4 text-sm font-medium text-gray-200 border-t border-white/10 transition-colors duration-200 first:border-t-0"
+                      class="flex items-center h-11 px-4 text-sm font-medium text-gray-200 rounded-lg transition-colors duration-200"
                       :class="subLink.hoverClass"
                     >
+                      <component :is="subLink.icon" :size="18" class="mr-3 opacity-70" />
                       {{ subLink.text }}
                     </NuxtLink>
                   </li>
@@ -77,12 +83,10 @@
         </div>
 
         <!-- MOBILE HAMBURGER BUTTON -->
-        <!-- Placed inside ClientOnly and Teleport for correct z-index over the light menu -->
         <ClientOnly>
           <Teleport to="body">
             <div class="fixed top-0 right-0 h-20 z-[60] lg:hidden flex items-center pt-2 pr-4 sm:pr-6">
               <button @click="$emit('toggle')" class="hamburger-button" aria-label="Toggle menu">
-                <!-- Lines turn dark if menu is open because the menu background is light -->
                 <span class="line top" :class="{ 'toggled bg-zinc-300': isOpen, 'bg-white': !isOpen }"></span>
                 <span class="line bottom" :class="{ 'toggled bg-zinc-300': isOpen, 'bg-white': !isOpen }"></span>
               </button>
@@ -96,58 +100,100 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
-import { PhCaretDown } from '@phosphor-icons/vue';
+import { ref, computed, onMounted, onUnmounted, markRaw } from 'vue';
+import { useRoute } from 'vue-router';
+// Import Phosphor Icons to act as our SVGs
+import { 
+  PhCaretDown, PhHouse, PhUsers, PhBed, PhTag, 
+  PhForkKnife, PhBookOpen, PhPlayCircle, PhBuildings, PhCoffee 
+} from '@phosphor-icons/vue';
 
 const props = defineProps({
-  isOpen: {
-    type: Boolean,
-    default: false
-  }
+  isOpen: { type: Boolean, default: false }
 });
 
 defineEmits(['toggle']);
 
+const route = useRoute();
 const isScrolled = ref(false);
 const activeDropdown = ref(null);
 
-// Navigation Data with exact specific route-based colors
+// ==========================================
+// DYNAMIC ROUTE-BASED BACKGROUNDS
+// ==========================================
+const headerBgClass = computed(() => {
+  if (!isScrolled.value) return 'bg-transparent';
+  
+  const path = route.path;
+  // Match the page themes (using Tailwind slate, emerald, rose, and a premium dark gold/zinc)
+  if (path.includes('/rooms') || path.includes('/pricing')) return 'bg-slate-900/95 backdrop-blur-lg shadow-lg';
+  if (path.includes('/restaurant') || path.includes('/menu') || path.includes('/live')) return 'bg-[#051c14]/95 backdrop-blur-lg shadow-lg'; // Deep emerald
+  if (path.includes('/hall') || path.includes('/catering')) return 'bg-rose-950/95 backdrop-blur-lg shadow-lg';
+  
+  // Default (Home)
+  return 'bg-[#0f1110]/95 backdrop-blur-lg shadow-lg'; // Deep premium zinc/gold hint
+});
+
+const dropdownBgClass = computed(() => {
+  const path = route.path;
+  if (path.includes('/rooms') || path.includes('/pricing')) return 'bg-[#141615]/95 border-slate-700';
+  if (path.includes('/restaurant') || path.includes('/menu') || path.includes('/live')) return 'bg-[#141615]/95 border-[#0d4a36]';
+  if (path.includes('/hall') || path.includes('/catering')) return 'bg-[#141615]/95 border-rose-900';
+  
+  return 'bg-[#141615]/95 border-[#272a28]';
+});
+
+const dropdownCaretColor = computed(() => {
+  const path = route.path;
+  if (path.includes('/rooms') || path.includes('/pricing')) return 'border-b-slate-700';
+  if (path.includes('/restaurant') || path.includes('/menu') || path.includes('/live')) return 'border-b-[#0d4a36]';
+  if (path.includes('/hall') || path.includes('/catering')) return 'border-b-rose-900';
+  
+  return 'border-b-[#272a28]';
+});
+
+// ==========================================
+// NAVIGATION DATA
+// ==========================================
 const navLinks = ref([
   {
     text: 'Home', 
     mainHoverClass: 'hover:text-amber-500',
     subLinks: [
-      { text: 'View Home', link: '/', hoverClass: 'hover:bg-[#D97706]/10 hover:text-[#D97706]' },
-      { text: 'About Us', link: '/about', hoverClass: 'hover:bg-[#e98206]/15 hover:text-[#e98206]' },
-      { text: 'Live', link: '/live', hoverClass: 'hover:bg-[#e982a6]/15 hover:text-[#e982a6]' },
+      { text: 'View Home', link: '/', icon: markRaw(PhHouse), hoverClass: 'hover:bg-[#D97706]/10 hover:text-[#D97706]' },
+      { text: 'About Us', link: '/about', icon: markRaw(PhUsers), hoverClass: 'hover:bg-[#e9a206]/15 hover:text-[#e9a206]' },
     ]
   },
   {
     text: 'Rooms', 
     mainHoverClass: 'hover:text-[#2563eb]',
     subLinks: [
-      { text: 'View Rooms', link: '/rooms', hoverClass: 'hover:bg-[#2563eb]/15 hover:text-[#2563eb]' },
-      { text: 'Our Pricing', link: '/pricing', hoverClass: 'hover:bg-[#0284c7]/15 hover:text-[#0284c7]' },
+      { text: 'View Rooms', link: '/rooms', icon: markRaw(PhBed), hoverClass: 'hover:bg-[#2563eb]/15 hover:text-[#2563eb]' },
+      { text: 'Our Pricing', link: '/pricing', icon: markRaw(PhTag), hoverClass: 'hover:bg-[#0284c7]/15 hover:text-[#0284c7]' },
     ]
   },
   {
     text: 'Restaurant', 
     mainHoverClass: 'hover:text-[#03a661]',
     subLinks: [
-      { text: 'View Restaurant', link: '/restaurant', hoverClass: 'hover:bg-[#03a661]/15 hover:text-[#03a661]' },
-      { text: 'Our Menu', link: '/menu', hoverClass: 'hover:bg-[#14b8a6]/15 hover:text-[#14b8a6]' },
+      { text: 'View Restaurant', link: '/restaurant', icon: markRaw(PhForkKnife), hoverClass: 'hover:bg-[#03a661]/15 hover:text-[#03a661]' },
+      { text: 'Our Menu', link: '/menu', icon: markRaw(PhBookOpen), hoverClass: 'hover:bg-[#14b8a6]/15 hover:text-[#14b8a6]' },
+      { text: 'Live', link: '/live', icon: markRaw(PhPlayCircle), hoverClass: 'hover:bg-[#82e9a6]/15 hover:text-[#82e9a6]' },
     ]
   },
   {
     text: 'Events Hall', 
     mainHoverClass: 'hover:text-[#e22473]',
     subLinks: [
-      { text: 'View Hall', link: '/hall', hoverClass: 'hover:bg-[#e22473]/15 hover:text-[#e22473]' },
-      { text: 'Our Catering', link: '/catering', hoverClass: 'hover:bg-[#df4444]/15 hover:text-[#df4444]' },
+      { text: 'View Hall', link: '/hall', icon: markRaw(PhBuildings), hoverClass: 'hover:bg-[#e22473]/15 hover:text-[#e22473]' },
+      { text: 'Our Catering', link: '/catering', icon: markRaw(PhCoffee), hoverClass: 'hover:bg-[#df4444]/15 hover:text-[#df4444]' },
     ]
   }
 ]);
 
+// ==========================================
+// INTERACTIONS
+// ==========================================
 const toggleDropdown = (itemName) => {
   activeDropdown.value = activeDropdown.value === itemName ? null : itemName;
 };
@@ -199,7 +245,7 @@ onUnmounted(() => {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
   border-radius: 0.5rem;
-  background-color: #D97706; /* Updated to contact orange */
+  background-color: #D97706;
   transform: scaleX(0);
   transform-origin: left;
   transition: all 0.4s cubic-bezier(0.7, 0, 0.2, 1);
@@ -228,6 +274,6 @@ onUnmounted(() => {
 .hamburger-button .line.bottom.toggled { bottom: 11px; transform: rotate(-45deg); }
 
 /* Dropdown Transition */
-.dropdown-enter-active, .dropdown-leave-active { transition: all 0.2s ease-in-out; }
-.dropdown-enter-from, .dropdown-leave-to { opacity: 0; transform: translateY(-15px) translateX(-50%); }
+.dropdown-enter-active, .dropdown-leave-active { transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+.dropdown-enter-from, .dropdown-leave-to { opacity: 0; transform: translateY(-8px) translateX(-50%); }
 </style>
