@@ -24,7 +24,7 @@
         >
           
           <!-- BACKGROUND & DYNAMIC LIGHT TINT -->
-          <div class="absolute inset-0 z-0">
+          <div class="absolute inset-0 z-0 pointer-events-none">
             <img src="/images/live/live-bg.jpg" alt="Hotel CAPS Live Background" class="w-full h-full object-cover" />
             <div ref="bgTintRef" class="absolute opacity-70 inset-0 transition-colors duration-1000"></div>
           </div>
@@ -35,10 +35,38 @@
             <!-- Stacked Logo -->
             <div class="flex flex-col items-center gap-[10px]">
               <img src="/images/caps-solid-logo.png" alt="Hotel CAPS" class="h-[77px]" />
-              <div class="text-white flex flex-col items-center font-display leading-none">
+              <div class="text-[#1c1c1c] flex flex-col items-center font-display leading-none">
                 <p class="text-[19px] font-medium tracking-widest">HOTEL</p>
                 <p class="text-[29px] font-bold tracking-widest mt-[4px]">CAPS</p>
               </div>
+            </div>
+
+            <!-- CENTERED LIVE DATE BADGE -->
+            <div 
+              v-if="activeSlide && ['restaurant', 'chai', 'arabic', 'specials'].includes(activeSlide.trackerId)"
+              class="absolute left-1/2 -translate-x-1/2 flex items-center gap-[14px] px-[26px] py-[10px]"
+            >
+              <!-- Day Number (Gold Accent) -->
+              <span class="font-display font-bold text-[35px] text-[#ff5537] tracking-wider leading-none">
+                {{ liveDate.day }}
+              </span>
+
+              <!-- Month -->
+              <span class="font-display font-bold text-[35px] text-zinc-800 tracking-[0.2em] uppercase leading-none">
+                {{ liveDate.month }} 
+              </span>
+              <!-- Year -->
+              <span class="font-display font-bold text-[35px] text-[#ff5537] tracking-[0.2em] uppercase leading-none">
+                  {{ liveDate.year }}
+              </span>
+
+              <!-- Subtle Divider Dot -->
+              <span class="w-[5px] h-[5px] rounded-full bg-slate-700"></span>
+
+              <!-- Day of Week (Warm Amber Highlight) -->
+              <span class="font-display font-semibold text-[31px] text-zinc-800 tracking-[0.25em] uppercase leading-none">
+                {{ liveDate.weekday }}
+              </span>
             </div>
 
             <!-- Live Indicator -->
@@ -60,7 +88,7 @@
                 <h2 
                   v-if="activeSlide.outlet" 
                   class="live-text-item font-['Dancing_Script'] text-[67px] font-bold mb-[10px] leading-tight"
-                  :style="{ color: activeSlide.darkHex }"
+                  :style="{ color: activeSlide.mainTitleColor }"
                 >
                   {{ activeSlide.outlet }}
                 </h2>
@@ -68,33 +96,53 @@
                 <h1 class="live-text-item font-display font-bold uppercase tracking-wide leading-none mb-[29px]">
                   <span 
                     class="block text-[86px]"
-                    :style="{ color: activeSlide.mainTitleColor }"
+                    :style="{ color: activeSlide.tagBgHex }"
                   >
                     {{ activeSlide.mainTitle }}
                   </span>
                 </h1>
 
-                <h3 class="live-text-item font-sans font-bold text-white text-[48px] mb-[19px] leading-tight">
-                  {{ activeSlide.title }}
-                </h3>
+                <div class="live-text-item flex items-center mb-[19px]">
+                  <h3 class="font-sans font-bold text-white text-[40px] leading-snug flex items-center gap-[20px]">
+                    <!-- Veg / Non-Veg Indicator -->
+                    <div 
+                      v-if="activeSlide.isVeg !== undefined" 
+                      class="flex-shrink-0 flex items-center justify-center w-[28px] h-[28px] border-[2.5px] rounded-[6px]"
+                      :class="activeSlide.isVeg ? 'border-green-700' : 'border-red-700'"
+                    >
+                      <div 
+                        class="w-[12px] h-[12px] rounded-full"
+                        :class="activeSlide.isVeg ? 'bg-green-700' : 'bg-red-700'"
+                      ></div>
+                    </div>
+                    {{ activeSlide.title }}
+                  </h3>
+                </div>
 
                 <p class="live-text-item font-sans text-zinc-100 text-[21px] leading-relaxed mb-[29px] max-w-[576px]">
                   {{ activeSlide.intro }}
                 </p>
 
-                <div v-if="activeSlide.price" :style="{ color: activeSlide.priceColor ? activeSlide.priceColor : '#f0cb52' }" class="live-text-item font-display font-bold text-[48px] mb-[48px]">
-                  {{ activeSlide.price }}
+                <div v-if="activeSlide.price" class="live-text-item font-display font-bold text-[48px] mb-[48px]">
+                  <span :style="{ color: activeSlide.priceColor ? activeSlide.priceColor : '#f0cb52' }" class="font-display font-bold text-[48px] leading-none">
+                    {{ activeSlide.price }}
+                  </span>
                 </div>
 
                 <!-- Feature Tags -->
                 <div class="live-text-item flex flex-wrap gap-[19px] mt-auto">
                   <div 
-                    v-for="(tag, tIdx) in activeSlide.tags" 
-                    :key="tIdx"
-                    class="flex items-center gap-[12px] bg-white/5 border border-white/20 px-[19px] py-[10px] rounded-[15px] text-white/90 text-[17px] font-medium tracking-wide backdrop-blur-sm shadow-md"
-                  >
-                    <div class="w-[23px] h-[23px]" :style="{ color: activeSlide.priceColor ? activeSlide.priceColor : '#f0cb52' }" v-html="tag.icon"></div>
-                    {{ tag.text }}
+                      v-for="(tag, tIdx) in activeSlide.tags" 
+                      :key="tIdx"
+                      class="flex items-center gap-[12px] border border-white/20 px-[19px] py-[10px] rounded-[15px] text-white/90 text-[17px] font-medium tracking-wide backdrop-blur-sm shadow-md"
+                      :style="{ backgroundColor: activeSlide.tagBgHex }"
+                    >
+                      <div 
+                        class="w-[23px] h-[23px]" 
+                        :style="{ color: activeSlide.priceColor || '#f0cb52' }" 
+                        v-html="tag.icon"
+                      ></div>
+                      {{ tag.text }}
                   </div>
                 </div>
               </div>
@@ -105,11 +153,20 @@
                 <!-- Format A -->
                 <div v-if="activeSlide.format === 'A'" class="live-image-item w-full h-full flex items-center justify-center">
                   <img 
-                    :src="activeSlide.images[0]" 
+                    :src="activeSlide.images?.[0] 
+                      ? (['Multi Cuisine Restaurant', 'Arabic Corner', 'Chill N Chai'].includes(activeSlide.outlet) 
+                          ? `${activeSlide.images[0]}?w=1200` 
+                          : activeSlide.images[0]) 
+                      : '/images/live/placeholder.jpg'" 
+                    @error="$event.target.src = '/images/live/placeholder.jpg'"
                     :alt="activeSlide.title"
                     :class="[
-                      'max-w-[864px] drop-shadow-2xl',
-                      activeSlide.isRoom ? 'w-[90%] max-h-[75%] object-cover rounded-[38px] border-[4px] border-white/10 shadow-[0_19px_58px_rgba(0,0,0,0.5)]' : 'max-h-[85%] object-contain'
+                      'max-w-[864px]',
+                      activeSlide.isRoom 
+                        ? 'w-[90%] max-h-[75%] object-cover rounded-[38px] border-[4px] border-white/10 shadow-[0_19px_58px_rgba(0,0,0,0.5)]' 
+                        : (['Multi-Cuisine Restaurant', 'Arabic Corner', 'Chill N Chai'].includes(activeSlide.outlet)
+                            ? 'max-h-[85%] w-auto aspect-[4/3] object-cover rounded-[34px] shadow-2xl shadow-black/20'
+                            : 'max-h-[85%] object-contain drop-shadow-2xl')
                     ]"
                   />
                 </div>
@@ -123,7 +180,7 @@
               </div>
             </template>
 
-            <!-- FORMAT LIST (5 ITEMS PER OUTLET) -->
+            <!-- FORMAT LIST (7 ITEMS PER OUTLET COLUMN) -->
             <div v-if="activeSlide.format === 'LIST'" class="w-full h-full flex flex-col pt-[1rem]">
               
               <div class="text-center mb-[1.5rem] flex flex-col items-center">
@@ -135,21 +192,30 @@
                 </h1>
               </div>
 
-              <!-- 3 Column Grid -->
-              <div class="flex justify-around w-full px-[38px] h-full">
-                <div v-for="(list, lIdx) in activeSlide.lists" :key="lIdx" class="w-[30%] flex flex-col gap-[15px]">
-                  <h2 class="live-text-item font-display font-bold text-[35px] mb-[10px] uppercase tracking-wider text-center" :style="{color: list.color}">
-                    {{ list.outletName }}
+              <div class="flex justify-center gap-[70px] w-full px-[38px] h-full">
+                
+                <div v-for="(outlet, oIdx) in activeSlide.outlets" :key="oIdx" class="flex flex-col gap-[15px]" :style="{ flex: outlet.columns.length }">
+                  
+                  <h2 class="live-text-item font-display font-bold text-[35px] mb-[10px] uppercase tracking-wider text-center" :style="{color: outlet.color}">
+                    {{ outlet.name }}
                   </h2>
-                  <div v-for="(item, iIdx) in list.items" :key="iIdx" class="live-list-item flex items-center justify-between border-b border-white/10 pb-[15px] pt-[8px]">
-                    <span class="font-sans text-[23px] text-zinc-900 font-medium tracking-wide">{{ item.name }}</span>
-                    <span class="font-bold text-[23px] text-[#d4af37]">{{ item.price }}</span>
+                  
+                  <div class="flex gap-[60px] h-full">
+                    <div v-for="(col, cIdx) in outlet.columns" :key="cIdx" class="flex-1 flex flex-col gap-[0]">
+                      <div v-for="(item, iIdx) in col" :key="iIdx" class="live-list-item flex items-center justify-between border-b border-white/10 py-[12px]">
+                        <div class="flex items-center gap-[14px]">
+                          <div v-if="item.isVeg !== undefined" class="flex-shrink-0 flex items-center justify-center w-[18px] h-[18px] border-[2px] rounded-[4px]" :class="item.isVeg ? 'border-green-700' : 'border-red-700'">
+                            <div class="w-[8px] h-[8px] rounded-full" :class="item.isVeg ? 'bg-green-700' : 'bg-red-700'"></div>
+                          </div>
+                          <span class="font-sans text-[23px] text-zinc-900 font-medium tracking-wide leading-snug mt-[4px]">{{ item.name }}</span>
+                        </div>
+                        <span class="font-bold text-[23px] text-[#ff5537] leading-none whitespace-nowrap ml-[15px] mt-[4px]">{{ item.price }}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-
             </div>
-
           </div>
 
           <!-- 4. BOTTOM PANE (Progress Tracker) -->
@@ -211,6 +277,17 @@ import { gsap } from 'gsap';
 
 // Import only the static rules and fixed slides
 import { specialsThemeDictionary, staticSpecialsSlides, capsCategoriesData } from '~/capsSpecialsData.js';
+
+// Formatted Live Date: Day, Month, Year, and Day of Week
+const liveDate = computed(() => {
+  const now = new Date();
+  const day = String(now.getDate()).padStart(2, '0');
+  const month = now.toLocaleString('en-US', { month: 'short' }).toUpperCase();
+  const year = now.getFullYear();
+  const weekday = now.toLocaleString('en-US', { weekday: 'long' });
+
+  return { day, month, year, weekday };
+});
 
 // =====================================
 // NEW SCALING LOGIC FOR 16:9 STAGE
@@ -329,49 +406,90 @@ useSeoMeta({
 const capsSpecialsData = computed(() => {
   const dynamicData = dynamicSpecials.value;
 
-  // 1. Separate out the Grand "CAPS" from the regular outlet items
+  // 1. Map Individual Specials (Adding isVeg parsing)
   const grandSpecialsRaw = dynamicData.filter(item => item.category === 'CAPS');
   const outletSpecialsRaw = dynamicData.filter(item => item.category !== 'CAPS');
 
-  // Map Grand Specials
   const grandSpecials = grandSpecialsRaw.map(item => ({
     format: 'A', isRoom: false, outlet: item.category, title: item.name, 
     intro: item.description, price: item.price, images: [item.image],
+    isVeg: item.isVeg === true || item.isVeg === 'true', // Safety parse for WP strings
     ...specialsThemeDictionary['CAPS']
   }));
 
-  // 2. Auto-generate the LIST Slide using the dynamic outlet specials
+  const individualSpecials = outletSpecialsRaw.map(item => {
+    const theme = specialsThemeDictionary[item.category] || specialsThemeDictionary['Multi-Cuisine Restaurant'];
+    return {
+      format: 'A', isRoom: false, outlet: item.category, title: item.name, 
+      intro: item.description, price: item.price, images: [item.image], 
+      isVeg: item.isVeg === true || item.isVeg === 'true',
+      ...theme
+    };
+  });
+
+  // 2. The Auto-Paginating Engine for LIST slides
   const outletsForList = [
     { key: 'Multi-Cuisine Restaurant', name: 'Restaurant', color: '#14532d' },
     { key: 'Chill N Chai', name: 'Chill N Chai', color: '#78350f' },
     { key: 'Arabic Corner', name: 'Arabic Corner', color: '#451a03' }
   ];
 
-  const lists = outletsForList.map(out => {
-    const items = outletSpecialsRaw
-      .filter(item => item.category === out.key)
-      .slice(0, 5) // Display max 5 items per outlet in the list view
-      .map(item => ({ name: item.name, price: item.price }));
-    return { outletName: out.name, color: out.color, items };
+  const listSlides = [];
+  let currentSlideOutlets = [];
+  let currentSlideCols = 0;
+
+  outletsForList.forEach(out => {
+    const items = outletSpecialsRaw.filter(item => item.category === out.key);
+    if (items.length === 0) return;
+
+    // Slice items into chunks of 7
+    const chunks = [];
+    for (let i = 0; i < items.length; i += 7) {
+      chunks.push(items.slice(i, i + 7).map(item => ({
+        name: item.name, 
+        price: item.price,
+        isVeg: item.isVeg === true || item.isVeg === 'true'
+      })));
+    }
+
+    chunks.forEach(chunk => {
+      // If slide hits 3 columns, package it and start a fresh slide
+      if (currentSlideCols === 3) {
+        listSlides.push({
+          trackerId: 'specials', format: 'LIST', isRoom: false, 
+          mainTitle: "TODAY'S SPECIALS", mainTitleColor: '#ff5537', 
+          darkHex: '#2a2a2a', lightHex: '#eaeaea', outlet: 'Explore Our Specials', 
+          outlets: currentSlideOutlets
+        });
+        currentSlideOutlets = [];
+        currentSlideCols = 0;
+      }
+
+      // Find if this outlet already exists on the current slide
+      let existingOutlet = currentSlideOutlets.find(o => o.name === out.name);
+      if (!existingOutlet) {
+        existingOutlet = { name: out.name, color: out.color, columns: [] };
+        currentSlideOutlets.push(existingOutlet);
+      }
+
+      // Drop the chunk in and increment the column counter
+      existingOutlet.columns.push(chunk);
+      currentSlideCols++;
+    });
   });
 
-  const listSlide = {
-    trackerId: 'specials', format: 'LIST', isRoom: false, 
-    mainTitle: "TODAY'S SPECIALS", mainTitleColor: '#f0cb52', 
-    darkHex: '#2a2a2a', lightHex: '#eaeaea', outlet: 'Explore Our Specials', lists
-  };
+  // Push the final slide if there's leftover data
+  if (currentSlideOutlets.length > 0) {
+    listSlides.push({
+      trackerId: 'specials', format: 'LIST', isRoom: false, 
+      mainTitle: "TODAY'S SPECIALS", mainTitleColor: '#ff5537', 
+      darkHex: '#2a2a2a', lightHex: '#eaeaea', outlet: 'Explore Our Specials', 
+      outlets: currentSlideOutlets
+    });
+  }
 
-  // 3. Map Individual Outlet Specials
-  const individualSpecials = outletSpecialsRaw.map(item => {
-    const theme = specialsThemeDictionary[item.category] || specialsThemeDictionary['Multi-Cuisine Restaurant'];
-    return {
-      format: 'A', isRoom: false, outlet: item.category, title: item.name, 
-      intro: item.description, price: item.price, images: [item.image], ...theme
-    };
-  });
-
-  // Combine Everything into one perfect array for GSAP
-  return [...grandSpecials, listSlide, ...individualSpecials, ...staticSpecialsSlides];
+  // Combine Everything
+  return [...grandSpecials, ...listSlides, ...individualSpecials, ...staticSpecialsSlides];
 });
 
 // ----------------------------------------------------------------------------
@@ -408,9 +526,16 @@ const runCycle = async (index) => {
   await nextTick();
 
   if (bgTintRef.value) {
-    bgTintRef.value.style.backgroundColor = activeSlide.value.lightHex;
+    if (activeSlide.value.format === 'LIST') {
+      // Dark warm amber overlay across the entire stage
+      bgTintRef.value.style.backgroundColor = '#e6c2a4'; // Deep dark amber/espresso
+      bgTintRef.value.style.opacity = '0.52';            // Darkens the base image cleanly
+    } else {
+      // Reset back to standard dynamic theme behavior for regular slides
+      bgTintRef.value.style.backgroundColor = activeSlide.value.lightHex;
+      bgTintRef.value.style.opacity = '0.70';
+    }
   }
-
   const tlIn = gsap.timeline();
   
   // Slide in Titles & Text

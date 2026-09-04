@@ -3,7 +3,7 @@
   <div :class="['w-full font-sans transition-colors duration-500', isDark ? 'dark bg-[#141414]' : 'bg-[#f9f7f3]']">
 
     <!-- Top Padding added to pull toggles away from the edge -->
-    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 lg:pt-12 relative">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-6 lg:pt-12 relative">
       
       <!-- ==========================================
            CONTROLS: VEG TOGGLE & LIGHT/DARK
@@ -81,9 +81,14 @@
               
               <!-- Image locked to aspect ratio so it doesn't collapse -->
               <div class="w-full aspect-[4/3] relative bg-white border-b border-zinc-100 dark:border-zinc-800">
-                <img :src="special.images[0]" :alt="special.title" class="w-full h-full object-contain p-2" />
+                <img 
+                  :src="special.images?.[0] || '/images/menu/placeholder.jpg'" 
+                  @error="$event.target.src = '/images/menu/placeholder.jpg'"
+                  :alt="special.title" 
+                  class="w-full h-full object-contain p-2" 
+                />
               </div>
-              
+
               <!-- Text auto-expands -->
               <div class="w-full p-6 pb-12 flex flex-col bg-white dark:bg-[#2a2a2a] transition-colors duration-500">
                 <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-2">{{ special.title }}</h3>
@@ -115,9 +120,13 @@
                 <div class="p-5 pt-7 flex flex-col gap-6 border-t border-zinc-50 dark:border-[#2a2a2a]">
                   <div v-for="item in getItemsByCategory(category)" :key="item.id" class="flex gap-4">
                     <div class="w-24 h-18 shrink-0 rounded-xl overflow-hidden">
-                      <img :src="item.image" :alt="item.name" class="w-full h-auto rounded-xl object-cover shadow-sm" />
+                      <img 
+                        :src="item.image || '/images/menu/placeholder.jpg'" 
+                        @error="$event.target.src = '/images/menu/placeholder.jpg'"
+                        :alt="item.alt || item.name" 
+                        class="w-full h-auto rounded-xl object-cover shadow-sm" 
+                      />
                     </div>
-                    <!-- <img :src="item.image" :alt="item.name" class="w-24 h-24 aspect-[4/3] object-contain rounded-xl border border-zinc-100 dark:border-white/5 shadow-sm" /> -->
                     <div class="flex-1 flex flex-col justify-center">
                       <h4 class="text-base font-bold text-zinc-900 dark:text-white leading-tight">{{ item.name }}</h4>
                       <p class="text-xs text-zinc-500 dark:text-zinc-400 line-clamp-3 mt-1 mb-2">{{ item.info }}</p>
@@ -134,6 +143,7 @@
                               </div>
                               <span class="text-xs font-medium text-zinc-600 dark:text-zinc-400">{{ spec.name || 'Regular' }}</span>
                             </div>
+                            <p v-if="item.offers" class="text-[10px] leading-tight font-medium text-emerald-600 dark:text-emerald-400 mt-0.5 line-clamp-1">{{ item.offers }}</p>
                             <span class="text-sm font-bold text-[#d4af37]">
                               {{ spec.price === 'Seasonal' ? 'Seasonal' : '₹' + spec.price }}
                             </span>
@@ -178,8 +188,13 @@
             <transition-group v-else name="fade" tag="div" class="grid w-full">
               <div v-for="(special, index) in outletSpecials" :key="special.title" v-show="index === currentSpecialIndex" class="col-start-1 row-start-1 w-full flex flex-col">
                 
-                <div class="w-full aspect-[4/3] bg-white p-4 pb-0 flex items-center justify-center border-b border-zinc-100 dark:border-white/5">
-                  <img :src="special.images[0]" :alt="special.title" class="w-full h-full object-contain rounded-2xl" />
+                <div class="w-full aspect-[4/3] bg-white p-2 flex items-center justify-center border-b border-zinc-100 dark:border-white/5">
+                  <img 
+                    :src="special.images?.[0] || '/images/menu/placeholder.jpg'" 
+                    @error="$event.target.src = '/images/menu/placeholder.jpg'"
+                    :alt="special.title" 
+                    class="w-full h-full object-contain rounded-2xl" 
+                  />
                 </div>
                 
                 <div class="w-full p-6 pb-12 flex flex-col bg-white dark:bg-[#1c1c1c] transition-colors duration-500">
@@ -247,7 +262,12 @@
             >
               <!-- Image -->
               <div class="w-full aspect-[4/3] overflow-hidden relative border-b border-zinc-50 dark:border-[#2a2a2a]">
-                <img :src="item.image" :alt="item.name" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                <img 
+                  :src="item.image || '/images/menu/placeholder.jpg'" 
+                  @error="$event.target.src = '/images/menu/placeholder.jpg'"
+                  :alt="item.name" 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
+                />
               </div>
               
               <!-- Content -->
@@ -256,14 +276,13 @@
                 <p class="text-sm text-zinc-500 dark:text-zinc-400 line-clamp-2 transition-colors duration-500">{{ item.info }}</p>
                 
                 <!-- Variants & Veg/Non-Veg -->
-                <div class="mt-auto flex flex-col gap-3 pt-5 border-t border-zinc-50 dark:border-[#2a2a2a] mt-5">
+                <div class="flex flex-col gap-3 pt-5 border-t border-zinc-50 dark:border-[#2a2a2a] mt-5">
                   
                   <!-- DESKTOP INVISIBLE TEMPLATE -->
                   <template v-for="spec in item.specializations" :key="spec.name">
-                    
+                    <div v-if="item.offers" class="mt-1.5 inline-flex items-center px-1 py-1 rounded text-[15px] leading-none font-medium bg-emerald-50 text-emerald-600 border border-emerald-100 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20 w-fit">{{ item.offers }} ✨</div>
                     <!-- DESKTOP V-IF USING YOUR EXACT VARIABLE (showOnlyVeg) -->
                     <div v-if="!showOnlyVeg || spec.isVeg" class="flex justify-between items-center">
-                      
                       <div class="flex items-center gap-2">
                         <!-- Dietary Indicator -->
                         <div class="w-4 h-4 flex items-center justify-center border rounded-sm p-[2px]" :class="spec.isVeg ? 'border-green-600' : 'border-red-600'">
@@ -271,11 +290,9 @@
                         </div>
                         <span class="text-sm font-medium text-zinc-600 dark:text-zinc-400">{{ spec.name || 'Regular' }}</span>
                       </div>
-                      
                       <span class="text-[#d4af37] font-bold text-lg">
                         {{ spec.price === 'Seasonal' ? 'Seasonal' : '₹' + spec.price }}
                       </span>
-                      
                     </div>
                     
                   </template>
@@ -287,6 +304,43 @@
           </div>
 
         </main>
+      </div>
+
+      <!-- Menu Disclaimers Footer -->
+      <div class="w-full mt-16 pt-8 pb-6 border-t border-zinc-200 dark:border-white/10">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+          <h4 class="text-[10px] font-bold tracking-widest uppercase text-zinc-400 dark:text-zinc-500 mb-5 text-center md:text-left">
+            Please Note
+          </h4>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12 text-[13px] leading-relaxed text-zinc-500 dark:text-zinc-400">
+            
+            <!-- Availability -->
+            <div class="flex items-start gap-2.5 group">
+              <svg class="w-5 h-5 mt-0.5 shrink-0 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <p><strong class="font-semibold text-[#d4af37]">Item Availability:</strong> Dishes are prepared fresh and subject to daily kitchen availability.</p>
+            </div>
+            
+            <!-- Pricing -->
+            <div class="flex items-start gap-2.5 group">
+              <svg class="w-5 h-5 mt-0.5 shrink-0 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <p><strong class="font-semibold text-[#d4af37]">Pricing & Seasonal Rates:</strong> Prices are subject to change based on market rates and seasonal availability without prior notice.</p>
+            </div>
+            
+            <!-- Visuals -->
+            <div class="flex items-start gap-2.5 group">
+              <svg class="w-5 h-5 mt-0.5 shrink-0 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+              <p><strong class="font-semibold text-[#d4af37]">Visual Representation:</strong> Images shown are for illustrative and presentation purposes only; actual dish presentation may vary.</p>
+            </div>
+            
+            <!-- Taxes -->
+            <div class="flex items-start gap-2.5 group">
+              <svg class="w-5 h-5 mt-0.5 shrink-0 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+              <p><strong class="font-semibold text-[#d4af37]">Taxes & Policies:</strong> Government taxes applicable as per standard regulations. Management reserves all rights of service.</p>
+            </div>
+
+          </div>
+        </div>
       </div>
 
     </div>
@@ -314,17 +368,17 @@ const showOnlyVeg = ref(false); // Veg filter state
 const outlets = [
   { 
     name: 'Multi Cuisine Restaurant', 
-    titleHtml: 'Multi<br>Cuisine',
+    titleHtml: 'Multi Cuisine',
     icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 17h18M12 4v2m-7 8a7 7 0 0114 0v3H5v-3z"/></svg>` 
   },
   { 
     name: 'Arabic Corner', 
-    titleHtml: 'Arabic<br/>Corner',
+    titleHtml: 'Arabic Corner',
     icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 3l-6 6m-9 9l-3 3m5-6l4-4a3 3 0 014.2 0v0a3 3 0 010 4.2l-4 4a3 3 0 01-4.2 0v0a3 3 0 010-4.2"/></svg>` 
   },
   { 
     name: 'Chill N Chai', 
-    titleHtml: 'Chill N<br/>Chai',
+    titleHtml: 'Chill N Chai',
     icon: `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 8H19C20.6569 8 22 9.34315 22 11C22 12.6569 20.6569 14 19 14H18M4 8H18V15C18 17.2091 16.2091 19 14 19H8C5.79086 19 4 17.2091 4 15V8ZM10 4V6M14 4V6M6 4V6"/></svg>` 
   }
 ];
@@ -461,7 +515,7 @@ watch([activeOutlet, showOnlyVeg], () => {
     if (!activeCategories.value.includes(activeCategory.value)) activeCategory.value = activeCategories.value[0]; 
     
     // Automatically open the first accordion of the new outlet
-    openAccordions.value = [activeCategories.value[0]]; 
+    // openAccordions.value = [activeCategories.value[0]];
   } else {
     activeCategory.value = '';
     openAccordions.value = [];
