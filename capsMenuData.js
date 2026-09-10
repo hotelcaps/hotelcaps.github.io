@@ -611,6 +611,90 @@ export const capsMenuData = ref([
   },
   {
     "id": 50,
+    "name": "Chicken Mughlai",
+    "category": "Chicken Delights",
+    "outlet": "Multi Cuisine Restaurant",
+    "info": "Rich, creamy, and mildly spiced chicken curry inspired by Mughal culinary traditions.",
+    "isBestseller": false,
+    "image": "/images/menu/items/chicken_mughlai.jpg",
+    "alt": "Chicken Mughlai rich creamy mildly spiced Mughal curry",
+    "specializations": [{ "name": "Regular", "price": 330, "isVeg": false }],
+    "offers": "",
+  },
+  {
+    "id": 51,
+    "name": "Chicken Patiala",
+    "category": "Chicken Delights",
+    "outlet": "Multi Cuisine Restaurant",
+    "info": "A rich, nutty, and flavorful Punjabi-style chicken curry topped with an omelet.",
+    "isBestseller": false,
+    "image": "/images/menu/items/chicken_patiala.jpg",
+    "alt": "Chicken Patiala rich nutty flavorful Punjabi style topped omelet",
+    "specializations": [{ "name": "Regular", "price": 330, "isVeg": false }],
+    "offers": "",
+  },
+  {
+    "id": 52,
+    "name": "Malabari Chicken Curry",
+    "category": "Chicken Delights",
+    "outlet": "Multi Cuisine Restaurant",
+    "info": "Authentic coastal Kerala chicken curry simmered in coconut milk and roasted spices.",
+    "isBestseller": false,
+    "image": "/images/menu/items/malabari_chicken_curry.jpg",
+    "alt": "Malabari Chicken Curry authentic coastal Kerala simmered coconut milk",
+    "specializations": [{ "name": "Regular", "price": 260, "isVeg": false }],
+    "offers": "",
+  },
+  {
+    "id": 53,
+    "name": "Nadan Chicken Curry",
+    "category": "Chicken Delights",
+    "outlet": "Multi Cuisine Restaurant",
+    "info": "Traditional Kerala-style homestyle chicken curry bursting with local rustic spices.",
+    "isBestseller": false,
+    "image": "/images/menu/items/nadan_chicken_curry.jpg",
+    "alt": "Nadan Chicken Curry traditional Kerala homestyle bursting rustic spices",
+    "specializations": [{ "name": "Regular", "price": 260, "isVeg": false }],
+    "offers": "",
+  },
+  {
+    "id": 54,
+    "name": "Pepper Chicken Curry",
+    "category": "Chicken Delights",
+    "outlet": "Multi Cuisine Restaurant",
+    "info": "A sharp, aromatic, and spicy chicken gravy heavily infused with black peppercorns.",
+    "isBestseller": false,
+    "image": "/images/menu/items/pepper_chicken_curry.jpg",
+    "alt": "Pepper Chicken Curry sharp aromatic spicy infused black peppercorns",
+    "specializations": [{ "name": "Regular", "price": 260, "isVeg": false }],
+    "offers": "",
+  },
+  {
+    "id": 55,
+    "name": "Pepper Chicken Masala",
+    "category": "Chicken Delights",
+    "outlet": "Multi Cuisine Restaurant",
+    "info": "A thick, flavor-packed masala coating tender chicken with crushed black pepper.",
+    "isBestseller": false,
+    "image": "/images/menu/items/pepper_chicken_masala.jpg",
+    "alt": "Pepper Chicken Masala thick flavor packed coating tender crushed",
+    "specializations": [{ "name": "Regular", "price": 270, "isVeg": false }],
+    "offers": "",
+  },
+  {
+    "id": 56,
+    "name": "Pepper Chicken Fry",
+    "category": "Chicken Delights",
+    "outlet": "Multi Cuisine Restaurant",
+    "info": "Intensely spiced and dry-roasted chicken chunks coated with freshly ground pepper.",
+    "isBestseller": false,
+    "image": "/images/menu/items/pepper_chicken_fry.jpg",
+    "alt": "Pepper Chicken Fry intensely spiced dry roasted chunks coated",
+    "specializations": [{ "name": "Regular", "price": 270, "isVeg": false }],
+    "offers": "",
+  },
+  {
+    "id": 57,
     "name": "Nadan Beef Curry",
     "category": "Beef Delights",
     "outlet": "Multi Cuisine Restaurant",
@@ -622,7 +706,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 51,
+    "id": 58,
     "name": "Beef Kondattam",
     "category": "Beef Delights",
     "outlet": "Multi Cuisine Restaurant",
@@ -634,7 +718,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 52,
+    "id": 59,
     "name": "Beef Masala",
     "category": "Beef Delights",
     "outlet": "Multi Cuisine Restaurant",
@@ -646,7 +730,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 53,
+    "id": 60,
     "name": "Beef Roast",
     "category": "Beef Delights",
     "outlet": "Multi Cuisine Restaurant",
@@ -658,7 +742,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 54,
+    "id": 61,
     "name": "Achayan Beef Curry",
     "category": "Beef Delights",
     "outlet": "Multi Cuisine Restaurant",
@@ -670,7 +754,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 55,
+    "id": 62,
     "name": "Beef Coconut Dry Fry",
     "category": "Beef Delights",
     "outlet": "Multi Cuisine Restaurant",
@@ -682,7 +766,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 56,
+    "id": 63,
     "name": "Beef Idimulaku Dry",
     "category": "Beef Delights",
     "outlet": "Multi Cuisine Restaurant",
@@ -694,7 +778,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 57,
+    "id": 64,
     "name": "Mutton Varutharachathu",
     "category": "Mutton Delights",
     "outlet": "Multi Cuisine Restaurant",
@@ -706,7 +790,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 58,
+    "id": 65,
     "name": "Mutton Pepper Fry",
     "category": "Mutton Delights",
     "outlet": "Multi Cuisine Restaurant",
@@ -718,7 +802,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 59,
+    "id": 66,
     "name": "Chettinadu Mutton Curry",
     "category": "Mutton Delights",
     "outlet": "Multi Cuisine Restaurant",
@@ -730,7 +814,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 60,
+    "id": 67,
     "name": "Meals",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -742,7 +826,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 61,
+    "id": 68,
     "name": "Mini Meals",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -754,7 +838,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 62,
+    "id": 69,
     "name": "Pothichoru Veg",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -766,7 +850,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 63,
+    "id": 70,
     "name": "Chatti Choru Veg",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -778,7 +862,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 64,
+    "id": 71,
     "name": "Chatti Choru Non Veg",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -790,7 +874,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 65,
+    "id": 72,
     "name": "Dum Chicken Biriyani",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -802,7 +886,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 66,
+    "id": 73,
     "name": "Beef Biriyani",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -814,7 +898,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 67,
+    "id": 74,
     "name": "Mutton Biriyani",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -826,7 +910,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 68,
+    "id": 75,
     "name": "Egg Biriyani",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -838,7 +922,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 69,
+    "id": 76,
     "name": "Vegetable Biriyani",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -850,7 +934,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 70,
+    "id": 77,
     "name": "Paneer Biriyani",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -862,7 +946,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 71,
+    "id": 78,
     "name": "Mushroom Biriyani",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -874,7 +958,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 72,
+    "id": 79,
     "name": "Ghee Rice",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -886,7 +970,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 73,
+    "id": 80,
     "name": "Biriyani Rice",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -898,7 +982,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 74,
+    "id": 81,
     "name": "Veg Fried Rice",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -910,7 +994,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 75,
+    "id": 82,
     "name": "Paneer Fried Rice",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -922,7 +1006,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 76,
+    "id": 83,
     "name": "Mushroom Fried Rice",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -934,7 +1018,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 77,
+    "id": 84,
     "name": "Egg Fried Rice",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -946,7 +1030,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 78,
+    "id": 85,
     "name": "Chicken Fried Rice",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -958,7 +1042,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 79,
+    "id": 86,
     "name": "Mixed Fried Rice",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -970,7 +1054,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 80,
+    "id": 87,
     "name": "Schezwan Veg Fried Rice",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -982,7 +1066,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 81,
+    "id": 88,
     "name": "Schezwan Paneer Fried Rice",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -994,7 +1078,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 82,
+    "id": 89,
     "name": "Schezwan Mushroom Fried Rice",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -1006,7 +1090,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 83,
+    "id": 90,
     "name": "Schezwan Egg Fried Rice",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -1018,7 +1102,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 84,
+    "id": 91,
     "name": "Schezwan Chicken Fried Rice",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -1030,7 +1114,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 85,
+    "id": 92,
     "name": "Schezwan Mixed Fried Rice",
     "category": "Rice & Biriyani",
     "outlet": "Multi Cuisine Restaurant",
@@ -1042,7 +1126,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 86,
+    "id": 93,
     "name": "Veg Noodles",
     "category": "Noodles",
     "outlet": "Multi Cuisine Restaurant",
@@ -1054,7 +1138,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 87,
+    "id": 94,
     "name": "Egg Noodles",
     "category": "Noodles",
     "outlet": "Multi Cuisine Restaurant",
@@ -1066,7 +1150,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 88,
+    "id": 95,
     "name": "Chicken Noodles",
     "category": "Noodles",
     "outlet": "Multi Cuisine Restaurant",
@@ -1078,7 +1162,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 89,
+    "id": 96,
     "name": "Mixed Noodles",
     "category": "Noodles",
     "outlet": "Multi Cuisine Restaurant",
@@ -1090,7 +1174,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 90,
+    "id": 97,
     "name": "Schezwan Veg Noodles",
     "category": "Noodles",
     "outlet": "Multi Cuisine Restaurant",
@@ -1102,7 +1186,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 91,
+    "id": 98,
     "name": "Schezwan Egg Noodles",
     "category": "Noodles",
     "outlet": "Multi Cuisine Restaurant",
@@ -1114,7 +1198,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 92,
+    "id": 99,
     "name": "Schezwan Chicken Noodles",
     "category": "Noodles",
     "outlet": "Multi Cuisine Restaurant",
@@ -1126,7 +1210,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 93,
+    "id": 100,
     "name": "Schezwan Mixed Noodles",
     "category": "Noodles",
     "outlet": "Multi Cuisine Restaurant",
@@ -1138,7 +1222,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 94,
+    "id": 101,
     "name": "Paal Kappa Beef",
     "category": "Traditional Highlights",
     "outlet": "Multi Cuisine Restaurant",
@@ -1150,7 +1234,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 95,
+    "id": 102,
     "name": "Paal Kappa Chicken",
     "category": "Traditional Highlights",
     "outlet": "Multi Cuisine Restaurant",
@@ -1162,7 +1246,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 96,
+    "id": 103,
     "name": "Kizhi Porotta Chicken",
     "category": "Traditional Highlights",
     "outlet": "Multi Cuisine Restaurant",
@@ -1174,7 +1258,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 97,
+    "id": 104,
     "name": "Kizhi Porotta Beef",
     "category": "Traditional Highlights",
     "outlet": "Multi Cuisine Restaurant",
@@ -1186,7 +1270,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 98,
+    "id": 105,
     "name": "Kizhi Porotta Egg",
     "category": "Traditional Highlights",
     "outlet": "Multi Cuisine Restaurant",
@@ -1198,7 +1282,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 99,
+    "id": 106,
     "name": "Pothi Porotta Chicken",
     "category": "Traditional Highlights",
     "outlet": "Multi Cuisine Restaurant",
@@ -1210,7 +1294,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 100,
+    "id": 107,
     "name": "Pothi Porotta Beef",
     "category": "Traditional Highlights",
     "outlet": "Multi Cuisine Restaurant",
@@ -1222,7 +1306,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 101,
+    "id": 108,
     "name": "Pothi Porotta Egg",
     "category": "Traditional Highlights",
     "outlet": "Multi Cuisine Restaurant",
@@ -1234,7 +1318,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 102,
+    "id": 109,
     "name": "Kothu Porotta Chicken",
     "category": "Traditional Highlights",
     "outlet": "Multi Cuisine Restaurant",
@@ -1246,7 +1330,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 103,
+    "id": 110,
     "name": "Kothu Porotta Beef",
     "category": "Traditional Highlights",
     "outlet": "Multi Cuisine Restaurant",
@@ -1258,7 +1342,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 104,
+    "id": 111,
     "name": "Kothu Porotta Egg",
     "category": "Traditional Highlights",
     "outlet": "Multi Cuisine Restaurant",
@@ -1270,7 +1354,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 105,
+    "id": 112,
     "name": "Alfaham",
     "category": "Alfaham",
     "outlet": "Arabic Corner",
@@ -1286,7 +1370,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 106,
+    "id": 113,
     "name": "Peri Peri Alfaham",
     "category": "Alfaham",
     "outlet": "Arabic Corner",
@@ -1302,7 +1386,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 107,
+    "id": 114,
     "name": "BBQ Alfaham",
     "category": "Alfaham",
     "outlet": "Arabic Corner",
@@ -1318,7 +1402,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 108,
+    "id": 115,
     "name": "Pepper Alfaham",
     "category": "Alfaham",
     "outlet": "Arabic Corner",
@@ -1334,7 +1418,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 109,
+    "id": 116,
     "name": "Kanthari Alfaham",
     "category": "Alfaham",
     "outlet": "Arabic Corner",
@@ -1350,7 +1434,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 110,
+    "id": 117,
     "name": "Honey Alfaham",
     "category": "Alfaham",
     "outlet": "Arabic Corner",
@@ -1366,7 +1450,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 111,
+    "id": 118,
     "name": "Honey Chilli Alfaham",
     "category": "Alfaham",
     "outlet": "Arabic Corner",
@@ -1382,7 +1466,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 112,
+    "id": 119,
     "name": "Caps Special Alfaham Mandi",
     "category": "Alfaham Mandi Specials",
     "outlet": "Arabic Corner",
@@ -1398,7 +1482,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 113,
+    "id": 120,
     "name": "Alfaham Mandi",
     "category": "Alfaham Mandi",
     "outlet": "Arabic Corner",
@@ -1414,7 +1498,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 114,
+    "id": 121,
     "name": "Peri Peri Alfaham Mandi",
     "category": "Alfaham Mandi",
     "outlet": "Arabic Corner",
@@ -1430,7 +1514,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 115,
+    "id": 122,
     "name": "BBQ Alfaham Mandi",
     "category": "Alfaham Mandi",
     "outlet": "Arabic Corner",
@@ -1446,7 +1530,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 116,
+    "id": 123,
     "name": "Pepper Alfaham Mandi",
     "category": "Alfaham Mandi",
     "outlet": "Arabic Corner",
@@ -1462,7 +1546,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 117,
+    "id": 124,
     "name": "Kanthari Alfaham Mandi",
     "category": "Alfaham Mandi",
     "outlet": "Arabic Corner",
@@ -1478,7 +1562,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 118,
+    "id": 125,
     "name": "Honey Alfaham Mandi",
     "category": "Alfaham Mandi",
     "outlet": "Arabic Corner",
@@ -1494,7 +1578,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 119,
+    "id": 126,
     "name": "Honey Chilli Alfaham Mandi",
     "category": "Alfaham Mandi",
     "outlet": "Arabic Corner",
@@ -1510,7 +1594,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 120,
+    "id": 127,
     "name": "Mandi Rice",
     "category": "Alfaham Mandi",
     "outlet": "Arabic Corner",
@@ -1522,7 +1606,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 121,
+    "id": 128,
     "name": "Shawarma Kuboos Roll",
     "category": "Kuboos Shawarma",
     "outlet": "Arabic Corner",
@@ -1534,7 +1618,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 122,
+    "id": 129,
     "name": "Shawarma Kuboos Plate",
     "category": "Kuboos Shawarma",
     "outlet": "Arabic Corner",
@@ -1546,7 +1630,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 123,
+    "id": 130,
     "name": "Shawarma Kuboos Cheese Roll",
     "category": "Kuboos Shawarma",
     "outlet": "Arabic Corner",
@@ -1558,7 +1642,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 124,
+    "id": 131,
     "name": "Shawarma Kuboos Cheese Plate",
     "category": "Kuboos Shawarma",
     "outlet": "Arabic Corner",
@@ -1570,7 +1654,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 125,
+    "id": 132,
     "name": "Shawarma Kuboos Peri Peri Roll",
     "category": "Kuboos Shawarma",
     "outlet": "Arabic Corner",
@@ -1582,7 +1666,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 126,
+    "id": 133,
     "name": "Shawarma Kuboos Peri Peri Plate",
     "category": "Kuboos Shawarma",
     "outlet": "Arabic Corner",
@@ -1594,7 +1678,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 127,
+    "id": 134,
     "name": "Shawarma Kuboos Full Meat Roll",
     "category": "Kuboos Shawarma",
     "outlet": "Arabic Corner",
@@ -1606,7 +1690,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 128,
+    "id": 135,
     "name": "Shawarma Kuboos Full Meat Plate",
     "category": "Kuboos Shawarma",
     "outlet": "Arabic Corner",
@@ -1618,7 +1702,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 129,
+    "id": 136,
     "name": "Shawarma Kuboos Honey Roll",
     "category": "Kuboos Shawarma",
     "outlet": "Arabic Corner",
@@ -1630,7 +1714,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 130,
+    "id": 137,
     "name": "Shawarma Rumali Rotti Roll",
     "category": "Rumali Shawarma",
     "outlet": "Arabic Corner",
@@ -1642,7 +1726,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 131,
+    "id": 138,
     "name": "Shawarma Rumali Rotti Plate",
     "category": "Rumali Shawarma",
     "outlet": "Arabic Corner",
@@ -1654,7 +1738,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 132,
+    "id": 139,
     "name": "Shawarma Rumali Rotti Cheese Roll",
     "category": "Rumali Shawarma",
     "outlet": "Arabic Corner",
@@ -1666,7 +1750,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 133,
+    "id": 140,
     "name": "Shawarma Rumali Rotti Cheese Plate",
     "category": "Rumali Shawarma",
     "outlet": "Arabic Corner",
@@ -1678,7 +1762,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 134,
+    "id": 141,
     "name": "Shawarma Rumali Rotti Peri Peri Roll",
     "category": "Rumali Shawarma",
     "outlet": "Arabic Corner",
@@ -1690,7 +1774,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 135,
+    "id": 142,
     "name": "Shawarma Peri Peri Rumali Rotti Plate",
     "category": "Rumali Shawarma",
     "outlet": "Arabic Corner",
@@ -1702,7 +1786,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 136,
+    "id": 143,
     "name": "Shawarma Rumali Rotti Full Meat Roll",
     "category": "Rumali Shawarma",
     "outlet": "Arabic Corner",
@@ -1714,7 +1798,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 137,
+    "id": 144,
     "name": "Shawarma Rumali Rotti Full Meat",
     "category": "Rumali Shawarma",
     "outlet": "Arabic Corner",
@@ -1726,7 +1810,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 138,
+    "id": 145,
     "name": "Shawarma Rumali Rotti Honey Roll",
     "category": "Rumali Shawarma",
     "outlet": "Arabic Corner",
@@ -1738,7 +1822,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 139,
+    "id": 146,
     "name": "Shawarma Rumali Rotti Honey Plate",
     "category": "Rumali Shawarma",
     "outlet": "Arabic Corner",
@@ -1750,7 +1834,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 140,
+    "id": 147,
     "name": "Porotta Shawarma Roll",
     "category": "Special Shawarma",
     "outlet": "Arabic Corner",
@@ -1762,7 +1846,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 141,
+    "id": 148,
     "name": "Shawarma Pollichathu",
     "category": "Special Shawarma",
     "outlet": "Arabic Corner",
@@ -1774,7 +1858,7 @@ export const capsMenuData = ref([
     "offers": "Buy 2 Get 1 Free",
   },
   {
-    "id": 142,
+    "id": 149,
     "name": "Parippu Vada",
     "category": "Snacks",
     "outlet": "Chill N Chai",
@@ -1786,7 +1870,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 143,
+    "id": 150,
     "name": "Uzhunnu Vada",
     "category": "Snacks",
     "outlet": "Chill N Chai",
@@ -1798,7 +1882,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 144,
+    "id": 151,
     "name": "Ullivada",
     "category": "Snacks",
     "outlet": "Chill N Chai",
@@ -1810,7 +1894,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 145,
+    "id": 152,
     "name": "Masala Bonda",
     "category": "Snacks",
     "outlet": "Chill N Chai",
@@ -1822,7 +1906,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 146,
+    "id": 153,
     "name": "Egg Masala Bonda",
     "category": "Snacks",
     "outlet": "Chill N Chai",
@@ -1834,7 +1918,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 147,
+    "id": 154,
     "name": "Onion Pakoda",
     "category": "Snacks",
     "outlet": "Chill N Chai",
@@ -1846,7 +1930,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 148,
+    "id": 155,
     "name": "Vazhakka Bajji",
     "category": "Snacks",
     "outlet": "Chill N Chai",
@@ -1858,7 +1942,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 149,
+    "id": 156,
     "name": "Veg Puffs",
     "category": "Snacks",
     "outlet": "Chill N Chai",
@@ -1870,7 +1954,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 150,
+    "id": 157,
     "name": "Egg Puffs",
     "category": "Snacks",
     "outlet": "Chill N Chai",
@@ -1882,7 +1966,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 151,
+    "id": 158,
     "name": "Veg Samosa",
     "category": "Snacks",
     "outlet": "Chill N Chai",
@@ -1894,7 +1978,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 152,
+    "id": 159,
     "name": "Veg Cutlet",
     "category": "Snacks",
     "outlet": "Chill N Chai",
@@ -1906,7 +1990,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 153,
+    "id": 160,
     "name": "Chicken Cutlet",
     "category": "Snacks",
     "outlet": "Chill N Chai",
@@ -1918,7 +2002,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 154,
+    "id": 161,
     "name": "Chicken Roll",
     "category": "Snacks",
     "outlet": "Chill N Chai",
@@ -1930,7 +2014,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 155,
+    "id": 162,
     "name": "Elayada",
     "category": "Snacks",
     "outlet": "Chill N Chai",
@@ -1942,11 +2026,11 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 156,
+    "id": 163,
     "name": "Kozhukatta Set",
     "category": "Snacks",
     "outlet": "Chill N Chai",
-    "info": "Steamed, sweet rice flour dumplings encasing a rich coconut-jaggery center.",
+    "info": "Steamed rice flour dumplings encasing a rich and fresh masala center.",
     "isBestseller": false,
     "image": "/images/menu/items/kozhukatta_set.jpg",
     "alt": "Kozhukatta Set steamed sweet rice flour dumplings encasing rich",
@@ -1954,7 +2038,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 157,
+    "id": 164,
     "name": "Pazham Pori",
     "category": "Snacks",
     "outlet": "Chill N Chai",
@@ -1966,7 +2050,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 158,
+    "id": 165,
     "name": "Apple",
     "category": "Fruit juices",
     "outlet": "Chill N Chai",
@@ -1978,7 +2062,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 159,
+    "id": 166,
     "name": "Anar",
     "category": "Fruit juices",
     "outlet": "Chill N Chai",
@@ -1990,7 +2074,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 160,
+    "id": 167,
     "name": "Grapes",
     "category": "Fruit juices",
     "outlet": "Chill N Chai",
@@ -2002,7 +2086,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 161,
+    "id": 168,
     "name": "Pineapple",
     "category": "Fruit juices",
     "outlet": "Chill N Chai",
@@ -2014,7 +2098,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 162,
+    "id": 169,
     "name": "Watermelon",
     "category": "Fruit juices",
     "outlet": "Chill N Chai",
@@ -2026,7 +2110,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 163,
+    "id": 170,
     "name": "Musambi",
     "category": "Fruit juices",
     "outlet": "Chill N Chai",
@@ -2038,7 +2122,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 164,
+    "id": 171,
     "name": "Orange",
     "category": "Fruit juices",
     "outlet": "Chill N Chai",
@@ -2050,7 +2134,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 165,
+    "id": 172,
     "name": "Chikku",
     "category": "Fruit juices",
     "outlet": "Chill N Chai",
@@ -2062,7 +2146,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 166,
+    "id": 173,
     "name": "Mango",
     "category": "Fruit juices",
     "outlet": "Chill N Chai",
@@ -2074,7 +2158,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 167,
+    "id": 174,
     "name": "Chikku",
     "category": "Shakes",
     "outlet": "Chill N Chai",
@@ -2086,7 +2170,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 168,
+    "id": 175,
     "name": "Guava",
     "category": "Shakes",
     "outlet": "Chill N Chai",
@@ -2098,7 +2182,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 169,
+    "id": 176,
     "name": "Papaya",
     "category": "Shakes",
     "outlet": "Chill N Chai",
@@ -2110,7 +2194,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 170,
+    "id": 177,
     "name": "Mango",
     "category": "Shakes",
     "outlet": "Chill N Chai",
@@ -2122,7 +2206,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 171,
+    "id": 178,
     "name": "Dates",
     "category": "Shakes",
     "outlet": "Chill N Chai",
@@ -2134,7 +2218,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 172,
+    "id": 179,
     "name": "Tender Coconut",
     "category": "Shakes",
     "outlet": "Chill N Chai",
@@ -2146,7 +2230,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 173,
+    "id": 180,
     "name": "Chocolate",
     "category": "Shakes",
     "outlet": "Chill N Chai",
@@ -2158,7 +2242,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 174,
+    "id": 181,
     "name": "Strawberry",
     "category": "Shakes",
     "outlet": "Chill N Chai",
@@ -2170,7 +2254,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 175,
+    "id": 182,
     "name": "Oreo",
     "category": "Shakes",
     "outlet": "Chill N Chai",
@@ -2182,7 +2266,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 176,
+    "id": 183,
     "name": "Kitkat",
     "category": "Shakes",
     "outlet": "Chill N Chai",
@@ -2194,7 +2278,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 177,
+    "id": 184,
     "name": "Badam",
     "category": "Shakes",
     "outlet": "Chill N Chai",
@@ -2206,7 +2290,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 178,
+    "id": 185,
     "name": "Rose Milk",
     "category": "Shakes",
     "outlet": "Chill N Chai",
@@ -2218,7 +2302,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 179,
+    "id": 186,
     "name": "Avocado",
     "category": "Shakes",
     "outlet": "Chill N Chai",
@@ -2230,7 +2314,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 180,
+    "id": 187,
     "name": "Mud Coffee",
     "category": "Shakes",
     "outlet": "Chill N Chai",
@@ -2242,7 +2326,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 181,
+    "id": 188,
     "name": "Roohafza",
     "category": "Shakes",
     "outlet": "Chill N Chai",
@@ -2254,7 +2338,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 182,
+    "id": 189,
     "name": "Fig",
     "category": "Shakes",
     "outlet": "Chill N Chai",
@@ -2266,7 +2350,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 183,
+    "id": 190,
     "name": "Jackfruit",
     "category": "Shakes",
     "outlet": "Chill N Chai",
@@ -2278,7 +2362,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 184,
+    "id": 191,
     "name": "Custard Apple",
     "category": "Shakes",
     "outlet": "Chill N Chai",
@@ -2290,7 +2374,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 185,
+    "id": 192,
     "name": "Kannur Cocktail",
     "category": "Shakes",
     "outlet": "Chill N Chai",
@@ -2302,7 +2386,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 186,
+    "id": 193,
     "name": "Normal",
     "category": "Avil milk",
     "outlet": "Chill N Chai",
@@ -2314,7 +2398,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 187,
+    "id": 194,
     "name": "Special",
     "category": "Avil milk",
     "outlet": "Chill N Chai",
@@ -2326,7 +2410,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 188,
+    "id": 195,
     "name": "Tender Coconut",
     "category": "Avil milk",
     "outlet": "Chill N Chai",
@@ -2338,7 +2422,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 189,
+    "id": 196,
     "name": "Cold Coffee",
     "category": "Cold beverages",
     "outlet": "Chill N Chai",
@@ -2350,7 +2434,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 190,
+    "id": 197,
     "name": "Cold Boost",
     "category": "Cold beverages",
     "outlet": "Chill N Chai",
@@ -2362,7 +2446,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 191,
+    "id": 198,
     "name": "Cold Horlicks",
     "category": "Cold beverages",
     "outlet": "Chill N Chai",
@@ -2374,7 +2458,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 192,
+    "id": 199,
     "name": "Tea",
     "category": "Hot beverages",
     "outlet": "Chill N Chai",
@@ -2386,7 +2470,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 193,
+    "id": 200,
     "name": "Coffee",
     "category": "Hot beverages",
     "outlet": "Chill N Chai",
@@ -2398,7 +2482,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 194,
+    "id": 201,
     "name": "Boost",
     "category": "Hot beverages",
     "outlet": "Chill N Chai",
@@ -2410,7 +2494,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 195,
+    "id": 202,
     "name": "Horlicks",
     "category": "Hot beverages",
     "outlet": "Chill N Chai",
@@ -2422,7 +2506,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 196,
+    "id": 203,
     "name": "Green Tea",
     "category": "Hot beverages",
     "outlet": "Chill N Chai",
@@ -2434,7 +2518,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 197,
+    "id": 204,
     "name": "Lemon Tea",
     "category": "Hot beverages",
     "outlet": "Chill N Chai",
@@ -2446,7 +2530,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 198,
+    "id": 205,
     "name": "Black Coffee",
     "category": "Hot beverages",
     "outlet": "Chill N Chai",
@@ -2458,7 +2542,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 199,
+    "id": 206,
     "name": "Black Tea",
     "category": "Hot beverages",
     "outlet": "Chill N Chai",
@@ -2470,7 +2554,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 200,
+    "id": 207,
     "name": "Ginger Tea",
     "category": "Hot beverages",
     "outlet": "Chill N Chai",
@@ -2482,7 +2566,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 201,
+    "id": 208,
     "name": "Mint Tea",
     "category": "Hot beverages",
     "outlet": "Chill N Chai",
@@ -2494,7 +2578,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 202,
+    "id": 209,
     "name": "Ginger Black Tea",
     "category": "Hot beverages",
     "outlet": "Chill N Chai",
@@ -2506,7 +2590,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 203,
+    "id": 210,
     "name": "Green Apple",
     "category": "Mojito",
     "outlet": "Chill N Chai",
@@ -2518,7 +2602,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 204,
+    "id": 211,
     "name": "Blue Curacao",
     "category": "Mojito",
     "outlet": "Chill N Chai",
@@ -2530,7 +2614,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 205,
+    "id": 212,
     "name": "Passion Fruit",
     "category": "Mojito",
     "outlet": "Chill N Chai",
@@ -2542,7 +2626,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 206,
+    "id": 213,
     "name": "Blueberry",
     "category": "Mojito",
     "outlet": "Chill N Chai",
@@ -2554,7 +2638,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 207,
+    "id": 214,
     "name": "Strawberry",
     "category": "Mojito",
     "outlet": "Chill N Chai",
@@ -2566,7 +2650,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 208,
+    "id": 215,
     "name": "Pink Panther",
     "category": "Mocktails",
     "outlet": "Chill N Chai",
@@ -2578,7 +2662,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 209,
+    "id": 216,
     "name": "Golden Taste",
     "category": "Mocktails",
     "outlet": "Chill N Chai",
@@ -2590,7 +2674,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 210,
+    "id": 217,
     "name": "Golden Face",
     "category": "Mocktails",
     "outlet": "Chill N Chai",
@@ -2602,7 +2686,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 211,
+    "id": 218,
     "name": "Fresh Lime",
     "category": "Limes",
     "outlet": "Chill N Chai",
@@ -2614,7 +2698,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 212,
+    "id": 219,
     "name": "Mint Lime",
     "category": "Limes",
     "outlet": "Chill N Chai",
@@ -2626,7 +2710,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 213,
+    "id": 220,
     "name": "Ginger Lime",
     "category": "Limes",
     "outlet": "Chill N Chai",
@@ -2638,7 +2722,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 214,
+    "id": 221,
     "name": "Grape Lime",
     "category": "Limes",
     "outlet": "Chill N Chai",
@@ -2650,7 +2734,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 215,
+    "id": 222,
     "name": "Pineapple Lime",
     "category": "Limes",
     "outlet": "Chill N Chai",
@@ -2662,7 +2746,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 216,
+    "id": 223,
     "name": "Dark Lime",
     "category": "Limes",
     "outlet": "Chill N Chai",
@@ -2674,7 +2758,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 217,
+    "id": 224,
     "name": "Magic Lime",
     "category": "Limes",
     "outlet": "Chill N Chai",
@@ -2686,7 +2770,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 218,
+    "id": 225,
     "name": "Orange Lime",
     "category": "Limes",
     "outlet": "Chill N Chai",
@@ -2698,7 +2782,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 219,
+    "id": 226,
     "name": "Lime Soda",
     "category": "Limes",
     "outlet": "Chill N Chai",
@@ -2710,7 +2794,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 220,
+    "id": 227,
     "name": "Fruit Salad",
     "category": "Desserts",
     "outlet": "Chill N Chai",
@@ -2722,7 +2806,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 221,
+    "id": 228,
     "name": "Fruit Salad with Ice Cream",
     "category": "Desserts",
     "outlet": "Chill N Chai",
@@ -2734,7 +2818,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 222,
+    "id": 229,
     "name": "Butterscotch Scoop",
     "category": "Desserts",
     "outlet": "Chill N Chai",
@@ -2746,7 +2830,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 223,
+    "id": 230,
     "name": "Chocolate Scoop",
     "category": "Desserts",
     "outlet": "Chill N Chai",
@@ -2758,7 +2842,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 224,
+    "id": 231,
     "name": "Pista Scoop",
     "category": "Desserts",
     "outlet": "Chill N Chai",
@@ -2770,7 +2854,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 225,
+    "id": 232,
     "name": "Vanilla Scoop",
     "category": "Desserts",
     "outlet": "Chill N Chai",
@@ -2782,7 +2866,7 @@ export const capsMenuData = ref([
     "offers": "",
   },
   {
-    "id": 226,
+    "id": 233,
     "name": "Strawberry Scoop",
     "category": "Desserts",
     "outlet": "Chill N Chai",

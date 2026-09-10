@@ -2,8 +2,13 @@
   <main class="menu-page-wrapper min-h-screen bg-[#f9f7f3] dark:bg-[#1c1c1c]">
 
     <!-- Hero Injection -->
-    <section class="w-full h-auto aspect-[6/5] xl:aspect-[2/1] relative flex items-center justify-center overflow-hidden">
-      <img :src="heroImages" alt="CAPS Digital Menu" class="absolute inset-0 w-full h-full object-cover" />
+    <section 
+      class="w-full relative flex items-center justify-center overflow-hidden bg-cover bg-no-repeat bg-center aspect-[6/5] md:aspect-[4/3] lg:aspect-[16/9] xl:aspect-auto xl:h-[55vh] xl:bg-[position:center_calc(100%+50px)]"
+      :style="{ backgroundImage: `url(${heroImages})` }"
+      aria-label="CAPS Digital Menu"
+    >
+    <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-green-950/20 to-black/70 z-5"></div>
+      <!-- Content (if any) goes here -->
     </section>
 
     <!-- THE MENU COMPONENT -->

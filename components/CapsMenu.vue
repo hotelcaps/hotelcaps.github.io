@@ -1,6 +1,6 @@
 <template>
   
-  <div :class="['w-full font-sans transition-colors duration-500', isDark ? 'dark bg-[#141414]' : 'bg-[#f9f7f3]']">
+  <div :class="['w-full font-sans transition-colors duration-500', isDark ? 'dark bg-[#111111]' : 'bg-[#f9f7f3]']">
 
     <!-- Top Padding added to pull toggles away from the edge -->
     <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-6 lg:pt-12 relative">
@@ -13,12 +13,12 @@
         <!-- Veg / Non-Veg Filter -->
         <div 
           @click="showOnlyVeg = !showOnlyVeg"
-          class="flex items-center bg-white dark:bg-[#2a2a2a] border border-zinc-200 dark:border-[#2a2a2a] p-1 rounded-full cursor-pointer shadow-sm hover:shadow-md transition-all duration-300 select-none"
+          class="flex items-center bg-[#2a2a2a] border border-[#2a2a2a] p-1 rounded-full cursor-pointer shadow-sm hover:shadow-md transition-all duration-300 select-none"
         >
-          <div :class="['px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase transition-colors flex items-center gap-1.5', !showOnlyVeg ? 'bg-red-600 text-white shadow-inner' : 'text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300']">
+          <div :class="['px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase transition-colors flex items-center gap-1.5', !showOnlyVeg ? 'bg-red-600 text-white shadow-inner' : 'text-zinc-400 hover:text-zinc-300']">
             <div class="w-2 h-2 rounded-full border border-current flex items-center justify-center p-[1px]"><div class="w-full h-full rounded-full bg-current"></div></div> All
           </div>
-          <div :class="['px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase transition-colors flex items-center gap-1.5', showOnlyVeg ? 'bg-green-600 text-white shadow-inner' : 'text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300']">
+          <div :class="['px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase transition-colors flex items-center gap-1.5', showOnlyVeg ? 'bg-green-600 text-white shadow-inner' : 'text-zinc-400 hover:text-zinc-300']">
             <div class="w-2 h-2 rounded-full border border-current flex items-center justify-center p-[1px]"><div class="w-full h-full rounded-full bg-current"></div></div> Veg
           </div>
         </div>
@@ -26,12 +26,12 @@
         <!-- Light / Dark Mode -->
         <div 
           @click="isDark = !isDark"
-          class="flex items-center bg-white dark:bg-[#2a2a2a] border border-zinc-200 dark:border-[#2a2a2a] p-1 rounded-full cursor-pointer shadow-sm hover:shadow-md transition-all duration-300 select-none"
+          class="flex items-center bg-[#2a2a2a] border border-[#2a2a2a] p-1 rounded-full cursor-pointer shadow-sm hover:shadow-md transition-all duration-300 select-none"
         >
-          <div :class="['px-5 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase transition-colors', !isDark ? 'bg-[#d4af37] text-white shadow-inner' : 'text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300']">
+          <div :class="['px-5 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase transition-colors', !isDark ? 'bg-[#d4af37] text-white shadow-inner' : 'text-zinc-400 hover:text-zinc-300']">
             Light
           </div>
-          <div :class="['px-5 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase transition-colors', isDark ? 'bg-[#d4af37] text-black shadow-inner' : 'text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300']">
+          <div :class="['px-5 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase transition-colors', isDark ? 'bg-[#d4af37] text-black shadow-inner' : 'text-zinc-400 hover:text-zinc-300']">
             Dark
           </div>
         </div>
@@ -44,14 +44,14 @@
       <div class="block lg:hidden">
 
         <!-- Outlet Tabs (Mobile - Grid Layout, No scroll) -->
-        <div class="pt-3 pb-5 mb-5 grid grid-cols-3 gap-2 transition-colors duration-500 border-b border-zinc-200 dark:border-[#2a2a2a]">
+        <div class="pt-3 pb-5 mb-5 grid grid-cols-3 gap-2 transition-colors duration-500 border-b border-[#2a2a2a]">
           <button 
             v-for="outlet in outlets" :key="outlet.name" @click="activeOutlet = outlet.name"
             :class="[
               'flex flex-col items-center justify-center gap-1.5 p-2 rounded-xl transition-all duration-300 border',
               activeOutlet === outlet.name 
-                ? 'bg-zinc-900 text-white border-zinc-900 dark:bg-[#d4af37] dark:text-[#0a0a0a] dark:border-[#d4af37] shadow-md' 
-                : 'bg-white text-zinc-600 border-zinc-200 dark:bg-[#2a2a2a] dark:text-zinc-400 dark:border-[#2a2a2a] shadow-sm dark:shadow-none'
+                ? 'bg-[#d4af37] text-[#0a0a0a] border-[#d4af37] shadow-md' 
+                : 'bg-[#2a2a2a] text-zinc-400 border-[#2a2a2a] shadow-none'
             ]"
           >
             <span v-html="outlet.icon" class="w-10 h-10"></span>
@@ -65,71 +65,194 @@
           @touchend="handleTouchEnd" 
           @mousedown="handleTouchStart" 
           @mouseup="handleTouchEnd"
-          class="mb-8 relative w-full h-auto bg-white dark:bg-[#2a2a2a] rounded-3xl overflow-hidden shadow-md border border-zinc-100 dark:border-[#2a2a2a] transition-colors duration-500 flex flex-col cursor-grab active:cursor-grabbing select-none"
+          class="mb-8 relative w-full h-auto bg-[#2a2a2a] rounded-3xl overflow-hidden shadow-md border border-[#2a2a2a] transition-colors duration-500 flex flex-col cursor-grab active:cursor-grabbing select-none"
         >
-          <div class="absolute top-2 right-2 z-20 flex items-center gap-2 bg-white/60 dark:bg-[#141414]/50 backdrop-blur-md px-4 py-2 rounded-full border border-zinc-200 dark:border-[#2a2a2a] shadow-sm">
+          <div class="absolute top-2 right-2 z-20 flex items-center gap-2 bg-[#141414]/50 backdrop-blur-md px-4 py-2 rounded-full border border-[#2a2a2a] shadow-sm">
             <svg class="w-3 h-3 text-[#d4af37]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <span class="text-[.6rem] font-bold tracking-widest uppercase text-zinc-900 dark:text-white">Today's Special</span>
+            <span class="text-[.6rem] font-bold tracking-widest uppercase text-white">Today's Special</span>
           </div>
           
-          <div v-if="outletSpecials.length === 0" class="p-12 text-center text-zinc-500 dark:text-zinc-400 text-sm font-medium tracking-wide">
+          <div v-if="outletSpecials.length === 0" class="p-12 text-center text-zinc-400 text-sm font-medium tracking-wide">
             Specials updating soon...
           </div>
                     
           <transition-group v-else name="fade" tag="div" class="grid w-full">
-            <div v-for="(special, index) in outletSpecials" :key="special.title" v-show="index === currentSpecialIndex" class="col-start-1 row-start-1 w-full flex flex-col">
-              
-              <!-- Image locked to aspect ratio so it doesn't collapse -->
-              <div class="w-full aspect-[4/3] relative bg-white border-b border-zinc-100 dark:border-zinc-800">
-                <img 
-                  :src="special.images?.[0] || '/images/menu/placeholder.jpg'" 
-                  @error="$event.target.src = '/images/menu/placeholder.jpg'"
-                  :alt="special.title" 
-                  class="w-full h-full object-contain p-2" 
+            <div 
+              v-for="(special, index) in outletSpecials" 
+              :key="special.title" 
+              v-show="index === currentSpecialIndex" 
+              class="col-start-1 row-start-1 w-full flex items-center justify-between p-5 pb-8 pt-12 sm:p-6 sm:py-10 sm:pt-16 rounded-[20px] relative overflow-hidden shadow-lg transition-colors duration-500"
+              :class="[
+                  special.category === 'Chill N Chai' ? 'bg-gradient-to-br from-[#5C4033] to-[#2A1C14]' :
+                  special.category === 'Arabic Corner' ? 'bg-gradient-to-br from-[#3E2723] to-[#1B100B]' :
+                  special.category === 'Multi-Cuisine Restaurant' ? 'bg-gradient-to-br from-[#1B3320] to-[#0A1A0F]' :
+                  'bg-gradient-to-br from-[#1c1c1c] to-[#252525]' // Default case (if needed)
+                ]"
+            >
+              <!-- Background SVG Decoration -->
+              <svg
+                class="absolute -bottom-6 right-16 w-32 h-32 sm:w-40 sm:h-40
+                      text-white opacity-10 pointer-events-none"
+                viewBox="0 0 100 100"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+
+                <!-- Chill N Chai : Tea Cup -->
+                <path
+                  v-if="special.category === 'Chill N Chai'"
+                  d="
+                    M28 43 H67 V61
+                    C67 72 59 78 48 78
+                    C37 78 28 72 28 61 Z
+                    M67 48 H74
+                    C82 48 85 53 85 59
+                    C85 66 80 70 72 70
+                    H66
+                    M22 84 H76
+                    M38 34
+                    C32 28 40 24 36 18
+                    M50 34
+                    C44 28 52 24 48 18
+                    M62 34
+                    C56 28 64 24 60 18
+                  "
                 />
+
+                <!-- Arabic Corner : Serving Cloche -->
+                <path
+                  v-else-if="special.category === 'Arabic Corner'"
+                  d="
+                    M18 72 H82
+                    M23 68
+                    C24 47 35 34 50 31
+                    C65 34 76 47 77 68
+                    M16 78 H84
+                    M45 29
+                    C45 24 55 24 55 29
+                    M50 24 V18
+                  "
+                />
+
+                <!-- Multi-Cuisine Restaurant : Chef Hat -->
+                <path
+                  v-else-if="special.category === 'Multi-Cuisine Restaurant'"
+                  d="
+                    M31 68
+                    V51
+                    C22 49 18 42 20 35
+                    C22 27 30 23 38 26
+                    C41 18 48 14 56 16
+                    C64 17 69 22 71 29
+                    C80 27 88 33 88 42
+                    C88 49 83 54 76 55
+                    V68
+                    M31 68 H76
+                    M34 76 H73
+                    M34 68 V81
+                    M73 68 V81
+                    M34 81 H73
+                  "
+                />
+
+                <!-- Generic / CAPS Special : Sparkle -->
+                <path
+                  v-else
+                  d="
+                    M50 16
+                    L57 38
+                    L79 45
+                    L57 52
+                    L50 74
+                    L43 52
+                    L21 45
+                    L43 38 Z
+
+                    M77 20
+                    L80 29
+                    L89 32
+                    L80 35
+                    L77 44
+                    L74 35
+                    L65 32
+                    L74 29 Z
+
+                    M23 63
+                    L26 71
+                    L34 74
+                    L26 77
+                    L23 85
+                    L20 77
+                    L12 74
+                    L20 71 Z
+                  "
+                />
+
+              </svg>
+
+              <!-- Left Content (Text & Badges) -->
+              <div class="relative z-10 flex flex-col flex-grow pr-4">
+                                
+                <div class="flex items-center gap-2 sm:gap-3 mb-1.5">
+                  <h3 class="text-xl sm:text-2xl font-bold text-white leading-tight line-clamp-2">{{ special.title }}</h3>
+                  
+                  <!-- Veg / Non-Veg Icon -->
+                  <svg v-if="special.isVeg" class="shrink-0 w-3.5 h-3.5 sm:w-4 sm:h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="1" y="1" width="14" height="14" stroke="#16a34a" stroke-width="2" rx="2"/>
+                    <circle cx="8" cy="8" r="4" fill="#16a34a"/>
+                  </svg>
+                  <svg v-else class="shrink-0 w-3.5 h-3.5 sm:w-4 sm:h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="1" y="1" width="14" height="14" stroke="#dc2626" stroke-width="2" rx="2"/>
+                    <circle cx="8" cy="8" r="4" fill="#dc2626"/>
+                  </svg>
+                </div>
+                
+                <p class="text-xs sm:text-sm text-white/80 line-clamp-2 leading-relaxed">{{ special.intro }}</p>
               </div>
 
-              <!-- Text auto-expands -->
-              <div class="w-full p-6 pb-12 flex flex-col bg-white dark:bg-[#2a2a2a] transition-colors duration-500">
-                <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-2">{{ special.title }}</h3>
-                <p class="text-sm text-zinc-500 dark:text-zinc-400 line-clamp-3 mb-4">{{ special.intro }}</p>
-                <div class="flex items-center gap-2 mt-auto">
-                  <span class="text-[#d4af37] font-bold text-xl">{{ special.price }}</span>
-                </div>
+              <!-- Right Content (Price) -->
+              <div class="relative z-10 shrink-0 flex items-center justify-end pl-2 h-full">
+                <span class="text-[#d4af37] font-bold text-2xl sm:text-3xl tracking-tight">₹{{ special.price }}</span>
               </div>
             </div>
           </transition-group>
-          
+
           <!-- Slider Indicators -->
           <div v-if="outletSpecials.length > 1" class="absolute bottom-5 inset-x-0 flex justify-center gap-2 z-20">
-            <div v-for="(_, idx) in outletSpecials" :key="'dot-m-'+idx" :class="['h-2 rounded-full transition-all duration-300', currentSpecialIndex === idx ? 'w-6 bg-[#d4af37]' : 'w-2 bg-zinc-400 dark:bg-zinc-500']"></div>
+            <div v-for="(_, idx) in outletSpecials" :key="'dot-m-'+idx" :class="['h-2 rounded-full transition-all duration-300', currentSpecialIndex === idx ? 'w-6 bg-[#d4af37]' : 'w-2 bg-zinc-500']"></div>
           </div>
         </div>
 
         <!-- Mobile Accordions -->
         <div class="flex flex-col gap-4 pb-20">
-          <div v-for="category in activeCategories" :key="category" :id="'acc-' + category.replace(/\s+/g, '')" class="bg-white dark:bg-[#2a2a2a] rounded-2xl border border-zinc-100 dark:border-[#2a2a2a] overflow-hidden shadow-sm transition-colors duration-500">
+          <div v-for="category in activeCategories" :key="category" :id="'acc-' + category.replace(/\s+/g, '')" class="bg-[#2a2a2a] rounded-2xl border border-[#2a2a2a] overflow-hidden shadow-sm transition-colors duration-500">
             
-            <button @click="toggleAccordion(category)" class="w-full px-5 py-3 border-b border-[#d4af37] flex justify-between items-center bg-white dark:bg-[#2a2a2a] transition-colors duration-500">
+            <button @click="toggleAccordion(category)" class="w-full px-5 py-3 border-b border-[#d4af37] flex justify-between items-center bg-[#252525] transition-colors duration-500">
               <span class="font-display font-bold text-xl text-[#d4af37]">{{ category }}</span>
               <svg :class="['w-5 h-5 text-[#d4af37] transition-transform duration-300', openAccordions.includes(category) ? 'rotate-180' : '']" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
             
             <div class="grid transition-all duration-500 ease-in-out" :class="openAccordions.includes(category) ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'">
               <div class="overflow-hidden">
-                <div class="p-5 pt-7 flex flex-col gap-6 border-t border-zinc-50 dark:border-[#2a2a2a]">
+                <div class="p-5 pt-7 flex flex-col gap-6 border-t border-[#2e2e2e]">
                   <div v-for="item in getItemsByCategory(category)" :key="item.id" class="flex gap-4">
                     <div class="w-24 h-18 shrink-0 rounded-xl overflow-hidden">
                       <img 
-                        :src="item.image || '/images/menu/placeholder.jpg'" 
+                        :src="item.image
+                        ? item.image
+                        : '/images/live/placeholder.jpg'" 
                         @error="$event.target.src = '/images/menu/placeholder.jpg'"
                         :alt="item.alt || item.name" 
                         class="w-full h-auto rounded-xl object-cover shadow-sm" 
                       />
                     </div>
                     <div class="flex-1 flex flex-col justify-center">
-                      <h4 class="text-base font-bold text-zinc-900 dark:text-white leading-tight">{{ item.name }}</h4>
-                      <p class="text-xs text-zinc-500 dark:text-zinc-400 line-clamp-3 mt-1 mb-2">{{ item.info }}</p>
+                      <h4 class="text-base font-semibold text-white leading-tight">{{ item.name }}</h4>
+                      <p class="text-xs text-zinc-400 line-clamp-3 mt-1 mb-2">{{ item.info }}</p>
                       
                       <div class="flex flex-col gap-1 mt-auto">
                         <!-- MOBILE INVISIBLE TEMPLATE -->
@@ -141,9 +264,9 @@
                               <div class="w-3.5 h-3.5 flex items-center justify-center border rounded-sm p-[2px]" :class="spec.isVeg ? 'border-green-600' : 'border-red-600'">
                                 <div class="w-full h-full rounded-full" :class="spec.isVeg ? 'bg-green-600' : 'bg-red-600'"></div>
                               </div>
-                              <span class="text-xs font-medium text-zinc-600 dark:text-zinc-400">{{ spec.name || 'Regular' }}</span>
+                              <span class="text-xs font-medium text-zinc-400">{{ spec.name || 'Regular' }}</span>
                             </div>
-                            <p v-if="item.offers" class="text-[10px] leading-tight font-medium text-emerald-600 dark:text-emerald-400 mt-0.5 line-clamp-1">{{ item.offers }}</p>
+                            <p v-if="item.offers" class="text-[10px] leading-tight font-medium text-emerald-400 mt-0.5 line-clamp-1">{{ item.offers }}</p>
                             <span class="text-sm font-bold text-[#d4af37]">
                               {{ spec.price === 'Seasonal' ? 'Seasonal' : '₹' + spec.price }}
                             </span>
@@ -178,36 +301,152 @@
             @touchend="handleTouchEnd" 
             @mousedown="handleTouchStart" 
             @mouseup="handleTouchEnd"
-            class="relative w-full h-auto bg-white dark:bg-[#2a2a2a] rounded-3xl overflow-hidden shadow-lg border border-zinc-100 dark:border-[#2a2a2a] transition-colors duration-500 flex flex-col cursor-grab active:cursor-grabbing select-none"
+            class="relative w-full h-auto bg-[#2a2a2a] rounded-3xl overflow-hidden shadow-lg border border-[#2a2a2a] transition-colors duration-500 flex flex-col cursor-grab active:cursor-grabbing select-none"
           >
             
-            <div v-if="outletSpecials.length === 0" class="p-12 text-center text-zinc-500 dark:text-zinc-400 text-sm font-medium tracking-wide">
+            <div v-if="outletSpecials.length === 0" class="p-12 text-center text-zinc-400 text-sm font-medium tracking-wide">
               Specials updating soon...
             </div>
 
-            <transition-group v-else name="fade" tag="div" class="grid w-full">
-              <div v-for="(special, index) in outletSpecials" :key="special.title" v-show="index === currentSpecialIndex" class="col-start-1 row-start-1 w-full flex flex-col">
-                
-                <div class="w-full aspect-[4/3] bg-white p-2 flex items-center justify-center border-b border-zinc-100 dark:border-white/5">
-                  <img 
-                    :src="special.images?.[0] || '/images/menu/placeholder.jpg'" 
-                    @error="$event.target.src = '/images/menu/placeholder.jpg'"
-                    :alt="special.title" 
-                    class="w-full h-full object-contain rounded-2xl" 
+            <transition-group v-else name="fade" tag="div" class="grid w-full h-full">
+              <div 
+                v-for="(special, index) in outletSpecials" 
+                :key="special.title" 
+                v-show="index === currentSpecialIndex" 
+                class="col-start-1 row-start-1 w-full h-full flex flex-col p-6 lg:p-8 rounded-[24px] relative overflow-hidden shadow-2xl transition-colors duration-500"
+                :class="[
+                  special.category === 'Chill N Chai' ? 'bg-gradient-to-br from-[#5C4033] to-[#2A1C14]' :
+                  special.category === 'Arabic Corner' ? 'bg-gradient-to-br from-[#3E2723] to-[#1B100B]' :
+                  special.category === 'Multi-Cuisine Restaurant' ? 'bg-gradient-to-br from-[#1B3320] to-[#0A1A0F]' :
+                  'bg-gradient-to-br from-[#1c1c1c] to-[#252525]' // Default case (if needed)
+                ]"
+              >
+                <!-- Background SVG Decoration -->
+                <svg
+                  class="absolute -bottom-6 -right-2 w-32 h-32 sm:w-40 sm:h-40
+                        text-white opacity-10 pointer-events-none"
+                  viewBox="0 0 100 100"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+
+                  <!-- Chill N Chai : Tea Cup -->
+                  <path
+                    v-if="special.category === 'Chill N Chai'"
+                    d="
+                      M28 43 H67 V61
+                      C67 72 59 78 48 78
+                      C37 78 28 72 28 61 Z
+                      M67 48 H74
+                      C82 48 85 53 85 59
+                      C85 66 80 70 72 70
+                      H66
+                      M22 84 H76
+                      M38 34
+                      C32 28 40 24 36 18
+                      M50 34
+                      C44 28 52 24 48 18
+                      M62 34
+                      C56 28 64 24 60 18
+                    "
                   />
-                </div>
-                
-                <div class="w-full p-6 pb-12 flex flex-col bg-white dark:bg-[#1c1c1c] transition-colors duration-500">
-                  <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-2 leading-tight">{{ special.title }}</h3>
-                  <p class="text-sm text-zinc-500 dark:text-zinc-400 line-clamp-3 mb-4">{{ special.intro }}</p>
+
+                  <!-- Arabic Corner : Serving Cloche -->
+                  <path
+                    v-else-if="special.category === 'Arabic Corner'"
+                    d="
+                      M18 72 H82
+                      M23 68
+                      C24 47 35 34 50 31
+                      C65 34 76 47 77 68
+                      M16 78 H84
+                      M45 29
+                      C45 24 55 24 55 29
+                      M50 24 V18
+                    "
+                  />
+
+                  <!-- Multi-Cuisine Restaurant : Chef Hat -->
+                  <path
+                    v-else-if="special.category === 'Multi-Cuisine Restaurant'"
+                    d="
+                      M31 68
+                      V51
+                      C22 49 18 42 20 35
+                      C22 27 30 23 38 26
+                      C41 18 48 14 56 16
+                      C64 17 69 22 71 29
+                      C80 27 88 33 88 42
+                      C88 49 83 54 76 55
+                      V68
+                      M31 68 H76
+                      M34 76 H73
+                      M34 68 V81
+                      M73 68 V81
+                      M34 81 H73
+                    "
+                  />
+
+                  <!-- Generic / CAPS Special : Sparkle -->
+                  <path
+                    v-else
+                    d="
+                      M50 16
+                      L57 38
+                      L79 45
+                      L57 52
+                      L50 74
+                      L43 52
+                      L21 45
+                      L43 38 Z
+
+                      M77 20
+                      L80 29
+                      L89 32
+                      L80 35
+                      L77 44
+                      L74 35
+                      L65 32
+                      L74 29 Z
+
+                      M23 63
+                      L26 71
+                      L34 74
+                      L26 77
+                      L23 85
+                      L20 77
+                      L12 74
+                      L20 71 Z
+                    "
+                  />
+
+                </svg>
+
+                <!-- Content Area -->
+                <div class="relative z-10 flex-grow flex flex-col">
+                  <div class="flex items-center gap-3 mb-2 lg:mb-3">
+                    <h3 class="text-xl lg:text-2xl font-semibold text-white leading-tight">{{ special.title }}</h3>
+                    
+                    <!-- Veg / Non-Veg Icon -->
+                    <svg v-if="special.isVeg" class="shrink-0 w-4 h-4 lg:w-5 lg:h-5" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="1" y="1" width="14" height="14" stroke="#16a34a" stroke-width="2" rx="2"/>
+                      <circle cx="8" cy="8" r="4" fill="#16a34a"/>
+                    </svg>
+                    <svg v-else class="shrink-0 w-4 h-4 lg:w-5 lg:h-5" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="1" y="1" width="14" height="14" stroke="#dc2626" stroke-width="2" rx="2"/>
+                      <circle cx="8" cy="8" r="4" fill="#dc2626"/>
+                    </svg>
+                  </div>
+
+                  <p class="text-sm lg:text-base text-white/80 leading-relaxed max-w-[85%]">{{ special.intro }}</p>
                   
-                  <div class="mt-auto border-t border-zinc-50 dark:border-[#2a2a2a] pt-4 pb-2">
-                    <div class="flex items-center justify-between">
-                      <span class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Today's Special</span>
-                      <span class="text-[#d4af37] font-bold text-2xl">
-                        {{ special.price }}
-                      </span>
-                    </div>
+                  <!-- Price (Bottom Left Anchored) -->
+                  <div class="mt-2 pt-6">
+                    <span class="text-[#d4af37] font-bold text-3xl lg:text-4xl tracking-tight">₹{{ special.price }}</span>
                   </div>
                 </div>
               </div>
@@ -215,7 +454,7 @@
             
             <!-- Slider Indicators -->
             <div v-if="outletSpecials.length > 1" class="absolute bottom-4 inset-x-0 flex justify-center gap-2 z-20">
-              <div v-for="(_, idx) in outletSpecials" :key="'dot-d-'+idx" :class="['h-2 rounded-full transition-all duration-300', currentSpecialIndex === idx ? 'w-6 bg-[#d4af37]' : 'w-2 bg-zinc-400 dark:bg-zinc-500']"></div>
+              <div v-for="(_, idx) in outletSpecials" :key="'dot-d-'+idx" :class="['h-2 rounded-full transition-all duration-300', currentSpecialIndex === idx ? 'w-6 bg-[#d4af37]' : 'w-2 bg-zinc-500']"></div>
             </div>
           </div>
         </aside>
@@ -230,8 +469,8 @@
               :class="[
                 'flex flex-1 items-center justify-center gap-3 px-4 xl:px-6 py-3 rounded-xl transition-all duration-300 border',
                 activeOutlet === outlet.name 
-                  ? 'bg-zinc-900 text-white border-zinc-900 dark:bg-[#d4af37] dark:text-[#0a0a0a] dark:border-[#d4af37] shadow-md' 
-                  : 'bg-white text-zinc-600 border-zinc-200 dark:bg-[#2a2a2a] dark:text-zinc-400 dark:border-[#2a2a2a] hover:border-zinc-400 hover:text-zinc-900 dark:hover:text-white shadow-sm dark:shadow-none'
+                  ? 'bg-[#d4af37] text-[#0a0a0a] border-[#d4af37] shadow-md' 
+                  : 'bg-[#2a2a2a] text-zinc-400 border-[#2a2a2a] hover:border-zinc-400 hover:text-white shadow-none'
               ]"
             >
               <span v-html="outlet.icon" class="w-10 h-10"></span>
@@ -240,14 +479,14 @@
           </div>
 
           <!-- Category Pills -->
-          <div class=" flex flex-wrap justify-center gap-5 py-4 mb-4 transition-colors duration-500 border-b border-zinc-200 dark:border-[#2a2a2a]">
+          <div class=" flex flex-wrap justify-center gap-5 py-4 mb-4 transition-colors duration-500 border-b border-[#2a2a2a]">
             <button
               v-for="category in activeCategories" :key="'pill-'+category" @click="activeCategory = category"
               :class="[
-                'px-5 py-2 rounded-xl text-sm font-bold tracking-wide transition-all duration-300 border',
+                'px-5 py-2 rounded-xl text-sm font-semibold tracking-wide transition-all duration-300 border',
                 activeCategory === category
-                  ? 'bg-zinc-200 text-zinc-900 border-zinc-300 dark:bg-zinc-800 dark:text-white dark:border-zinc-700 shadow-sm'
-                  : 'bg-white text-zinc-600 border-zinc-200 dark:bg-[#2a2a2a] dark:text-zinc-400 dark:border-[#2a2a2a] hover:border-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-300 shadow-sm dark:shadow-none'
+                  ? 'bg-[#252525] text-white border-zinc-700 shadow-sm'
+                  : 'bg-[#2e2e2e] border-[#2a2a2a] text-zinc-400 hover:border-zinc-400 hover:text-zinc-200 shadow-none'
               ]"
             >
               {{ category }}
@@ -258,12 +497,14 @@
           <div class="flex flex-wrap justify-start gap-6 pb-20 pt-2">
             <div 
               v-for="item in activeDesktopItems" :key="'grid-'+item.id"
-              class="menu-grid-card w-[280px] xl:w-[300px] flex flex-col bg-white dark:bg-[#2a2a2a] rounded-3xl border border-zinc-100 dark:border-[#2a2a2a] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group"
+              class="menu-grid-card w-[280px] xl:w-[300px] flex flex-col bg-[#2a2a2a] rounded-3xl border border-[#2a2a2a] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group"
             >
               <!-- Image -->
-              <div class="w-full aspect-[4/3] overflow-hidden relative border-b border-zinc-50 dark:border-[#2a2a2a]">
+              <div class="w-full aspect-[4/3] overflow-hidden relative border-b border-[#2a2a2a]">
                 <img 
-                  :src="item.image || '/images/menu/placeholder.jpg'" 
+                  :src="item.image
+                        ? item.image
+                        : '/images/live/placeholder.jpg'" 
                   @error="$event.target.src = '/images/menu/placeholder.jpg'"
                   :alt="item.name" 
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
@@ -271,16 +512,16 @@
               </div>
               
               <!-- Content -->
-              <div class="p-6 flex flex-col flex-1 bg-white dark:bg-[#2a2a2a] transition-colors duration-500">
-                <h4 class="text-xl font-bold text-zinc-900 dark:text-white mb-2 leading-snug transition-colors duration-500">{{ item.name }}</h4>
-                <p class="text-sm text-zinc-500 dark:text-zinc-400 line-clamp-2 transition-colors duration-500">{{ item.info }}</p>
+              <div class="p-6 flex flex-col flex-1 bg-[#2a2a2a] transition-colors duration-500">
+                <h4 class="text-xl font-bold text-white mb-2 leading-snug transition-colors duration-500">{{ item.name }}</h4>
+                <p class="text-sm text-zinc-400 line-clamp-2 transition-colors duration-500">{{ item.info }}</p>
                 
                 <!-- Variants & Veg/Non-Veg -->
-                <div class="flex flex-col gap-3 pt-5 border-t border-zinc-50 dark:border-[#2a2a2a] mt-5">
+                <div class="flex flex-col gap-3 pt-5 border-t border-[#2a2a2a] mt-5">
                   
                   <!-- DESKTOP INVISIBLE TEMPLATE -->
                   <template v-for="spec in item.specializations" :key="spec.name">
-                    <div v-if="item.offers" class="mt-1.5 inline-flex items-center px-1 py-1 rounded text-[15px] leading-none font-medium bg-emerald-50 text-emerald-600 border border-emerald-100 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20 w-fit">{{ item.offers }} ✨</div>
+                    <div v-if="item.offers" class="mt-1.5 inline-flex items-center px-1 py-1 rounded text-[15px] leading-none font-medium bg-emerald-500/10 text-emerald-400 border-emerald-500/20 w-fit">{{ item.offers }} ✨</div>
                     <!-- DESKTOP V-IF USING YOUR EXACT VARIABLE (showOnlyVeg) -->
                     <div v-if="!showOnlyVeg || spec.isVeg" class="flex justify-between items-center">
                       <div class="flex items-center gap-2">
@@ -288,7 +529,7 @@
                         <div class="w-4 h-4 flex items-center justify-center border rounded-sm p-[2px]" :class="spec.isVeg ? 'border-green-600' : 'border-red-600'">
                           <div class="w-full h-full rounded-full" :class="spec.isVeg ? 'bg-green-600' : 'bg-red-600'"></div>
                         </div>
-                        <span class="text-sm font-medium text-zinc-600 dark:text-zinc-400">{{ spec.name || 'Regular' }}</span>
+                        <span class="text-sm font-medium text-zinc-400">{{ spec.name || 'Regular' }}</span>
                       </div>
                       <span class="text-[#d4af37] font-bold text-lg">
                         {{ spec.price === 'Seasonal' ? 'Seasonal' : '₹' + spec.price }}
@@ -307,13 +548,13 @@
       </div>
 
       <!-- Menu Disclaimers Footer -->
-      <div class="w-full mt-16 pt-8 pb-6 border-t border-zinc-200 dark:border-white/10">
+      <div class="w-full mt-1 pt-8 pb-6 border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 md:px-8">
-          <h4 class="text-[10px] font-bold tracking-widest uppercase text-zinc-400 dark:text-zinc-500 mb-5 text-center md:text-left">
+          <h4 class="text-[10px] font-bold tracking-widest uppercase text-zinc-500 mb-5 text-center md:text-left">
             Please Note
           </h4>
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12 text-[13px] leading-relaxed text-zinc-500 dark:text-zinc-400">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12 text-[13px] leading-relaxed text-zinc-400">
             
             <!-- Availability -->
             <div class="flex items-start gap-2.5 group">
@@ -492,7 +733,9 @@ const outletSpecials = computed(() => {
       title: item.name,
       intro: item.description,
       price: item.price,
-      images: [item.image]
+      isVeg: item.isVeg,
+      category: item.category,
+      // images: [item.image]
     };
   });
 });
