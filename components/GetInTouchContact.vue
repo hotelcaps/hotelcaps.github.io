@@ -8,7 +8,7 @@
       
       <!-- Section Header -->
       <div class="text-center mb-16 lg:mb-20">
-        <span class="contact-page-header-reveal block text-[#df9c4d] font-sans font-semibold text-xs sm:text-sm uppercase tracking-[0.2em] mb-2 sm:mb-3">
+        <span class="contact-page-header-reveal block text-[#df9c4d] font-sans font-bold text-sm uppercase tracking-widest mb-2 sm:mb-3">
           {{ contactData.eyebrow }}
         </span>
         <h2 class="contact-page-header-reveal font-display font-bold text-3xl lg:text-4xl text-white tracking-wide">

@@ -1,11 +1,6 @@
 @font-face {
     font-family: 'Faculty Glyphic';
-    src: url('assets/fonts/FacultyGlyphic-Regular.eot');
-    src: url('assets/fonts/FacultyGlyphic-Regular.eot?#iefix') format('embedded-opentype'),
-        url('assets/fonts/FacultyGlyphic-Regular.woff2') format('woff2'),
-        url('assets/fonts/FacultyGlyphic-Regular.woff') format('woff'),
-        url('assets/fonts/FacultyGlyphic-Regular.ttf') format('truetype'),
-        url('assets/fonts/FacultyGlyphic-Regular.svg#FacultyGlyphic-Regular') format('svg');
+    src: url('~/assets/fonts/FacultyGlyphic-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -13,12 +8,15 @@
 
 @font-face {
     font-family: 'Inter';
-    src: url('assets/fonts/Inter-Italic.eot');
-    src: url('assets/fonts/Inter-Italic.eot?#iefix') format('embedded-opentype'),
-        url('assets/fonts/Inter-Italic.woff2') format('woff2'),
-        url('assets/fonts/Inter-Italic.woff') format('woff'),
-        url('assets/fonts/Inter-Italic.ttf') format('truetype'),
-        url('assets/fonts/Inter-Italic.svg#Inter-Italic') format('svg');
+    src: url('~/assets/fonts/Inter-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('~/assets/fonts/Inter-Italic.woff2') format('woff2');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -26,12 +24,7 @@
 
 @font-face {
     font-family: 'Dancing Script';
-    src: url('assets/fonts/DancingScript-Regular.eot');
-    src: url('assets/fonts/DancingScript-Regular.eot?#iefix') format('embedded-opentype'),
-        url('assets/fonts/DancingScript-Regular.woff2') format('woff2'),
-        url('assets/fonts/DancingScript-Regular.woff') format('woff'),
-        url('assets/fonts/DancingScript-Regular.ttf') format('truetype'),
-        url('assets/fonts/DancingScript-Regular.svg#DancingScript-Regular') format('svg');
+    src: url('~/assets/fonts/DancingScript-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -39,27 +32,8 @@
 
 @font-face {
     font-family: 'Cinzel';
-    src: url('assets/fonts/Cinzel-Regular.eot');
-    src: url('assets/fonts/Cinzel-Regular.eot?#iefix') format('embedded-opentype'),
-        url('assets/fonts/Cinzel-Regular.woff2') format('woff2'),
-        url('assets/fonts/Cinzel-Regular.woff') format('woff'),
-        url('assets/fonts/Cinzel-Regular.ttf') format('truetype'),
-        url('assets/fonts/Cinzel-Regular.svg#Cinzel-Regular') format('svg');
+    src: url('~/assets/fonts/Cinzel-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
-
-@font-face {
-    font-family: 'Inter';
-    src: url('assets/fonts/Inter-Regular.eot');
-    src: url('assets/fonts/Inter-Regular.eot?#iefix') format('embedded-opentype'),
-        url('assets/fonts/Inter-Regular.woff2') format('woff2'),
-        url('assets/fonts/Inter-Regular.woff') format('woff'),
-        url('assets/fonts/Inter-Regular.ttf') format('truetype'),
-        url('assets/fonts/Inter-Regular.svg#Inter-Regular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
