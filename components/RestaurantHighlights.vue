@@ -78,7 +78,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 const highlightsData = [
   { title: "Chill & Chai", description: "Your cozy corner for relaxing vibes and refreshing sips.\n\nEnjoy a variety of teas, snacks, and light bites in a calm and inviting atmosphere.", image: "/images/restaurant/chill-chai.jpg", imageAlt: "Chill and Chai special tea and snacks" },
-  { title: "Shawarma Stand", description: "Bold flavors. Freshly made. Always satisfying.\n\nHot, juicy, and packed with authentic taste – our shawarma is a must-try!", image: "/images/restaurant/shawarma.jpg", imageAlt: "Freshly made authentic shawarma" }
+  {
+    title: "Arabic Corner",
+    description: "Authentic flavours. Richly spiced. Always satisfying.\n\nFrom aromatic rice and grilled favourites to classic Arabic dishes, discover bold flavours made to be shared.",
+    image: "/images/restaurant/arabic-corner.jpg",
+    imageAlt: "Arabic dishes with grilled meats, rice, hummus and traditional accompaniments"
+  }
 ];
 
 const sectionRef = ref(null);

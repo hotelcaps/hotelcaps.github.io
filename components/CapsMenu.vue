@@ -215,8 +215,16 @@
               </div>
 
               <!-- Right Content (Price) -->
-              <div class="relative z-10 shrink-0 flex items-center justify-end pl-2 h-full">
-                <span class="text-[#d4af37] font-bold text-2xl sm:text-3xl tracking-tight">₹{{ special.price }}</span>
+              <div
+                v-if="special.price != null && String(special.price).trim() !== ''"
+                class="relative z-10 shrink-0 flex items-center justify-end pl-2 h-full"
+              >
+                <span class="text-[#d4af37] font-bold text-2xl sm:text-3xl tracking-tight">
+                  {{ Number.isFinite(Number(special.price))
+                    ? '₹' + special.price
+                    : special.price
+                  }}
+                </span>
               </div>
             </div>
           </transition-group>
@@ -268,7 +276,10 @@
                             </div>
                             <p v-if="item.offers" class="text-[10px] leading-tight font-medium text-emerald-400 mt-0.5 line-clamp-1">{{ item.offers }}</p>
                             <span class="text-sm font-bold text-[#d4af37]">
-                              {{ spec.price === 'Seasonal' ? 'Seasonal' : '₹' + spec.price }}
+                              {{ Number.isFinite(Number(spec.price)) && String(spec.price).trim() !== ''
+                                ? '₹' + spec.price
+                                : spec.price
+                              }}
                             </span>
                           </div>
                         </template>
@@ -445,8 +456,13 @@
                   <p class="text-sm lg:text-base text-white/80 leading-relaxed max-w-[85%]">{{ special.intro }}</p>
                   
                   <!-- Price (Bottom Left Anchored) -->
-                  <div class="mt-2 pt-6">
-                    <span class="text-[#d4af37] font-bold text-3xl lg:text-4xl tracking-tight">₹{{ special.price }}</span>
+                  <div
+                    v-if="special.price != null && String(special.price).trim() !== ''"
+                    class="mt-2 pt-6"
+                  >
+                    <span class="text-[#d4af37] font-bold text-3xl lg:text-4xl tracking-tight">
+                      <span v-if="Number.isFinite(Number(special.price))">₹</span>{{ special.price }}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -532,7 +548,10 @@
                         <span class="text-sm font-medium text-zinc-400">{{ spec.name || 'Regular' }}</span>
                       </div>
                       <span class="text-[#d4af37] font-bold text-lg">
-                        {{ spec.price === 'Seasonal' ? 'Seasonal' : '₹' + spec.price }}
+                        {{ Number.isFinite(Number(spec.price)) && String(spec.price).trim() !== ''
+                          ? '₹' + spec.price
+                          : spec.price
+                        }}
                       </span>
                     </div>
                     

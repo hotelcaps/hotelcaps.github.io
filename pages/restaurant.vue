@@ -126,29 +126,96 @@ const restaurantGalleryData = {
   title: "Flavors That Speak for Us",
   themeTextClass: "text-[#03a661]",
   themeBgClass: "bg-[#03a661]",
+
   images: [
-    { src: "/images/restaurant/food/1.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/2.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/3.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/4.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/5.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/6.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/7.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/8.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/9.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/10.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/11.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/12.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/13.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/14.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/15.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/16.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/17.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/18.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/19.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/20.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/21.jpg", alt: "CAPS Delicacy" },
-    { src: "/images/restaurant/food/22.jpg", alt: "CAPS Delicacy" },
+    {
+      src: "/images/restaurant/food/1.jpg",
+      alt: "Traditional South Indian breakfast served with chutneys and accompaniments"
+    },
+    {
+      src: "/images/restaurant/food/2.jpg",
+      alt: "Green dosa served with chutney and fresh herbs"
+    },
+    {
+      src: "/images/restaurant/food/3.jpg",
+      alt: "Traditional Kerala meals served on a banana leaf"
+    },
+    {
+      src: "/images/restaurant/food/4.jpg",
+      alt: "Traditional banana leaf wrapped food parcel"
+    },
+    {
+      src: "/images/restaurant/food/5.jpg",
+      alt: "Bread toast served with a savory side dish"
+    },
+    {
+      src: "/images/restaurant/food/6.jpg",
+      alt: "Kerala-style fried fish served on a banana leaf"
+    },
+    {
+      src: "/images/restaurant/food/7.jpg",
+      alt: "Hotel CAPS mini meals with rice and assorted side dishes"
+    },
+    {
+      src: "/images/restaurant/food/8.jpg",
+      alt: "Grilled chicken pieces served with vegetables and dipping sauce"
+    },
+    {
+      src: "/images/restaurant/food/9.jpg",
+      alt: "Spicy grilled fish served with aromatic rice and lemon"
+    },
+    {
+      src: "/images/restaurant/food/10.jpg",
+      alt: "Grilled fish fillet served with sautéed vegetables"
+    },
+    {
+      src: "/images/restaurant/food/11.jpg",
+      alt: "Assorted Hotel CAPS dishes served on banana leaves"
+    },
+    {
+      src: "/images/restaurant/food/12.jpg",
+      alt: "Hotel CAPS special Chicken Mughlai with flatbread"
+    },
+    {
+      src: "/images/restaurant/food/13.jpg",
+      alt: "Spiced chicken fry served with fresh herbs"
+    },
+    {
+      src: "/images/restaurant/food/14.jpg",
+      alt: "Spicy fried fish pieces served on a banana leaf"
+    },
+    {
+      src: "/images/restaurant/food/15.jpg",
+      alt: "Indo-Chinese chicken appetizer garnished with spring onions"
+    },
+    {
+      src: "/images/restaurant/food/16.jpg",
+      alt: "Hotel CAPS special Chicken Patiala curry"
+    },
+    {
+      src: "/images/restaurant/food/17.jpg",
+      alt: "Tandoori-style grilled chicken pieces fresh from the grill"
+    },
+    {
+      src: "/images/restaurant/food/18.jpg",
+      alt: "Creamy chicken curry served with vegetables and herbs"
+    },
+    {
+      src: "/images/restaurant/food/19.jpg",
+      alt: "Hotel CAPS special Palada Payasam"
+    },
+    {
+      src: "/images/restaurant/food/20.jpg",
+      alt: "Hotel CAPS special Parippu Pradhaman"
+    },
+    {
+      src: "/images/restaurant/food/21.jpg",
+      alt: "Hotel CAPS buffet counter with a variety of freshly prepared dishes"
+    },
+    {
+      src: "/images/restaurant/food/22.jpg",
+      alt: "Hotel CAPS special beef and chicken Kizhi Porotta"
+    }
   ]
 };
 

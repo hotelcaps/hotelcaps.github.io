@@ -20,13 +20,12 @@
           <div 
             v-for="navItem in navLinks" 
             :key="navItem.text"
-            class="relative h-20 flex items-center"
+            class="relative h-20 flex items-center cursor-default"
             @mouseenter="openDropdownOnHover(navItem.text)"
             @mouseleave="closeDropdownOnMouseLeave"
           >
             <!-- Main navigation link -->
-            <a 
-              href="#"
+            <div
               @click.prevent="toggleDropdown(navItem.subLinks.length > 0 ? navItem.text : null)"
               class="flex items-center xl:text-lg text-white font-display tracking-wider transition-all duration-300"
               :class="[
@@ -41,7 +40,7 @@
                 class="ml-1.5 transition-transform duration-300 opacity-70"
                 :class="{ 'rotate-180': activeDropdown === navItem.text }" 
               />
-            </a>
+            </div>
 
             <!-- Dropdown Menu -->
             <Transition name="dropdown">

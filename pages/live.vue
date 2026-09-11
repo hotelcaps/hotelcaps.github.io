@@ -149,8 +149,14 @@
                           </div>
                         </div>
                         
-                        <div class="text-[30px] font-display tracking-wide text-white font-semibold pl-2 flex-shrink-0 drop-shadow-sm">
-                          <span class="text-[20px] text-[#e6c2a4] mr-1">₹</span>{{ item.price }}
+                        <div
+                          v-if="item.price !== null && item.price !== undefined && item.price.trim() !== ''"
+                          class="text-[30px] font-display tracking-wide text-white font-semibold pl-2 flex-shrink-0 drop-shadow-sm"
+                        >
+                          <span
+                            v-if="Number.isFinite(Number(item.price))"
+                            class="text-[20px] text-[#e6c2a4] mr-1"
+                          >₹</span>{{ item.price }}
                         </div>
                       </div>
 
@@ -377,7 +383,7 @@
               <!-- Scaled down Rider and Repositioned Marker -->
               <div class="absolute bottom-[0px] right-[400px] w-[900px] h-[850px] z-10 pointer-events-none flex items-end justify-end">
                  <!-- Map Marker (Moved A LOT left, slightly bottom) -->
-                 <div id="live-delivery-marker" class="absolute top-[60%] left-[20%] z-0 opacity-0 scale-50">
+                 <div id="live-delivery-marker" class="absolute top-[45%] left-[20%] z-0 opacity-0 scale-50">
                     <svg class="w-[85px] h-[85px] text-[#2563eb] drop-shadow-2xl" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                  </div>
                  

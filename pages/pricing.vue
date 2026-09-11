@@ -67,16 +67,46 @@ const roomsGalleryData = {
   themeTextClass: "text-sky-600",
   themeBgClass: "bg-sky-600",
   images: [
-    { src: "/images/rooms/amenities/1.jpg", alt: "room amenities" },
-    { src: "/images/rooms/amenities/2.jpg", alt: "room amenities" },
-    { src: "/images/rooms/amenities/3.jpg", alt: "room amenities" },
-    { src: "/images/rooms/amenities/4.jpg", alt: "room amenities" },
-    { src: "/images/rooms/amenities/5.jpg", alt: "room amenities" },
-    { src: "/images/rooms/amenities/6.jpg", alt: "room amenities" },
-    { src: "/images/rooms/amenities/7.jpg", alt: "room amenities" },
-    { src: "/images/rooms/amenities/8.jpg", alt: "room amenities" },
-    { src: "/images/rooms/amenities/9.jpg", alt: "room amenities" },
-    { src: "/images/rooms/amenities/10.jpg", alt: "room amenities" },
+    {
+      src: "/images/rooms/amenities/1.jpg",
+      alt: "Hotel CAPS room with air conditioning, wardrobe and dressing area"
+    },
+    {
+      src: "/images/rooms/amenities/2.jpg",
+      alt: "Hotel CAPS room with air conditioning, window and seating area"
+    },
+    {
+      src: "/images/rooms/amenities/3.jpg",
+      alt: "Television and entertainment unit inside a Hotel CAPS room"
+    },
+    {
+      src: "/images/rooms/amenities/4.jpg",
+      alt: "Spacious Hotel CAPS room with television, air conditioning and furnished interior"
+    },
+    {
+      src: "/images/rooms/amenities/5.jpg",
+      alt: "Wash basin and mirror in a Hotel CAPS room bathroom"
+    },
+    {
+      src: "/images/rooms/amenities/6.jpg",
+      alt: "Private bathroom with toilet and shower facilities at Hotel CAPS"
+    },
+    {
+      src: "/images/rooms/amenities/7.jpg",
+      alt: "Spacious Hotel CAPS bathroom with shower, toilet, wash basin and mirror"
+    },
+    {
+      src: "/images/rooms/amenities/8.jpg",
+      alt: "Hot water geyser and shower facility in a Hotel CAPS bathroom"
+    },
+    {
+      src: "/images/rooms/amenities/9.jpg",
+      alt: "Elevator facility providing convenient access to Hotel CAPS rooms"
+    },
+    {
+      src: "/images/rooms/amenities/10.jpg",
+      alt: "Parking area available for guests staying at Hotel CAPS"
+    }
   ]
 };
 

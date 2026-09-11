@@ -128,18 +128,52 @@ const hallGalleryData = {
   title: "Spaces Designed for Excellence",
   themeTextClass: "text-[#e22473]",
   themeBgClass: "bg-[#e22473]",
+
   images: [
-    { src: "/images/hall/amenities/1.jpg", alt: "" },
-    { src: "/images/hall/amenities/2.jpg", alt: "" },
-    { src: "/images/hall/amenities/3.jpg", alt: "" },
-    { src: "/images/hall/amenities/4.jpg", alt: "" },
-    { src: "/images/hall/amenities/5.jpg", alt: "" },
-    { src: "/images/hall/amenities/6.jpg", alt: "" },
-    { src: "/images/hall/amenities/7.jpg", alt: "" },
-    { src: "/images/hall/amenities/8.jpg", alt: "" },
-    { src: "/images/hall/amenities/9.jpg", alt: "" },
-    { src: "/images/hall/amenities/10.jpg", alt: "" },
-    { src: "/images/hall/amenities/11.jpg", alt: "" },
+    {
+      src: "/images/hall/amenities/1.jpg",
+      alt: "Hotel CAPS Events Hall stage arranged for celebrations and special occasions"
+    },
+    {
+      src: "/images/hall/amenities/2.jpg",
+      alt: "Hotel CAPS Events Hall with theatre-style seating facing the stage"
+    },
+    {
+      src: "/images/hall/amenities/3.jpg",
+      alt: "Hotel CAPS Events Hall arranged with rows of seating for an event"
+    },
+    {
+      src: "/images/hall/amenities/4.jpg",
+      alt: "Spacious Hotel CAPS Events Hall with seating arranged for guests"
+    },
+    {
+      src: "/images/hall/amenities/5.jpg",
+      alt: "Hotel CAPS Events Hall interior prepared for a gathering"
+    },
+    {
+      src: "/images/hall/amenities/6.jpg",
+      alt: "Hotel CAPS Events Hall stage and seating area"
+    },
+    {
+      src: "/images/hall/amenities/7.jpg",
+      alt: "Hotel CAPS Events Hall with spacious seating and illuminated ceiling"
+    },
+    {
+      src: "/images/hall/amenities/8.jpg",
+      alt: "Interior corridor providing access to the Hotel CAPS Events Hall"
+    },
+    {
+      src: "/images/hall/amenities/9.jpg",
+      alt: "Hotel CAPS Events Hall stage with red backdrop and decorative seating"
+    },
+    {
+      src: "/images/hall/amenities/10.jpg",
+      alt: "Elevator / Lift facility at Hotel CAPS for convenient guest access"
+    },
+    {
+      src: "/images/hall/amenities/11.jpg",
+      alt: "Parking area available for guests at Hotel CAPS"
+    }
   ]
 };
 

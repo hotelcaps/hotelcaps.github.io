@@ -1,10 +1,9 @@
 <script setup>
 
-
 const homeGalleryData = {
   homeEyebrow: "Explore",
   title: "Nearby Tourist Attractions",
-  themeTextClass: "text-[#0891b2]",
+  themeTextClass: "text-[#005F61]",
   themeBgClass: "bg-[#06b6d4]",
   images: [
     { src: "/images/home/tourism/1.jpg", alt: "Kava View Point" },

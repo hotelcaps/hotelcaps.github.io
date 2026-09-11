@@ -132,14 +132,30 @@ const cateringGalleryData = {
   title: "Moments That Speak for Us",
   themeTextClass: "text-[#df4444]",
   themeBgClass: "bg-[#df4444]",
+
   images: [
-    { src: "/images/catering/gallery/1.jpg", alt: "" },
-    { src: "/images/catering/gallery/2.jpg", alt: "" },
-    { src: "/images/catering/gallery/3.jpg", alt: "" },
-    { src: "/images/catering/gallery/4.jpg", alt: "" },
-    { src: "/images/catering/gallery/5.jpg", alt: "" },
+    {
+      src: "/images/catering/gallery/1.jpg",
+      alt: "Hotel CAPS outdoor catering team preparing a live food counter"
+    },
+    {
+      src: "/images/catering/gallery/2.jpg",
+      alt: "Hotel CAPS catering team serving freshly prepared dishes from buffet counters"
+    },
+    {
+      src: "/images/catering/gallery/3.jpg",
+      alt: "Hotel CAPS chef preparing food at a live outdoor catering station"
+    },
+    {
+      src: "/images/catering/gallery/4.jpg",
+      alt: "Freshly prepared dishes arranged for Hotel CAPS catering service"
+    },
+    {
+      src: "/images/catering/gallery/5.jpg",
+      alt: "Guests being served by the Hotel CAPS catering team at an event"
+    }
   ]
-};
+};s
 
 const cateringCtaData = {
   eyebrow: "Ready to Plan Your Event?",
