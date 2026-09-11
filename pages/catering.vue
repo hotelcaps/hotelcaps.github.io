@@ -155,7 +155,7 @@ const cateringGalleryData = {
       alt: "Guests being served by the Hotel CAPS catering team at an event"
     }
   ]
-};s
+};
 
 const cateringCtaData = {
   eyebrow: "Ready to Plan Your Event?",
