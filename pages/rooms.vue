@@ -146,43 +146,63 @@ const roomsGalleryData = {
   images: [
     {
       src: "/images/rooms/amenities/1.jpg",
-      alt: "Hotel CAPS room with air conditioning, wardrobe and dressing area"
+      alt: "Hotel CAPS room with air conditioning, wardrobe and dressing area",
+      width: 600,
+      height: 400
     },
     {
       src: "/images/rooms/amenities/2.jpg",
-      alt: "Hotel CAPS room with air conditioning, window and seating area"
+      alt: "Hotel CAPS room with air conditioning, window and seating area",
+      width: 400,
+      height: 400
     },
     {
       src: "/images/rooms/amenities/3.jpg",
-      alt: "Television and entertainment unit inside a Hotel CAPS room"
+      alt: "Television and entertainment unit inside a Hotel CAPS room",
+      width: 600,
+      height: 400
     },
     {
       src: "/images/rooms/amenities/4.jpg",
-      alt: "Spacious Hotel CAPS room with television, air conditioning and furnished interior"
+      alt: "Spacious Hotel CAPS room with television, air conditioning and furnished interior",
+      width: 711,
+      height: 400
     },
     {
       src: "/images/rooms/amenities/5.jpg",
-      alt: "Wash basin and mirror in a Hotel CAPS room bathroom"
+      alt: "Wash basin and mirror in a Hotel CAPS room bathroom",
+      width: 266,
+      height: 400
     },
     {
       src: "/images/rooms/amenities/6.jpg",
-      alt: "Private bathroom with toilet and shower facilities at Hotel CAPS"
+      alt: "Private bathroom with toilet and shower facilities at Hotel CAPS",
+      width: 266,
+      height: 400
     },
     {
       src: "/images/rooms/amenities/7.jpg",
-      alt: "Spacious Hotel CAPS bathroom with shower, toilet, wash basin and mirror"
+      alt: "Spacious Hotel CAPS bathroom with shower, toilet, wash basin and mirror",
+      width: 400,
+      height: 400
     },
     {
       src: "/images/rooms/amenities/8.jpg",
-      alt: "Hot water geyser and shower facility in a Hotel CAPS bathroom"
+      alt: "Hot water geyser and shower facility in a Hotel CAPS bathroom",
+      width: 600,
+      height: 400
     },
     {
       src: "/images/rooms/amenities/9.jpg",
-      alt: "Elevator facility providing convenient access to Hotel CAPS rooms"
+      alt: "Elevator facility providing convenient access to Hotel CAPS rooms",
+      width: 320,
+      height: 400
     },
     {
       src: "/images/rooms/amenities/10.jpg",
-      alt: "Parking area available for guests staying at Hotel CAPS"
+      alt: "Parking area available for guests staying at Hotel CAPS",
+      width: 602,
+      height: 400
     }
   ]
 };

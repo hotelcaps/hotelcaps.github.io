@@ -16,16 +16,23 @@ export default defineNuxtConfig({
     }
   },
 
-  modules: [
-    '@nuxtjs/tailwindcss',
-    '@nuxtjs/sitemap',
-    '@nuxtjs/robots'
-  ],
+  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/sitemap', '@nuxtjs/robots', '@nuxt/image'],
 
   // 1. Site configuration for Sitemap & Robots
   site: {
     url: 'https://capsfamily.in',
     name: 'Hotel CAPS'
+  },
+
+  image: {
+    // Forces the generator to always output highly compressed WebP files
+    format: ['webp'], 
+    
+    // Explicitly tells Nuxt that your assets live in the /public folder
+    dir: 'public', 
+    
+    // Sets a high-quality baseline (90% is the industry sweet spot for WebP)
+    quality: 90 
   },
 
   // 2. Sitemap Module Configuration
@@ -38,6 +45,7 @@ export default defineNuxtConfig({
       { loc: '/pricing', changefreq: 'weekly', priority: 0.8 },
       { loc: '/restaurant', changefreq: 'weekly', priority: 0.9 },
       { loc: '/menu', changefreq: 'weekly', priority: 0.8 },
+      { loc: '/live', changefreq: 'weekly', priority: 0.8 },
       { loc: '/hall', changefreq: 'monthly', priority: 0.8 },
       { loc: '/catering', changefreq: 'monthly', priority: 0.8 },
       { loc: '/contact', changefreq: 'monthly', priority: 0.7 },

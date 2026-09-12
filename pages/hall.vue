@@ -132,47 +132,69 @@ const hallGalleryData = {
   images: [
     {
       src: "/images/hall/amenities/1.jpg",
-      alt: "Hotel CAPS Events Hall stage arranged for celebrations and special occasions"
+      alt: "Hotel CAPS Events Hall stage arranged for celebrations and special occasions",
+      width: 600,
+      height: 400
     },
     {
       src: "/images/hall/amenities/2.jpg",
-      alt: "Hotel CAPS Events Hall with theatre-style seating facing the stage"
+      alt: "Hotel CAPS Events Hall with theatre-style seating facing the stage",
+      width: 576,
+      height: 400
     },
     {
       src: "/images/hall/amenities/3.jpg",
-      alt: "Hotel CAPS Events Hall arranged with rows of seating for an event"
+      alt: "Hotel CAPS Events Hall arranged with rows of seating for an event",
+      width: 533,
+      height: 400
     },
     {
       src: "/images/hall/amenities/4.jpg",
-      alt: "Spacious Hotel CAPS Events Hall with seating arranged for guests"
+      alt: "Spacious Hotel CAPS Events Hall with seating arranged for guests",
+      width: 600,
+      height: 399
     },
     {
       src: "/images/hall/amenities/5.jpg",
-      alt: "Hotel CAPS Events Hall interior prepared for a gathering"
+      alt: "Hotel CAPS Events Hall interior prepared for a gathering",
+      width: 519,
+      height: 400
     },
     {
       src: "/images/hall/amenities/6.jpg",
-      alt: "Hotel CAPS Events Hall stage and seating area"
+      alt: "Hotel CAPS Events Hall stage and seating area",
+      width: 634,
+      height: 400
     },
     {
       src: "/images/hall/amenities/7.jpg",
-      alt: "Hotel CAPS Events Hall with spacious seating and illuminated ceiling"
+      alt: "Hotel CAPS Events Hall with spacious seating and illuminated ceiling",
+      width: 533,
+      height: 400
     },
     {
       src: "/images/hall/amenities/8.jpg",
-      alt: "Interior corridor providing access to the Hotel CAPS Events Hall"
+      alt: "Interior corridor providing access to the Hotel CAPS Events Hall",
+      width: 711,
+      height: 400
     },
     {
       src: "/images/hall/amenities/9.jpg",
-      alt: "Hotel CAPS Events Hall stage with red backdrop and decorative seating"
+      alt: "Hotel CAPS Events Hall stage with red backdrop and decorative seating",
+      width: 600,
+      height: 400
     },
     {
       src: "/images/hall/amenities/10.jpg",
-      alt: "Elevator / Lift facility at Hotel CAPS for convenient guest access"
+      alt: "Elevator / Lift facility at Hotel CAPS for convenient guest access",
+      width: 320,
+      height: 400
     },
     {
       src: "/images/hall/amenities/11.jpg",
-      alt: "Parking area available for guests at Hotel CAPS"
+      alt: "Parking area available for guests at Hotel CAPS",
+      width: 602,
+      height: 400
     }
   ]
 };

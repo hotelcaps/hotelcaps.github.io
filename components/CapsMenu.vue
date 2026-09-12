@@ -249,13 +249,16 @@
                 <div class="p-5 pt-7 flex flex-col gap-6 border-t border-[#2e2e2e]">
                   <div v-for="item in getItemsByCategory(category)" :key="item.id" class="flex gap-4">
                     <div class="w-24 h-18 shrink-0 rounded-xl overflow-hidden">
-                      <img 
-                        :src="item.image
-                        ? item.image
-                        : '/images/live/placeholder.jpg'" 
+                      <NuxtImg 
+                        :src="item.image ? item.image : '/images/live/placeholder.jpg'" 
                         @error="$event.target.src = '/images/menu/placeholder.jpg'"
                         :alt="item.alt || item.name" 
-                        class="w-full h-auto rounded-xl object-cover shadow-sm" 
+                        width="590"
+                        height="442"
+                        format="webp"
+                        quality="80"
+                        loading="lazy"
+                        class="w-full h-full rounded-xl object-cover shadow-sm" 
                       />
                     </div>
                     <div class="flex-1 flex flex-col justify-center">
@@ -517,12 +520,15 @@
             >
               <!-- Image -->
               <div class="w-full aspect-[4/3] overflow-hidden relative border-b border-[#2a2a2a]">
-                <img 
-                  :src="item.image
-                        ? item.image
-                        : '/images/live/placeholder.jpg'" 
+                <NuxtImg 
+                  :src="item.image ? item.image : '/images/live/placeholder.jpg'" 
                   @error="$event.target.src = '/images/menu/placeholder.jpg'"
                   :alt="item.name" 
+                  width="590"
+                  height="442"
+                  format="webp"
+                  quality="80"
+                  loading="lazy"
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
                 />
               </div>

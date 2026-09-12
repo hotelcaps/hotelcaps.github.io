@@ -28,7 +28,7 @@ const playHeroAnimation = () => {
   ctx = gsap.context(() => {
     
     // Background slow zoom
-    gsap.from(bgImageRef.value, {
+    gsap.from(bgImageRef.value.$el, {
       delay: 0,
       opacity: 0,
       scale: 1.15,
@@ -83,16 +83,19 @@ onUnmounted(() => {
   <section ref="heroSectionRef" class="relative h-[85vh] portrait:h-[60vh] w-full flex items-center text-white overflow-hidden">
     
     <!-- Background Image Layer (z-0) -->
-    <div class="absolute inset-0 z-0">
-      <div ref="bgImageRef" class="h-full w-full">
-        <img 
-          v-if="images.length > 0" 
-          :src="images[0]" 
-          :alt="`${title} background image`" 
-          class="bg-image h-full w-full object-cover" 
-          loading="lazy" 
-        />
-      </div>
+    <div class="absolute inset-0 z-0 overflow-hidden">
+      <NuxtImg 
+        v-if="images.length > 0"
+        ref="bgImageRef"
+        :src="images[0]" 
+        :alt="`${title} background image`" 
+        format="webp"
+        quality="80"
+        fetchpriority="high"
+        loading="eager"
+        preload
+        class="bg-image h-full w-full object-cover" 
+      />
     </div>
 
     <!-- Custom ThemeishColor-Black Gradient Overlay (z-5) -->

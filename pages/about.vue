@@ -123,47 +123,69 @@ const aboutGalleryData = {
   images: [
     {
       src: "/images/about/caps-family/1.jpg",
-      alt: "Hotel CAPS anniversary celebrations featuring special offers across rooms, restaurant and dining"
+      alt: "Hotel CAPS anniversary celebrations featuring special offers across rooms, restaurant and dining",
+      width: 325,
+      height: 400
     },
     {
       src: "/images/about/caps-family/2.jpg",
-      alt: "Hotel CAPS anniversary cake celebrating another milestone in the journey"
+      alt: "Hotel CAPS anniversary cake celebrating another milestone in the journey",
+      width: 411,
+      height: 400
     },
     {
       src: "/images/about/caps-family/3.jpg",
-      alt: "Hotel CAPS team enjoying a special treat arranged for employees"
+      alt: "Hotel CAPS team enjoying a special treat arranged for employees",
+      width: 493,
+      height: 400
     },
     {
       src: "/images/about/caps-family/4.jpg",
-      alt: "Hotel CAPS employees sharing a special team meal together"
+      alt: "Hotel CAPS employees sharing a special team meal together",
+      width: 483,
+      height: 400
     },
     {
       src: "/images/about/caps-family/5.jpg",
-      alt: "Hotel CAPS Best Employee of the Month recognition"
+      alt: "Hotel CAPS Best Employee of the Month recognition",
+      width: 348,
+      height: 400
     },
     {
       src: "/images/about/caps-family/6.jpg",
-      alt: "Hotel CAPS presenting a token of appreciation to the Nemmara MLA"
+      alt: "Hotel CAPS presenting a token of appreciation to the Nemmara MLA",
+      width: 298,
+      height: 400
     },
     {
       src: "/images/about/caps-family/7.jpg",
-      alt: "Hotel CAPS supporting the local community during Koduvayur Rathotsavam"
+      alt: "Hotel CAPS supporting the local community during Koduvayur Rathotsavam",
+      width: 533,
+      height: 400
     },
     {
       src: "/images/about/caps-family/8.jpg",
-      alt: "Students with the Hotel CAPS team as part of a local school sponsorship initiative"
+      alt: "Students with the Hotel CAPS team as part of a local school sponsorship initiative",
+      width: 350,
+      height: 400
     },
     {
       src: "/images/about/caps-family/9.jpg",
-      alt: "Hotel CAPS supporting a local club through community sponsorship"
+      alt: "Hotel CAPS supporting a local club through community sponsorship",
+      width: 533,
+      height: 400
     },
     {
       src: "/images/about/caps-family/10.jpg",
-      alt: "Hotel CAPS sponsoring Souhrida Badminton Club Koduvayur and Smashfest tournament"
+      alt: "Hotel CAPS sponsoring Souhrida Badminton Club Koduvayur and Smashfest tournament",
+      width: 398,
+      height: 400
     },
     {
       src: "/images/about/caps-family/11.jpg",
-      alt: "Hotel CAPS fourth anniversary celebration marking four years of food, hospitality and memories, powered by Brandsta Interactive"
+      alt: "Hotel CAPS fourth anniversary celebration marking four years of food, hospitality and memories, powered by Brandsta Interactive",
+      width: 600,
+      height: 400
     }
   ]
 };

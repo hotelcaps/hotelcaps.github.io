@@ -35,7 +35,7 @@ export const roomsData = ref([
   },
   {
     id: 'suite',
-    name: 'Suite Room',
+    name: 'Premium Suite',
     price: 3500,
     description: 'The pinnacle of luxury, offering a separate living area and exclusive services.',
     features: [

@@ -62,11 +62,15 @@
         <!-- Right Column: Image -->
         <div class="intro-image-reveal w-full flex justify-center lg:w-2/5 mt-4 md:mt-0">
           <div class="relative w-full sm:w-8/12 lg:w-full aspect-[1/1] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden shadow-2xl">
-            <img 
+            <NuxtImg 
               :src="image" 
               :alt="imageAlt" 
-              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+              width="600"
+              height="600"
+              format="webp"
+              quality="80"
               loading="lazy"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
             />
           </div>
         </div>

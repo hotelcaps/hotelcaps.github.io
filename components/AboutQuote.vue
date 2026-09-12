@@ -51,11 +51,15 @@
           <!-- Right Column: Director Image -->
           <div class="w-full lg:w-2/5 flex justify-center">
             <div class="quote-image-reveal relative w-full sm:w-10/12 lg:w-full aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border border-amber-500/30 shadow-2xl group">
-              <img 
+              <NuxtImg 
                 :src="directorsQuoteData.image" 
                 :alt="directorsQuoteData.imageAlt"
-                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                width="800"
+                height="600"
+                format="webp"
+                quality="80"
                 loading="lazy"
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
               <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60"></div>
             </div>

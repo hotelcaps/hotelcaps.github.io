@@ -136,23 +136,33 @@ const cateringGalleryData = {
   images: [
     {
       src: "/images/catering/gallery/1.jpg",
-      alt: "Hotel CAPS outdoor catering team preparing a live food counter"
+      alt: "Hotel CAPS outdoor catering team preparing a live food counter",
+      width: 710,
+      height: 400
     },
     {
       src: "/images/catering/gallery/2.jpg",
-      alt: "Hotel CAPS catering team serving freshly prepared dishes from buffet counters"
+      alt: "Hotel CAPS catering team serving freshly prepared dishes from buffet counters",
+      width: 711,
+      height: 400
     },
     {
       src: "/images/catering/gallery/3.jpg",
-      alt: "Hotel CAPS chef preparing food at a live outdoor catering station"
+      alt: "Hotel CAPS chef preparing food at a live outdoor catering station",
+      width: 711,
+      height: 400
     },
     {
       src: "/images/catering/gallery/4.jpg",
-      alt: "Freshly prepared dishes arranged for Hotel CAPS catering service"
+      alt: "Freshly prepared dishes arranged for Hotel CAPS catering service",
+      width: 712,
+      height: 400
     },
     {
       src: "/images/catering/gallery/5.jpg",
-      alt: "Guests being served by the Hotel CAPS catering team at an event"
+      alt: "Guests being served by the Hotel CAPS catering team at an event",
+      width: 457,
+      height: 400
     }
   ]
 };

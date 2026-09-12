@@ -23,10 +23,30 @@ const testimonials = ref([
 ]);
 
 const galleryImages = ref([
-  { src: '/images/home/testimonial/rooms-t.jpg', alt: 'A beautifully set up hall for an event' },
-  { src: '/images/home/testimonial/restaurant-t.jpg', alt: 'The welcoming exterior of Hotel CAPS' },
-  { src: '/images/home/testimonial/hall-t.jpg', alt: 'A close-up of a luxurious suite' },
-  { src: '/images/home/testimonial/caps-t.jpg', alt: 'A delicious dish served at the restaurant' }
+  { 
+    src: '/images/home/testimonial/rooms-t.jpg', 
+    alt: 'A beautifully set up hall for an event',
+    width: 400, // Replace with actual native width
+    height: 400 // Replace with actual native height
+  },
+  { 
+    src: '/images/home/testimonial/restaurant-t.jpg', 
+    alt: 'The welcoming exterior of Hotel CAPS',
+    width: 400, 
+    height: 400 
+  },
+  { 
+    src: '/images/home/testimonial/hall-t.jpg', 
+    alt: 'A close-up of a luxurious suite',
+    width: 400, 
+    height: 400 
+  },
+  { 
+    src: '/images/home/testimonial/caps-t.jpg', 
+    alt: 'A delicious dish served at the restaurant',
+    width: 400, 
+    height: 400 
+  }
 ]);
 
 // Refs for GSAP and Swiper
@@ -141,11 +161,15 @@ onMounted(() => {
       <div class="image-gallery-col">
         <div class="grid grid-cols-2 grid-rows-2 gap-4 aspect-square">
           <div v-for="(image, index) in galleryImages" :key="index" class="gallery-item group relative rounded-2xl overflow-hidden shadow-lg">
-            <img 
+            <NuxtImg 
               :src="image.src" 
               :alt="image.alt"
-              class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+              :width="image.width"
+              :height="image.height"
+              format="webp"
+              quality="80"
               loading="lazy"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
             />
             <div class="absolute inset-0 bg-black/10"></div>
           </div>

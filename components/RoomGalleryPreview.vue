@@ -52,12 +52,16 @@ onMounted(() => {
     <!-- Main Preview Image Slider -->
     <div ref="mainSwiperRef" class="swiper main-swiper">
       <div class="swiper-wrapper">
-        <div v-for="(image, index) in galleryImages" :key="index" class="swiper-slide aspect-[3/2] ">
-          <img
+        <div v-for="(image, index) in galleryImages" :key="index" class="swiper-slide aspect-[3/2]">
+          <NuxtImg
             :src="image" 
             :alt="`Room image ${index + 1}`"
-            class="w-full h-full object-cover aspect-square rounded-2xl transform transition-transform duration-300 hover:scale-110"
+            width="1200"
+            height="800"
+            format="webp"
+            quality="80"
             loading="lazy" 
+            class="w-full h-full object-cover rounded-2xl transform transition-transform duration-300 hover:scale-110"
           />
         </div>
       </div>
@@ -68,11 +72,15 @@ onMounted(() => {
       <div ref="thumbsSwiperRef" class="swiper thumbs-swiper">
         <div class="swiper-wrapper">
           <div v-for="(image, index) in galleryImages" :key="index" class="swiper-slide thumb-slide">
-            <img
+            <NuxtImg
               :src="image" 
               :alt="`Room thumbnail ${index + 1}`"
-              class="w-full h-full object-cover rounded-lg cursor-pointer"
+              width="1200"
+              height="800"
+              format="webp"
+              quality="80"
               loading="lazy" 
+              class="w-full h-full object-cover rounded-lg cursor-pointer"
             />
           </div>
         </div>

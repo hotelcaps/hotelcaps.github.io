@@ -29,11 +29,15 @@
             <div class="room-image-reveal relative w-full aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border border-sky-400/30 shadow-2xl group cursor-pointer">
               
               <!-- Background Image -->
-              <img 
+              <NuxtImg 
                 :src="room.image" 
                 :alt="room.imageAlt"
-                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                width="1200"
+                height="800"
+                format="webp"
+                quality="80"
                 loading="lazy"
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
               />
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40 group-hover:via-black/30 transition-colors duration-500"></div>
 
@@ -68,7 +72,7 @@ const roomCategoriesData = {
   rooms: [
     { title: "Standard Room", image: "/images/rooms/standard/1.jpg", imageAlt: "Hotel CAPS Standard Room Category" },
     { title: "Deluxe Room", image: "/images/rooms/deluxe/1.jpg", imageAlt: "Hotel CAPS Deluxe Room Category" },
-    { title: "Suite Room", image: "/images/rooms/suite/1.jpg", imageAlt: "Hotel CAPS Suite Room Category" }
+    { title: "Premium Suite", image: "/images/rooms/suite/1.jpg", imageAlt: "Hotel CAPS Premium Suite Room Category" }
   ]
 };
 

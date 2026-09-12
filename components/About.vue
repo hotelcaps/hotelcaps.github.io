@@ -46,11 +46,18 @@ onMounted(() => {
   <section id="about" ref="main" class="relative w-full py-16 sm:py-20 md:py-24 lg:py-28 px-4 lg:px-8 flex items-center justify-center overflow-hidden">
     
     <!-- Fixed Parallax Background Layer -->
-    <div class="absolute inset-0 z-0">
-      <div 
-        class="w-full h-full bg-cover bg-no-repeat lg:bg-fixed bg-center"
-        style="background-image: url('/images/home/about-bg.jpg');"
-      ></div>
+    <div class="absolute inset-0 z-0 overflow-hidden">
+      
+      <!-- NuxtImg acting as the background -->
+      <NuxtImg 
+        src="/images/home/about-bg.jpg" 
+        alt="About Hotel CAPS"
+        format="webp"
+        quality="80"
+        loading="lazy"
+        class="absolute inset-0 w-full h-full object-cover object-center"
+      />
+      
       <!-- Tint Overlay -->
       <div class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm"></div>
     </div>

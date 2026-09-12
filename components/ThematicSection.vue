@@ -32,11 +32,13 @@ const themeClasses = {
 };
 const currentTheme = themeClasses[props.theme];
 
+const bgImageRef = ref(null);
+
 // --- ANIMATION LOGIC ---
 onMounted(() => {
   let ctx = gsap.context(() => {
     const textContainer = sectionRef.value.querySelector('.feature-text-container');
-    const image = sectionRef.value.querySelector('.bg-image');
+    const image = bgImageRef.value.$el;
 
     gsap.set(textContainer, { xPercent: props.align === 'right' ? 100 : -100, opacity: 0 });
     gsap.set(image, { scale: 1.2 });
@@ -62,14 +64,17 @@ onMounted(() => {
 <template>
   <section ref="sectionRef" class="feature-section relative w-full flex items-center justify-center overflow-hidden rounded-2xl">
     <!-- Background Image Layer -->
-    <div class="absolute inset-0 z-0">
-      <img 
+    <div class="absolute inset-0 z-0 overflow-hidden">
+      <NuxtImg 
+        ref="bgImageRef"
         :src="imageSrc" 
         :alt="imageAlt"
-        class="bg-image w-full h-full object-cover" 
+        format="webp"
+        quality="80"
         loading="lazy"
+        class="bg-image w-full h-full object-cover" 
       />
-      <div class="absolute inset-0 bg-black/30"></div> <!-- Image Tint -->
+      <div class="absolute inset-0 bg-black/30"></div>
     </div>
 
     <!-- Content Layer -->
@@ -78,7 +83,7 @@ onMounted(() => {
       :class="{ 'md:justify-end': align === 'right', 'md:justify-start': align === 'left' }"
     >
       <div class="feature-text-container w-full sm:w-full md:w-[65%] lg:w-1/2 xl:w-[40%]">
-        <div class="rounded-2xl p-2 sm:p-4 bg-opacity-95 text-white shadow-2xl" :class="currentTheme.bg">
+        <div class="rounded-2xl p-2 sm:p-4 bg-opacity-90 text-white shadow-2xl" :class="currentTheme.bg">
           <div class="feature-card-content p-6 sm:p-8 lg:p-10 rounded-xl" :class="currentTheme.card">
             <component :is="icon" class="absolute top-4 right-4 text-7xl opacity-30 -translate-y-1/4 translate-x-1/4" :class="currentTheme.icon" />
             <p class="text-sm font-bold uppercase tracking-widest" :class="currentTheme.text">{{ category }}</p>

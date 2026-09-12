@@ -2,10 +2,15 @@
   <section ref="heroSectionRef" class="relative h-[100vh] sm:h-[70vh] lg:h-[100vh] w-full flex items-center justify-center overflow-hidden">
     <!-- Background Image -->
     <div class="absolute inset-0">
-      <img
+      <NuxtImg
         ref="bgImageRef"
         :src="slide.image"
         :alt="slide.alt"
+        format="webp"
+        quality="80"
+        fetchpriority="high"
+        loading="eager"
+        preload
         class="h-full w-full object-cover"
       />
       <div class="absolute inset-0 bg-black/55"></div>
@@ -53,22 +58,23 @@ const config = useRuntimeConfig();
 // Read the shared state controlled by app.vue
 const isInitialAppLoad = useState('isInitialAppLoad', () => true);
 
-// Calculate delay: use config value on first load, 0 on internal navigation
-const dynamicDelay = isInitialAppLoad.value 
-  ? Number(config.public.initialAnimationDelay) - 0.3 || 0 
-  : 0;
+// Loader takes 2.4s. We want a 0.3s overlap, so Hero starts at 2.1s.
+// If internal navigation (isInitialAppLoad is false), delay is 0.
+const dynamicDelay = isInitialAppLoad.value ? 2.1 : 0;
 
 onMounted(() => {
   const ctx = gsap.context(() => {
 
-    gsap.from(bgImageRef.value, {
+    // Hero Background Animation
+    gsap.from(bgImageRef.value.$el, {
       delay: dynamicDelay,
-      opacity: 0, // Changed from 1 to 0 to ensure a proper fade-in
+      opacity: 0, 
       scale: 1.15,
       duration: 2.5,
       ease: 'power5.out'
     });
 
+    // Hero Content Animation
     gsap.from(heroContentRef.value.children, {
       delay: dynamicDelay,
       opacity: 0,

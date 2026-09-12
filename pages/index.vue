@@ -6,14 +6,14 @@ const homeGalleryData = {
   themeTextClass: "text-[#005F61]",
   themeBgClass: "bg-[#06b6d4]",
   images: [
-    { src: "/images/home/tourism/1.jpg", alt: "Kava View Point" },
-    { src: "/images/home/tourism/2.jpg", alt: "Nelliyampathy Hills" },
-    { src: "/images/home/tourism/3.jpg", alt: "Malampuzha Dam" },
-    { src: "/images/home/tourism/4.jpg", alt: "Pothundi Park" },
-    { src: "/images/home/tourism/5.jpg", alt: "Koduvayur Ratholsavam" },
-    { src: "/images/home/tourism/6.jpg", alt: "Seethargundu Viewpoint" },
-    { src: "/images/home/tourism/7.jpg", alt: "Malampuzha Park" },
-    { src: "/images/home/tourism/8.jpg", alt: "Pallavur Hill Temple" },
+    { src: "/images/home/tourism/1.jpg", alt: "Kava View Point", width: 655, height: 400 },
+    { src: "/images/home/tourism/2.jpg", alt: "Nelliyampathy Hills", width: 603, height: 400 },
+    { src: "/images/home/tourism/3.jpg", alt: "Malampuzha Dam", width: 700, height: 400 },
+    { src: "/images/home/tourism/4.jpg", alt: "Pothundi Park", width: 603, height: 400 },
+    { src: "/images/home/tourism/5.jpg", alt: "Koduvayur Ratholsavam", width: 600, height: 400 },
+    { src: "/images/home/tourism/6.jpg", alt: "Seethargundu Viewpoint", width: 711, height: 400 },
+    { src: "/images/home/tourism/7.jpg", alt: "Malampuzha Park", width: 710, height: 400 },
+    { src: "/images/home/tourism/8.jpg", alt: "Pallavur Hill Temple", width: 626, height: 400 },
   ]
 };
 

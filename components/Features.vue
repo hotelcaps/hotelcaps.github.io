@@ -72,11 +72,14 @@ onMounted(() => {
           class="feature-card group block bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-500 ease-out hover:-translate-y-5 w-[92%] sm:w-[80%] md:w-[45%] lg:w-[30%]"
         >
           <div class="relative h-64 overflow-hidden">
-            <img 
+            <NuxtImg 
               :src="feature.image" 
               :alt="feature.alt" 
-              class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+              format="webp"
+              quality="80"
               loading="lazy"
+              sizes="sm:100vw md:50vw lg:400px"
+              class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
             />
           </div>
           <div class="p-8 text-left">

@@ -729,9 +729,9 @@ const staticSlidesData = [
     format: 'ROOMS', trackerId: 'rooms', title: 'SUITES & ROOMS', subtitle: 'Comfort for every journey.',
     images: ['/images/rooms/standard/1.jpg', '/images/rooms/deluxe/1.jpg', '/images/rooms/suite/1.jpg'],
     roomDetails: [
-      { name: 'STANDARD ROOM', desc: 'Comfortable, elegantly furnished rooms designed for a restful stay.', price: '1,500' },
-      { name: 'DELUXE ROOM', desc: 'Spacious rooms with modern amenities for a more relaxed and enjoyable stay.', price: '2,500' },
-      { name: 'PREMIUM SUITE', desc: 'An elevated experience with extra space, premium comfort and refined elegance.', price: '4,500' }
+      { name: 'STANDARD ROOM', desc: 'Comfortable, elegantly furnished rooms designed for a restful stay.', price: '2,500' },
+      { name: 'DELUXE ROOM', desc: 'Spacious rooms with modern amenities for a more relaxed and enjoyable stay.', price: '2,8800' },
+      { name: 'PREMIUM SUITE', desc: 'An elevated experience with extra space, premium comfort and refined elegance.', price: '3,500' }
     ]
   },
   { 

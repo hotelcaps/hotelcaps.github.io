@@ -130,91 +130,171 @@ const restaurantGalleryData = {
   images: [
     {
       src: "/images/restaurant/food/1.jpg",
-      alt: "Traditional South Indian breakfast served with chutneys and accompaniments"
+      alt: "Traditional South Indian breakfast served with chutneys and accompaniments",
+      width: 735,
+      height: 400
     },
     {
       src: "/images/restaurant/food/2.jpg",
-      alt: "Green dosa served with chutney and fresh herbs"
+      alt: "Green dosa served with chutney and fresh herbs",
+      width: 454,
+      height: 400
     },
     {
       src: "/images/restaurant/food/3.jpg",
-      alt: "Traditional Kerala meals served on a banana leaf"
+      alt: "Traditional Kerala meals served on a banana leaf",
+      width: 533,
+      height: 400
     },
     {
       src: "/images/restaurant/food/4.jpg",
-      alt: "Traditional banana leaf wrapped food parcel"
+      alt: "Traditional banana leaf wrapped food parcel",
+      width: 527,
+      height: 400
     },
     {
       src: "/images/restaurant/food/5.jpg",
-      alt: "Bread toast served with a savory side dish"
+      alt: "Bread toast served with a savory side dish",
+      width: 400,
+      height: 400
     },
     {
       src: "/images/restaurant/food/6.jpg",
-      alt: "Kerala-style fried fish served on a banana leaf"
+      alt: "Kerala-style fried fish served on a banana leaf",
+      width: 524,
+      height: 400
     },
     {
       src: "/images/restaurant/food/7.jpg",
-      alt: "Hotel CAPS mini meals with rice and assorted side dishes"
+      alt: "Hotel CAPS mini meals with rice and assorted side dishes",
+      width: 309,
+      height: 400
     },
     {
       src: "/images/restaurant/food/8.jpg",
-      alt: "Grilled chicken pieces served with vegetables and dipping sauce"
+      alt: "Grilled chicken pieces served with vegetables and dipping sauce",
+      width: 533,
+      height: 400
     },
     {
       src: "/images/restaurant/food/9.jpg",
-      alt: "Spicy grilled fish served with aromatic rice and lemon"
+      alt: "Spicy grilled fish served with aromatic rice and lemon",
+      width: 435,
+      height: 400
     },
     {
       src: "/images/restaurant/food/10.jpg",
-      alt: "Grilled fish fillet served with sautéed vegetables"
+      alt: "Grilled fish fillet served with sautéed vegetables",
+      width: 400,
+      height: 400
     },
     {
       src: "/images/restaurant/food/11.jpg",
-      alt: "Assorted Hotel CAPS dishes served on banana leaves"
+      alt: "Assorted Hotel CAPS dishes served on banana leaves",
+      width: 610,
+      height: 400
     },
     {
       src: "/images/restaurant/food/12.jpg",
-      alt: "Hotel CAPS special Chicken Mughlai with flatbread"
+      alt: "Hotel CAPS special Chicken Mughlai with flatbread",
+      width: 470,
+      height: 400
     },
     {
       src: "/images/restaurant/food/13.jpg",
-      alt: "Spiced chicken fry served with fresh herbs"
+      alt: "Spiced chicken fry served with fresh herbs",
+      width: 402,
+      height: 400
     },
     {
       src: "/images/restaurant/food/14.jpg",
-      alt: "Spicy fried fish pieces served on a banana leaf"
+      alt: "Spicy fried fish pieces served on a banana leaf",
+      width: 533,
+      height: 400
     },
     {
       src: "/images/restaurant/food/15.jpg",
-      alt: "Indo-Chinese chicken appetizer garnished with spring onions"
+      alt: "Indo-Chinese chicken appetizer garnished with spring onions",
+      width: 638,
+      height: 400
     },
     {
       src: "/images/restaurant/food/16.jpg",
-      alt: "Hotel CAPS special Chicken Patiala curry"
+      alt: "Hotel CAPS special Chicken Patiala curry",
+      width: 515,
+      height: 400
     },
     {
       src: "/images/restaurant/food/17.jpg",
-      alt: "Tandoori-style grilled chicken pieces fresh from the grill"
+      alt: "Tandoori-style grilled chicken pieces fresh from the grill",
+      width: 295,
+      height: 400
     },
     {
       src: "/images/restaurant/food/18.jpg",
-      alt: "Creamy chicken curry served with vegetables and herbs"
+      alt: "Creamy chicken curry served with vegetables and herbs",
+      width: 400,
+      height: 400
     },
     {
       src: "/images/restaurant/food/19.jpg",
-      alt: "Hotel CAPS special Palada Payasam"
+      alt: "Hotel CAPS special Palada Payasam",
+      width: 304,
+      height: 400
     },
     {
       src: "/images/restaurant/food/20.jpg",
-      alt: "Hotel CAPS special Parippu Pradhaman"
+      alt: "Hotel CAPS special Parippu Pradhaman",
+      width: 401,
+      height: 400
     },
     {
       src: "/images/restaurant/food/21.jpg",
-      alt: "Hotel CAPS buffet counter with a variety of freshly prepared dishes"
+      alt: "Hotel CAPS buffet counter with a variety of freshly prepared dishes",
+      width: 685,
+      height: 400
     },
     {
       src: "/images/restaurant/food/22.jpg",
-      alt: "Hotel CAPS special beef and chicken Kizhi Porotta"
+      alt: "Hotel CAPS special beef and chicken Kizhi Porotta",
+      width: 400,
+      height: 400
+    },
+    {
+      src: "/images/restaurant/food/23.jpg",
+      alt: "Hotel CAPS special pulao varieties with aromatic rice and accompaniments",
+      width: 400,
+      height: 400
+    },
+    {
+      src: "/images/restaurant/food/24.jpg",
+      alt: "Hotel CAPS special spicy beef curry served with a creamy accompaniment",
+      width: 400,
+      height: 400
+    },
+    {
+      src: "/images/restaurant/food/25.jpg",
+      alt: "Hotel CAPS special beef and chicken Kizhi Porotta wrapped in banana leaves",
+      width: 400,
+      height: 400
+    },
+    {
+      src: "/images/restaurant/food/26.jpg",
+      alt: "Hotel CAPS biryani and mandi specials with aromatic rice and grilled meat",
+      width: 400,
+      height: 400
+    },
+    {
+      src: "/images/restaurant/food/27.jpg",
+      alt: "Hotel CAPS special Paneer Roast and Mushroom Roast",
+      width: 400,
+      height: 400
+    },
+    {
+      src: "/images/restaurant/food/28.jpg",
+      alt: "Hotel CAPS special biryani varieties including chicken, mutton, beef, vegetable and prawns",
+      width: 400,
+      height: 400
     }
   ]
 };
