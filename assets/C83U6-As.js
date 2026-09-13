@@ -1,0 +1,1 @@
+import{r as e}from"./BSqqcga3.js";var t=e(`/images/caps-solid-logo.png`);export{t};
