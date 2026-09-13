@@ -37,6 +37,7 @@ export default defineNuxtConfig({
 
   // 2. Sitemap Module Configuration
   sitemap: {
+    zeroRuntime: true, // Ensures the sitemap is generated at build time, not runtime
     // Explicitly define all static routes
     urls: [
       { loc: '/', changefreq: 'weekly', priority: 1.0 },
@@ -60,15 +61,38 @@ export default defineNuxtConfig({
     sitemap: ['https://capsfamily.in/sitemap.xml']
   },
 
-  // This tells Nuxt to build self-contained pages for static hosting.
-  // experimental: {
-  //   payloadExtraction: false
-  // },
+  routeRules: {
+      // Core Navigation & Content (100% Static)
+      '/': { prerender: true },
+      '/about': { prerender: true },
+      '/rooms': { prerender: true },
+      '/pricing': { prerender: true },
+      '/restaurant': { prerender: true },
+      '/hall': { prerender: true },
+      '/catering': { prerender: true },
+      '/contact': { prerender: true },
 
-  // This tells Nuxt to render the interactive homepage on the client-side only.
-  // routeRules: {
-  //   '/': { ssr: false },
-  // },
+      // Legal (100% Static)
+      '/policy': { prerender: true },
+      '/terms': { prerender: true },
+
+      // The Dynamic Islands (HTML is Static, JS handles the WP Data)
+      // Nitro pre-builds the structure, and your client-side $fetch populates the text.
+      '/menu': { prerender: true },
+      '/live': { prerender: true },
+    },
+
+    nitro: {
+      // Tells the Nitro engine to compress the pre-rendered HTML files
+      // further reducing the initial payload for mobile devices.
+      compressPublicAssets: true
+    },
+
+    experimental: {
+      // Ensures Nuxt extracts the payloads for static routes so the Vue 
+      // router stays lightning fast during client-side navigation.
+      payloadExtraction: true
+    },
 
   app: {
     baseURL: '/',
